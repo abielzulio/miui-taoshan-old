@@ -1,5 +1,8 @@
+MIUI Patchrom
+=============
+
 Get Android SDK
-==============
+---------------
 
 In order to build patchrom project, you must have [Android SDK](http://developer.android.com/sdk/installing.html) installed and add the sdk tools and platform-tools to PATH.
 
@@ -11,7 +14,7 @@ Add this line to ```.bashrc```
 
 
 Setting Up Initial Patchrom
-============================
+---------------------------
 
 To get started with patchrom, you'll need to get familiar with [git and repo](http://source.android.com/source/using-repo.html).
 
@@ -30,7 +33,7 @@ Then to sync up:
 
 
 Build
-======
+-----
 
     $ cd /your/patchrom/dir
 

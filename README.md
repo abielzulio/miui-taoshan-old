@@ -41,10 +41,6 @@ Build
 
     $ cd taoshan
 
-Put any KitKat ROM here (CM/FXP/AOSP is more recommended) and rename it to ```stockrom.zip```, otherwise it will never work!
-
-    $ make workspace
-
-    $ make firstpatch
-
     $ make fullota
+    
+For now, you will be faced some problem(s). I will fixed it ASAP!

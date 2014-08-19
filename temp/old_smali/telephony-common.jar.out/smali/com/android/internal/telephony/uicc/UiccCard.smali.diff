@@ -1,0 +1,21 @@
+*** ./smali/com/android/internal/telephony/uicc/UiccCard.smali	2014-08-20 05:50:07.924016593 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/UiccCard.smali	2014-08-20 05:52:53.232020880 +0700
+***************
+*** 370,376 ****
+  
+      iget-object v9, p0, Lcom/android/internal/telephony/uicc/UiccCard;->mContext:Landroid/content/Context;
+  
+!     invoke-direct {v7, v9}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+  
+      invoke-virtual {v7, v6}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+  
+--- 370,378 ----
+  
+      iget-object v9, p0, Lcom/android/internal/telephony/uicc/UiccCard;->mContext:Landroid/content/Context;
+  
+!     const v1, 0x60d003e
+! 
+!     invoke-direct {v7, v9, v1}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;I)V
+  
+      invoke-virtual {v7, v6}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+  

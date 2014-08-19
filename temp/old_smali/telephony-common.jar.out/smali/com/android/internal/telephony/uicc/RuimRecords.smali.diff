@@ -1,0 +1,27 @@
+*** ./smali/com/android/internal/telephony/uicc/RuimRecords.smali	2014-08-20 05:50:08.184016600 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/RuimRecords.smali	2014-08-20 05:52:53.504020887 +0700
+***************
+*** 90,100 ****
+  
+      iput-boolean v2, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mCsimSpnDisplayCondition:Z
+  
+!     new-instance v0, Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  
+      iget-object v1, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mFh:Lcom/android/internal/telephony/uicc/IccFileHandler;
+  
+!     invoke-direct {v0, v1}, Lcom/android/internal/telephony/uicc/AdnRecordCache;-><init>(Lcom/android/internal/telephony/uicc/IccFileHandler;)V
+  
+      iput-object v0, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mAdnCache:Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  
+--- 90,100 ----
+  
+      iput-boolean v2, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mCsimSpnDisplayCondition:Z
+  
+!     new-instance v0, Lcom/android/internal/telephony/uicc/MiuiAdnRecordCache;
+  
+      iget-object v1, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mFh:Lcom/android/internal/telephony/uicc/IccFileHandler;
+  
+!     invoke-direct {v0, v1}, Lcom/android/internal/telephony/uicc/MiuiAdnRecordCache;-><init>(Lcom/android/internal/telephony/uicc/IccFileHandler;)V
+  
+      iput-object v0, p0, Lcom/android/internal/telephony/uicc/RuimRecords;->mAdnCache:Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  

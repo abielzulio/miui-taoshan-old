@@ -1,0 +1,23 @@
+*** ./smali/android/speech/tts/TextToSpeech$Connection$SetupConnectionAsyncTask.smali	2014-08-20 05:47:49.676013008 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/speech/tts/TextToSpeech$Connection$SetupConnectionAsyncTask.smali	2014-08-20 05:50:34.532017283 +0700
+***************
+*** 117,122 ****
+--- 117,124 ----
+      move-result-object v0
+  
+      .local v0, defaultLanguage:[Ljava/lang/String;
++     if-eqz v0, :cond_miui
++ 
+      iget-object v2, p0, Landroid/speech/tts/TextToSpeech$Connection$SetupConnectionAsyncTask;->this$1:Landroid/speech/tts/TextToSpeech$Connection;
+  
+      iget-object v2, v2, Landroid/speech/tts/TextToSpeech$Connection;->this$0:Landroid/speech/tts/TextToSpeech;
+***************
+*** 168,173 ****
+--- 170,176 ----
+  
+      invoke-virtual {v2, v4, v5}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
+  
++     :cond_miui
+      const-string v2, "TextToSpeech"
+  
+      new-instance v4, Ljava/lang/StringBuilder;

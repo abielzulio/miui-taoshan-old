@@ -1,0 +1,208 @@
+*** ./smali/android/widget/OverScroller.smali	2014-08-20 05:48:24.000013898 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/OverScroller.smali	2014-08-20 05:51:08.996018177 +0700
+***************
+*** 30,35 ****
+--- 30,37 ----
+  
+  .field private final mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
+  
++ .field mSpringOverScrollEnable:Z
++ 
+  
+  # direct methods
+  .method public constructor <init>(Landroid/content/Context;)V
+***************
+*** 131,140 ****
+      return-void
+  .end method
+  
+  .method public computeScrollOffset()Z
+!     .locals 8
+  
+      .prologue
+      invoke-virtual {p0}, Landroid/widget/OverScroller;->isFinished()Z
+  
+      move-result v6
+--- 133,176 ----
+      return-void
+  .end method
+  
++ .method public final checkSpringBackState()Z
++     .locals 2
++ 
++     .prologue
++     const/4 v0, 0x1
++ 
++     iget-object v1, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v1}, Landroid/widget/OverScroller$SplineOverScroller;->getState()I
++ 
++     move-result v1
++ 
++     if-eq v1, v0, :cond_0
++ 
++     iget-object v1, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v1}, Landroid/widget/OverScroller$SplineOverScroller;->getState()I
++ 
++     move-result v1
++ 
++     if-ne v1, v0, :cond_1
++ 
++     :cond_0
++     :goto_0
++     return v0
++ 
++     :cond_1
++     const/4 v0, 0x0
++ 
++     goto :goto_0
++ .end method
++ 
+  .method public computeScrollOffset()Z
+!     .locals 9
+  
+      .prologue
++     const/4 v8, 0x0
++ 
+      invoke-virtual {p0}, Landroid/widget/OverScroller;->isFinished()Z
+  
+      move-result v6
+***************
+*** 243,249 ****
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     invoke-virtual {v6}, Landroid/widget/OverScroller$SplineOverScroller;->update()Z
+  
+      move-result v6
+  
+--- 279,285 ----
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     invoke-virtual {v6, v8}, Landroid/widget/OverScroller$SplineOverScroller;->update(Z)Z
+  
+      move-result v6
+  
+***************
+*** 251,257 ****
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     invoke-virtual {v6}, Landroid/widget/OverScroller$SplineOverScroller;->continueWhenFinished()Z
+  
+      move-result v6
+  
+--- 287,295 ----
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     iget-boolean v8, p0, Landroid/widget/OverScroller;->mSpringOverScrollEnable:Z
+! 
+!     invoke-virtual {v6, v8}, Landroid/widget/OverScroller$SplineOverScroller;->continueWhenFinished(Z)Z
+  
+      move-result v6
+  
+***************
+*** 281,287 ****
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     invoke-virtual {v6}, Landroid/widget/OverScroller$SplineOverScroller;->continueWhenFinished()Z
+  
+      move-result v6
+  
+--- 319,327 ----
+  
+      iget-object v6, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
+  
+!     iget-boolean v8, p0, Landroid/widget/OverScroller;->mSpringOverScrollEnable:Z
+! 
+!     invoke-virtual {v6, v8}, Landroid/widget/OverScroller$SplineOverScroller;->continueWhenFinished(Z)Z
+  
+      move-result v6
+  
+***************
+*** 571,576 ****
+--- 611,630 ----
+      return v0
+  .end method
+  
++ .method public getCurrYVelocity()F
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     #getter for: Landroid/widget/OverScroller$SplineOverScroller;->mCurrVelocity:F
++     invoke-static {v0}, Landroid/widget/OverScroller$SplineOverScroller;->access$200(Landroid/widget/OverScroller$SplineOverScroller;)F
++ 
++     move-result v0
++ 
++     return v0
++ .end method
++ 
+  .method public final getDuration()I
+      .locals 2
+      .annotation runtime Ljava/lang/Deprecated;
+***************
+*** 853,858 ****
+--- 907,928 ----
+      return-void
+  .end method
+  
++ .method public final setDecelerationScale(F)V
++     .locals 1
++     .parameter "scale"
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v0, p1}, Landroid/widget/OverScroller$SplineOverScroller;->setDecelerationScale(F)V
++ 
++     iget-object v0, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v0, p1}, Landroid/widget/OverScroller$SplineOverScroller;->setDecelerationScale(F)V
++ 
++     return-void
++ .end method
++ 
+  .method public setFinalX(I)V
+      .locals 1
+      .parameter "newX"
+***************
+*** 906,911 ****
+--- 976,1007 ----
+  
+      return-void
+  .end method
++ 
++ .method public setSpringOverScrollEnable(Z)V
++     .locals 0
++     .parameter "enable"
++ 
++     .prologue
++     iput-boolean p1, p0, Landroid/widget/OverScroller;->mSpringOverScrollEnable:Z
++ 
++     return-void
++ .end method
++ 
++ .method public final setTotalOverDistance(I)V
++     .locals 1
++     .parameter "distance"
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/OverScroller;->mScrollerX:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v0, p1}, Landroid/widget/OverScroller$SplineOverScroller;->setTotalOverDistance(I)V
++ 
++     iget-object v0, p0, Landroid/widget/OverScroller;->mScrollerY:Landroid/widget/OverScroller$SplineOverScroller;
++ 
++     invoke-virtual {v0, p1}, Landroid/widget/OverScroller$SplineOverScroller;->setTotalOverDistance(I)V
++ 
++     return-void
++ .end method
+  
+  .method public springBack(IIIIII)Z
+      .locals 4

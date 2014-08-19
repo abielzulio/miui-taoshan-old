@@ -1,0 +1,19 @@
+*** ./smali/android/widget/MediaController$6.smali	2014-08-20 05:48:27.992014002 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/MediaController$6.smali	2014-08-20 05:51:12.996018281 +0700
+***************
+*** 53,59 ****
+      move-result v0
+  
+      .local v0, pos:I
+!     add-int/lit16 v0, v0, -0x1388
+  
+      iget-object v1, p0, Landroid/widget/MediaController$6;->this$0:Landroid/widget/MediaController;
+  
+--- 53,59 ----
+      move-result v0
+  
+      .local v0, pos:I
+!     add-int/lit16 v0, v0, -0x3a98
+  
+      iget-object v1, p0, Landroid/widget/MediaController$6;->this$0:Landroid/widget/MediaController;
+  

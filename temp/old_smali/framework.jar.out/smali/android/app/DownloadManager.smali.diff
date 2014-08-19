@@ -1,0 +1,104 @@
+*** ./smali/android/app/DownloadManager.smali	2014-08-20 05:48:09.480013522 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/DownloadManager.smali	2014-08-20 05:50:54.336017797 +0700
+***************
+*** 110,116 ****
+      .locals 3
+  
+      .prologue
+!     const/16 v0, 0x10
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+--- 110,116 ----
+      .locals 3
+  
+      .prologue
+!     const/16 v0, 0xf
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+***************
+*** 194,210 ****
+  
+      const/16 v1, 0xd
+  
+-     const-string v2, "allow_write"
+- 
+-     aput-object v2, v0, v1
+- 
+-     const/16 v1, 0xe
+- 
+      const-string v2, "\'placeholder\' AS local_uri"
+  
+      aput-object v2, v0, v1
+  
+!     const/16 v1, 0xf
+  
+      const-string v2, "\'placeholder\' AS reason"
+  
+--- 194,204 ----
+  
+      const/16 v1, 0xd
+  
+      const-string v2, "\'placeholder\' AS local_uri"
+  
+      aput-object v2, v0, v1
+  
+!     const/16 v1, 0xe
+  
+      const-string v2, "\'placeholder\' AS reason"
+  
+***************
+*** 614,632 ****
+  
+      invoke-virtual {v2, v4, v3}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Integer;)V
+  
+-     const-string v4, "allow_write"
+- 
+-     if-eqz p9, :cond_3
+- 
+-     const/4 v3, 0x1
+- 
+-     :goto_2
+-     invoke-static {v3}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+- 
+-     move-result-object v3
+- 
+-     invoke-virtual {v2, v4, v3}, Landroid/content/ContentValues;->put(Ljava/lang/String;Ljava/lang/Integer;)V
+- 
+      iget-object v3, p0, Landroid/app/DownloadManager;->mResolver:Landroid/content/ContentResolver;
+  
+      sget-object v4, Landroid/provider/Downloads$Impl;->CONTENT_URI:Landroid/net/Uri;
+--- 608,613 ----
+***************
+*** 654,664 ****
+  
+      goto :goto_1
+  
+-     :cond_3
+-     const/4 v3, 0x0
+- 
+-     goto :goto_2
+- 
+      .restart local v0       #downloadUri:Landroid/net/Uri;
+      :cond_4
+      invoke-virtual {v0}, Landroid/net/Uri;->getLastPathSegment()Ljava/lang/String;
+--- 635,640 ----
+***************
+*** 705,710 ****
+--- 681,695 ----
+      return-wide v1
+  .end method
+  
++ .method getBaseUri()Landroid/net/Uri;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/app/DownloadManager;->mBaseUri:Landroid/net/Uri;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getDownloadUri(J)Landroid/net/Uri;
+      .locals 1
+      .parameter "id"

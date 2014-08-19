@@ -1,0 +1,13 @@
+*** ./smali/android/os/Process.smali	2014-08-20 05:49:04.628014952 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/os/Process.smali	2014-08-20 05:51:49.736019233 +0700
+***************
+*** 24,29 ****
+--- 24,31 ----
+  
+  .field public static final FIRST_SHARED_APPLICATION_GID:I = 0xc350
+  
++ .field public static final FM_RADIO_UID:I = 0x405
++ 
+  .field public static final GOOGLE_SHARED_APP_CONTENT:Ljava/lang/String; = "com.google.process.content"
+  
+  .field public static final LAST_APPLICATION_UID:I = 0x4e1f

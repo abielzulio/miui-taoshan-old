@@ -1,0 +1,31 @@
+*** ./smali/android/content/ClipboardManager.smali	2014-08-20 05:47:27.772012440 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/content/ClipboardManager.smali	2014-08-20 05:50:12.752016718 +0700
+***************
+*** 211,216 ****
+--- 211,225 ----
+      goto :goto_0
+  .end method
+  
++ .method getContext()Landroid/content/Context;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/content/ClipboardManager;->mContext:Landroid/content/Context;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getPrimaryClip()Landroid/content/ClipData;
+      .locals 3
+  
+***************
+*** 511,516 ****
+--- 520,527 ----
+      .parameter "clip"
+  
+      .prologue
++     invoke-static {p0, p1}, Landroid/content/Injector$ClipboardManagerHook;->before_setPrimaryClip(Landroid/content/ClipboardManager;Landroid/content/ClipData;)V
++ 
+      if-eqz p1, :cond_0
+  
+      :try_start_0

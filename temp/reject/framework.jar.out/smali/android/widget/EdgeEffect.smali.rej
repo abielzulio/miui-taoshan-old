@@ -1,0 +1,35 @@
+*** EdgeEffect.smali	2014-08-20 05:48:28.388014012 +0700
+--- EdgeEffect.smali	2014-08-20 05:51:13.400018291 +0700
+***************
+*** 138,154 ****
+      move-result-object v0
+  
+      .local v0, res:Landroid/content/res/Resources;
+!     const v1, 0x108047c
+! 
+!     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
+  
+      move-result-object v1
+  
+      iput-object v1, p0, Landroid/widget/EdgeEffect;->mEdge:Landroid/graphics/drawable/Drawable;
+  
+!     const v1, 0x108047d
+! 
+!     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getDrawable(I)Landroid/graphics/drawable/Drawable;
+  
+      move-result-object v1
+  
+--- 138,150 ----
+      move-result-object v0
+  
+      .local v0, res:Landroid/content/res/Resources;
+!     invoke-static {p1}, Landroid/widget/Injector$EdgeEffectHook;->getOverScrollEdge(Landroid/content/Context;)Landroid/graphics/drawable/Drawable;
+  
+      move-result-object v1
+  
+      iput-object v1, p0, Landroid/widget/EdgeEffect;->mEdge:Landroid/graphics/drawable/Drawable;
+  
+!     invoke-static {p1}, Landroid/widget/Injector$EdgeEffectHook;->getOverScrollGlow(Landroid/content/Context;)Landroid/graphics/drawable/Drawable;
+  
+      move-result-object v1
+  

@@ -1,0 +1,21 @@
+*** MccTable.smali	2014-08-20 05:50:08.656016612 +0700
+--- MccTable.smali	2014-08-20 05:52:53.968020899 +0700
+***************
+*** 3736,3745 ****
+  
+      invoke-static {p0, v3}, Lcom/android/internal/telephony/MccTable;->setTimezoneFromMccIfNeeded(Landroid/content/Context;I)V
+  
+-     invoke-static {p0, v3}, Lcom/android/internal/telephony/MccTable;->getLocaleFromMcc(Landroid/content/Context;I)Ljava/util/Locale;
+- 
+-     move-result-object v2
+- 
+      invoke-static {p0, v3}, Lcom/android/internal/telephony/MccTable;->setWifiCountryCodeFromMcc(Landroid/content/Context;I)V
+  
+      :cond_0
+--- 3736,3741 ----
+  
+      invoke-static {p0, v3}, Lcom/android/internal/telephony/MccTable;->setTimezoneFromMccIfNeeded(Landroid/content/Context;I)V
+  
+      invoke-static {p0, v3}, Lcom/android/internal/telephony/MccTable;->setWifiCountryCodeFromMcc(Landroid/content/Context;I)V
+  
+      :cond_0

@@ -1,0 +1,23 @@
+*** ./smali/com/android/internal/view/menu/ActionMenuView.smali	2014-08-20 05:49:21.372015386 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework2.jar.out/./smali/com/android/internal/view/menu/ActionMenuView.smali	2014-08-20 05:52:06.596019670 +0700
+***************
+*** 2145,2150 ****
+--- 2145,2162 ----
+  
+      invoke-virtual {v0, v12, v1, v2, v3}, Landroid/view/View;->layout(IIII)V
+  
++     move-object/from16 v0, v27
++ 
++     move/from16 v1, p2
++ 
++     move/from16 v2, v26
++ 
++     move/from16 v3, p4
++ 
++     move/from16 v4, p5
++ 
++     invoke-static {v0, v1, v2, v3, v4}, Lcom/android/internal/view/menu/Injector$ActionMenuViewHook;->layout(Landroid/view/View;IIII)V
++ 
+      goto/16 :goto_0
+  
+      .end local v9           #height:I

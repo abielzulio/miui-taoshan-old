@@ -1,0 +1,44 @@
+*** ./smali/com/android/internal/telephony/uicc/SIMRecords.smali	2014-08-20 05:50:07.336016578 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/SIMRecords.smali	2014-08-20 05:52:52.644020865 +0700
+***************
+*** 970,980 ****
+  
+      iput-object v2, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mPnnHomeName:Ljava/lang/String;
+  
+!     new-instance v0, Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  
+      iget-object v1, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mFh:Lcom/android/internal/telephony/uicc/IccFileHandler;
+  
+!     invoke-direct {v0, v1}, Lcom/android/internal/telephony/uicc/AdnRecordCache;-><init>(Lcom/android/internal/telephony/uicc/IccFileHandler;)V
+  
+      iput-object v0, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mAdnCache:Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  
+--- 970,980 ----
+  
+      iput-object v2, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mPnnHomeName:Ljava/lang/String;
+  
+!     new-instance v0, Lcom/android/internal/telephony/uicc/MiuiAdnRecordCache;
+  
+      iget-object v1, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mFh:Lcom/android/internal/telephony/uicc/IccFileHandler;
+  
+!     invoke-direct {v0, v1}, Lcom/android/internal/telephony/uicc/MiuiAdnRecordCache;-><init>(Lcom/android/internal/telephony/uicc/IccFileHandler;)V
+  
+      iput-object v0, p0, Lcom/android/internal/telephony/uicc/SIMRecords;->mAdnCache:Lcom/android/internal/telephony/uicc/AdnRecordCache;
+  
+***************
+*** 4402,4408 ****
+  
+      array-length v4, v11
+  
+!     invoke-static {v11, v2, v4}, Lcom/android/internal/telephony/uicc/IccUtils;->bcdToString([BII)Ljava/lang/String;
+  
+      move-result-object v2
+  
+--- 4402,4408 ----
+  
+      array-length v4, v11
+  
+!     invoke-static {v11, v2, v4}, Lcom/android/internal/telephony/uicc/IccUtils;->parseIccIdToString([BII)Ljava/lang/String;
+  
+      move-result-object v2
+  

@@ -1,0 +1,15 @@
+*** ./smali/com/android/internal/telephony/cdma/CdmaServiceStateTracker.smali	2014-08-20 05:50:10.088016649 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/cdma/CdmaServiceStateTracker.smali	2014-08-20 05:52:55.348020935 +0700
+***************
+*** 8523,8528 ****
+--- 8523,8532 ----
+      move-result-object v1
+  
+      .local v1, plmn:Ljava/lang/String;
++     invoke-static {p0, v1}, Lcom/android/internal/telephony/Injector$ServiceStateTrackerHook;->getSpn(Lcom/android/internal/telephony/ServiceStateTracker;Ljava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v1
++ 
+      iget-object v5, p0, Lcom/android/internal/telephony/cdma/CdmaServiceStateTracker;->mCurPlmn:Ljava/lang/String;
+  
+      invoke-static {v1, v5}, Landroid/text/TextUtils;->equals(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Z

@@ -1,0 +1,33 @@
+*** PackageParser.smali	2014-08-20 05:47:29.840012494 +0700
+--- PackageParser.smali	2014-08-20 05:50:14.684016769 +0700
+***************
+*** 15223,15237 ****
+      .local v25, cookie:I
+      if-eqz v25, :cond_4
+  
+-     new-instance v32, Landroid/content/res/Resources;
+- 
+      const/4 v6, 0x0
+  
+!     move-object/from16 v0, v32
+  
+!     move-object/from16 v1, p3
+  
+!     invoke-direct {v0, v5, v1, v6}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+  
+--- 15264,15276 ----
+      .local v25, cookie:I
+      if-eqz v25, :cond_4
+  
+      const/4 v6, 0x0
+  
+!     move-object/from16 v0, p3
+  
+!     invoke-static {v5, v0, v6}, Landroid/content/pm/Injector$PackageParserHook;->createResources(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)Landroid/content/res/Resources;
+  
+!     move-result-object v32
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+  

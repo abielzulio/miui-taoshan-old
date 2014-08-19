@@ -1,0 +1,30 @@
+*** ./smali/com/android/internal/policy/impl/PhoneWindowManager$13.smali	2014-08-20 05:50:00.040016389 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/android.policy.jar.out/./smali/com/android/internal/policy/impl/PhoneWindowManager$13.smali	2014-08-20 05:52:45.348020675 +0700
+***************
+*** 143,152 ****
+      const/4 v4, 0x1
+  
+      iput v4, v2, Landroid/os/Message;->arg2:I
+      :try_end_0
+      .catchall {:try_start_0 .. :try_end_0} :catchall_0
+  
+!     :cond_2
+      :try_start_1
+      invoke-virtual {v1, v2}, Landroid/os/Messenger;->send(Landroid/os/Message;)V
+      :try_end_1
+--- 143,157 ----
+      const/4 v4, 0x1
+  
+      iput v4, v2, Landroid/os/Message;->arg2:I
++ 
++     :cond_2
++     iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager$13;->this$0:Lcom/android/internal/policy/impl/PhoneWindowManager;
++ 
++     invoke-virtual {v4, v2}, Lcom/android/internal/policy/impl/PhoneWindowManager;->onScreenShotMessageSend(Landroid/os/Message;)V
+      :try_end_0
+      .catchall {:try_start_0 .. :try_end_0} :catchall_0
+  
+!     #:cond_2
+      :try_start_1
+      invoke-virtual {v1, v2}, Landroid/os/Messenger;->send(Landroid/os/Message;)V
+      :try_end_1

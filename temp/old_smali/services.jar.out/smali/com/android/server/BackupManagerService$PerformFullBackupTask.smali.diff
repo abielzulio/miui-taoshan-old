@@ -1,0 +1,48 @@
+*** ./smali/com/android/server/BackupManagerService$PerformFullBackupTask.smali	2014-08-20 05:49:32.924015686 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/BackupManagerService$PerformFullBackupTask.smali	2014-08-20 05:52:18.200019971 +0700
+***************
+*** 1386,1391 ****
+--- 1386,1393 ----
+  
+      invoke-virtual {v5}, Ljava/io/FileOutputStream;->close()V
+  
++     invoke-static {p2}, Lcom/android/server/BackupManagerService$Injector;->resetManifestFileModifiedTime(Ljava/io/File;)V
++ 
+      return-void
+  
+      .end local v5           #outstream:Ljava/io/FileOutputStream;
+***************
+*** 1685,1707 ****
+      check-cast v21, Landroid/content/pm/PackageInfo;
+  
+      .restart local v21       #pkg:Landroid/content/pm/PackageInfo;
+!     move-object/from16 v0, v21
+! 
+!     iget-object v0, v0, Landroid/content/pm/PackageInfo;->applicationInfo:Landroid/content/pm/ApplicationInfo;
+! 
+!     move-object/from16 v23, v0
+! 
+!     move-object/from16 v0, v23
+! 
+!     iget v0, v0, Landroid/content/pm/ApplicationInfo;->flags:I
+! 
+!     move/from16 v23, v0
+! 
+!     const v24, 0x8000
+! 
+!     and-int v23, v23, v24
+  
+!     if-eqz v23, :cond_3
+  
+      move-object/from16 v0, v21
+  
+--- 1687,1695 ----
+      check-cast v21, Landroid/content/pm/PackageInfo;
+  
+      .restart local v21       #pkg:Landroid/content/pm/PackageInfo;
+!     sget-boolean v23, Lcom/android/server/BackupManagerService$Injector;->FALSE:Z
+  
+!     if-nez v23, :cond_3
+  
+      move-object/from16 v0, v21
+  

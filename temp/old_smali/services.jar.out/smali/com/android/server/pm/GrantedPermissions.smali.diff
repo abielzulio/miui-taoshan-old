@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/pm/GrantedPermissions.smali	2014-08-20 05:49:43.100015950 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/pm/GrantedPermissions.smali	2014-08-20 05:52:28.432020237 +0700
+***************
+*** 91,97 ****
+      .parameter "pkgFlags"
+  
+      .prologue
+!     const v0, 0x60040001
+  
+      and-int/2addr v0, p1
+  
+--- 91,97 ----
+      .parameter "pkgFlags"
+  
+      .prologue
+!     const v0, -0x19fbffff
+  
+      and-int/2addr v0, p1
+  

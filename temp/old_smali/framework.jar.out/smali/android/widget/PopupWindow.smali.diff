@@ -1,0 +1,44 @@
+*** ./smali/android/widget/PopupWindow.smali	2014-08-20 05:48:23.388013883 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/PopupWindow.smali	2014-08-20 05:51:08.356018160 +0700
+***************
+*** 1975,1984 ****
+      .parameter "aboveAnchor"
+  
+      .prologue
+-     iget-boolean v0, p0, Landroid/widget/PopupWindow;->mAboveAnchor:Z
+- 
+-     if-eq p1, v0, :cond_0
+- 
+      iput-boolean p1, p0, Landroid/widget/PopupWindow;->mAboveAnchor:Z
+  
+      iget-object v0, p0, Landroid/widget/PopupWindow;->mBackground:Landroid/graphics/drawable/Drawable;
+--- 1975,1980 ----
+***************
+*** 2137,2146 ****
+  .end method
+  
+  .method public getBackground()Landroid/graphics/drawable/Drawable;
+!     .locals 1
+  
+      .prologue
+!     iget-object v0, p0, Landroid/widget/PopupWindow;->mBackground:Landroid/graphics/drawable/Drawable;
+  
+      return-object v0
+  .end method
+--- 2133,2148 ----
+  .end method
+  
+  .method public getBackground()Landroid/graphics/drawable/Drawable;
+!     .locals 2
+  
+      .prologue
+!     iget-object v0, p0, Landroid/widget/PopupWindow;->mPopupView:Landroid/view/View;
+! 
+!     iget-object v1, p0, Landroid/widget/PopupWindow;->mBackground:Landroid/graphics/drawable/Drawable;
+! 
+!     invoke-static {v0, v1}, Landroid/widget/Injector$PopupWindowHook;->after_getBackground(Landroid/view/View;Landroid/graphics/drawable/Drawable;)Landroid/graphics/drawable/Drawable;
+! 
+!     move-result-object v0
+  
+      return-object v0
+  .end method

@@ -1,0 +1,38 @@
+*** ./smali/android/speech/tts/TextToSpeech$Connection.smali	2014-08-20 05:47:48.868012987 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/speech/tts/TextToSpeech$Connection.smali	2014-08-20 05:50:33.736017263 +0700
+***************
+*** 215,220 ****
+--- 215,247 ----
+      return-object v0
+  .end method
+  
++ .method public isConnected()Z
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/speech/tts/TextToSpeech$Connection;->mService:Landroid/speech/tts/ITextToSpeechService;
++ 
++     if-eqz v0, :cond_0
++ 
++     iget-object v0, p0, Landroid/speech/tts/TextToSpeech$Connection;->mService:Landroid/speech/tts/ITextToSpeechService;
++ 
++     invoke-interface {v0}, Landroid/speech/tts/ITextToSpeechService;->asBinder()Landroid/os/IBinder;
++ 
++     move-result-object v0
++ 
++     invoke-interface {v0}, Landroid/os/IBinder;->isBinderAlive()Z
++ 
++     move-result v0
++ 
++     :goto_0
++     return v0
++ 
++     :cond_0
++     const/4 v0, 0x0
++ 
++     goto :goto_0
++ .end method
++ 
+  .method public isEstablished()Z
+      .locals 1
+  

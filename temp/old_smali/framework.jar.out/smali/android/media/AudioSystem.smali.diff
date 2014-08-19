@@ -1,0 +1,45 @@
+*** ./smali/android/media/AudioSystem.smali	2014-08-20 05:47:42.016012810 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/media/AudioSystem.smali	2014-08-20 05:50:26.832017084 +0700
+***************
+*** 146,151 ****
+--- 146,153 ----
+  
+  .field public static final FORCE_DIGITAL_DOCK:I = 0x9
+  
++ .field public static final FORCE_EARPIECE:I = 0xc
++ 
+  .field public static final FORCE_HEADPHONES:I = 0x2
+  
+  .field public static final FORCE_NONE:I = 0x0
+***************
+*** 162,167 ****
+--- 164,171 ----
+  
+  .field public static final FOR_DOCK:I = 0x3
+  
++ .field public static final FOR_LB_TEST:I = 0x5
++ 
+  .field public static final FOR_MEDIA:I = 0x1
+  
+  .field public static final FOR_RECORD:I = 0x2
+***************
+*** 182,190 ****
+  
+  .field private static final NUM_DEVICE_STATES:I = 0x1
+  
+! .field private static final NUM_FORCE_CONFIG:I = 0xc
+  
+! .field private static final NUM_FORCE_USE:I = 0x5
+  
+  .field public static final NUM_MODES:I = 0x4
+  
+--- 186,194 ----
+  
+  .field private static final NUM_DEVICE_STATES:I = 0x1
+  
+! .field private static final NUM_FORCE_CONFIG:I = 0xd
+  
+! .field private static final NUM_FORCE_USE:I = 0x6
+  
+  .field public static final NUM_MODES:I = 0x4
+  

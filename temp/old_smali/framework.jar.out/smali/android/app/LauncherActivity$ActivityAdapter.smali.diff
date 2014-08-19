@@ -1,0 +1,19 @@
+*** ./smali/android/app/LauncherActivity$ActivityAdapter.smali	2014-08-20 05:48:11.712013580 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/LauncherActivity$ActivityAdapter.smali	2014-08-20 05:50:56.560017854 +0700
+***************
+*** 268,275 ****
+--- 268,281 ----
+  
+      iget-object v1, p0, Landroid/app/LauncherActivity$ActivityAdapter;->mInflater:Landroid/view/LayoutInflater;
+  
++     iget-object v3, p0, Landroid/app/LauncherActivity$ActivityAdapter;->this$0:Landroid/app/LauncherActivity;
++ 
+      const v2, 0x1090022
+  
++     invoke-static {v3, v2}, Landroid/app/Injector$LauncherActivityHook;->getActivityListItemLayout(Landroid/app/LauncherActivity;I)I
++ 
++     move-result v2
++ 
+      const/4 v3, 0x0
+  
+      invoke-virtual {v1, v2, p3, v3}, Landroid/view/LayoutInflater;->inflate(ILandroid/view/ViewGroup;Z)Landroid/view/View;

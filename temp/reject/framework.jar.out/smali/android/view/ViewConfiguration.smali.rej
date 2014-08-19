@@ -1,0 +1,57 @@
+*** ViewConfiguration.smali	2014-08-20 05:47:55.348013155 +0700
+--- ViewConfiguration.smali	2014-08-20 05:50:40.264017432 +0700
+***************
+*** 340,346 ****
+  
+      iput v10, p0, Landroid/view/ViewConfiguration;->mMaximumDrawingCacheSize:I
+  
+!     const/4 v10, 0x0
+  
+      mul-float/2addr v10, v7
+  
+--- 340,346 ----
+  
+      iput v10, p0, Landroid/view/ViewConfiguration;->mMaximumDrawingCacheSize:I
+  
+!     const/high16 v10, 0x40c0
+  
+      mul-float/2addr v10, v7
+  
+***************
+*** 350,355 ****
+  
+      float-to-int v10, v10
+  
+      iput v10, p0, Landroid/view/ViewConfiguration;->mOverscrollDistance:I
+  
+      const/high16 v10, 0x40c0
+--- 350,359 ----
+  
+      float-to-int v10, v10
+  
++     invoke-static {p1, v10}, Landroid/view/Injector$ViewConfigurationHook;->getOverscrollDistance(Landroid/content/Context;I)I
++ 
++     move-result v10
++ 
+      iput v10, p0, Landroid/view/ViewConfiguration;->mOverscrollDistance:I
+  
+      const/high16 v10, 0x40c0
+***************
+*** 362,367 ****
+  
+      float-to-int v10, v10
+  
+      iput v10, p0, Landroid/view/ViewConfiguration;->mOverflingDistance:I
+  
+      iget-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKeySet:Z
+--- 366,375 ----
+  
+      float-to-int v10, v10
+  
++     invoke-static {p1, v10}, Landroid/view/Injector$ViewConfigurationHook;->getOverflingDistance(Landroid/content/Context;I)I
++ 
++     move-result v10
++ 
+      iput v10, p0, Landroid/view/ViewConfiguration;->mOverflingDistance:I
+  
+      iget-boolean v10, p0, Landroid/view/ViewConfiguration;->sHasPermanentMenuKeySet:Z

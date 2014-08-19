@@ -1,0 +1,39 @@
+*** ./smali/android/telephony/TelephonyManager.smali	2014-08-20 05:48:58.580014795 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/telephony/TelephonyManager.smali	2014-08-20 05:51:43.704019077 +0700
+***************
+*** 1234,1239 ****
+--- 1234,1248 ----
+      goto :goto_0
+  .end method
+  
++ .method getContext()Landroid/content/Context;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/telephony/TelephonyManager;->mContext:Landroid/content/Context;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getCurrentPhoneType()I
+      .locals 3
+  
+***************
+*** 1961,1969 ****
+      .locals 1
+  
+      .prologue
+!     const-string v0, "gsm.sim.operator.numeric"
+! 
+!     invoke-static {v0}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+  
+      move-result-object v0
+  
+--- 1970,1976 ----
+      .locals 1
+  
+      .prologue
+!     invoke-static {p0}, Landroid/telephony/Injector$TelephonyManagerHook;->getSimOperator(Landroid/telephony/TelephonyManager;)Ljava/lang/String;
+  
+      move-result-object v0
+  

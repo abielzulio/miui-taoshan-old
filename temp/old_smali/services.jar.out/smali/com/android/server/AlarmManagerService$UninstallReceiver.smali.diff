@@ -1,0 +1,15 @@
+*** ./smali/com/android/server/AlarmManagerService$UninstallReceiver.smali	2014-08-20 05:49:34.224015719 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/AlarmManagerService$UninstallReceiver.smali	2014-08-20 05:52:19.516020006 +0700
+***************
+*** 204,209 ****
+--- 204,213 ----
+  
+      :cond_3
+      :goto_2
++     invoke-static {v7}, Lcom/android/server/AlarmManagerService$Injector;->filterPersistPackages([Ljava/lang/String;)[Ljava/lang/String;
++ 
++     move-result-object v7
++ 
+      if-eqz v7, :cond_7
+  
+      array-length v9, v7

@@ -1,0 +1,103 @@
+*** ./smali/android/text/StaticLayout.smali	2014-08-20 05:48:57.060014756 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/text/StaticLayout.smali	2014-08-20 05:51:42.168019037 +0700
+***************
+*** 1003,1008 ****
+--- 1003,1021 ----
+      goto/16 :goto_3
+  .end method
+  
++ .method static callIsIdeographic(CZ)Z
++     .locals 1
++     .parameter "c"
++     .parameter "includeNonStarters"
++ 
++     .prologue
++     invoke-static {p0, p1}, Landroid/text/StaticLayout;->isIdeographic(CZ)Z
++ 
++     move-result v0
++ 
++     return v0
++ .end method
++ 
+  .method private static final isIdeographic(CZ)Z
+      .locals 3
+      .parameter "c"
+***************
+*** 1133,1139 ****
+      if-le p0, v2, :cond_0
+  
+      :cond_a
+!     move v0, v1
+  
+      goto :goto_0
+  
+--- 1146,1154 ----
+      if-le p0, v2, :cond_0
+  
+      :cond_a
+!     invoke-static {p0, p1}, Landroid/text/Injector$StaticLayoutHook;->isChineseIdeographic(CZ)Z
+! 
+!     move-result v0
+  
+      goto :goto_0
+  
+***************
+*** 1811,1816 ****
+--- 1826,1833 ----
+      .parameter "ellipsize"
+  
+      .prologue
++     invoke-static {}, Landroid/text/Injector$StaticLayoutHook;->before_generate()V
++ 
+      const/4 v5, 0x0
+  
+      move-object/from16 v0, p0
+***************
+*** 2404,2409 ****
+--- 2421,2452 ----
+      move/from16 v42, v102
+  
+      :cond_f
++     move/from16 v0, v95
++ 
++     move-object/from16 v1, v27
++ 
++     move/from16 v2, v109
++ 
++     move/from16 v3, v123
++ 
++     move/from16 v4, v29
++ 
++     invoke-static {v0, v1, v2, v3, v4}, Landroid/text/Injector$StaticLayoutHook;->validateCJKCharAsSpace(C[CIII)C
++ 
++     move-result v95
++ 
++     if-nez v108, :cond_miui_0
++ 
++     const/16 v5, 0x20
++ 
++     move/from16 v0, v95
++ 
++     if-ne v0, v5, :cond_miui_1
++ 
++     :cond_miui_0
++     const/16 v108, 0x1
++ 
++     :goto_miui
+      if-nez v108, :cond_12
+  
+      const/16 v5, 0x2f
+***************
+*** 2811,2816 ****
+--- 2854,2864 ----
+      goto/16 :goto_a
+  
+      .restart local v108       #isSpaceOrTab:Z
++     :cond_miui_1
++     const/16 v108, 0x0
++ 
++     goto/16 :goto_miui
++ 
+      :cond_21
+      const/16 v107, 0x0
+  

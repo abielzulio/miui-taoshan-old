@@ -1,0 +1,23 @@
+*** ./smali/android/view/ViewRootImpl$ViewRootHandler.smali	2014-08-20 05:47:50.784013037 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/view/ViewRootImpl$ViewRootHandler.smali	2014-08-20 05:50:35.664017313 +0700
+***************
+*** 310,315 ****
+--- 310,327 ----
+  
+      iget-object v2, v0, Landroid/view/ViewRootImpl$ViewRootHandler;->this$0:Landroid/view/ViewRootImpl;
+  
++     move-object/from16 v0, p1
++ 
++     invoke-static {v2, v7, v0}, Landroid/view/Injector$ViewRootImplHook;->tryToSkipResizedMsg(Landroid/view/ViewRootImpl;Lcom/android/internal/os/SomeArgs;Landroid/os/Message;)Z
++ 
++     move-result v2
++ 
++     if-nez v2, :cond_0
++ 
++     move-object/from16 v0, p0
++ 
++     iget-object v2, v0, Landroid/view/ViewRootImpl$ViewRootHandler;->this$0:Landroid/view/ViewRootImpl;
++ 
+      iget-object v2, v2, Landroid/view/ViewRootImpl;->mWinFrame:Landroid/graphics/Rect;
+  
+      iget-object v3, v7, Lcom/android/internal/os/SomeArgs;->arg1:Ljava/lang/Object;

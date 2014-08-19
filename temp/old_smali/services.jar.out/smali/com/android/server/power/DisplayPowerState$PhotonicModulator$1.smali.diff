@@ -1,0 +1,13 @@
+*** ./smali/com/android/server/power/DisplayPowerState$PhotonicModulator$1.smali	2014-08-20 05:49:37.940015816 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/power/DisplayPowerState$PhotonicModulator$1.smali	2014-08-20 05:52:23.224020102 +0700
+***************
+*** 208,213 ****
+--- 208,215 ----
+  
+      invoke-interface {v6}, Lcom/android/server/power/DisplayBlanker;->unblankAllDisplays()V
+  
++     invoke-static {}, Lcom/android/server/power/DisplayPowerController;->setScreenColor()V
++ 
+      :cond_5
+      if-eqz v1, :cond_6
+  

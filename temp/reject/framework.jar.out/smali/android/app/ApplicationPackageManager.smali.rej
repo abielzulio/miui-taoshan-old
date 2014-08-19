@@ -1,0 +1,19 @@
+*** ApplicationPackageManager.smali	2014-08-20 05:48:09.040013511 +0700
+--- ApplicationPackageManager.smali	2014-08-20 05:50:53.916017786 +0700
+***************
+*** 2667,2672 ****
+      move-result-object v0
+  
+      .local v0, r:Landroid/content/res/Resources;
+      if-nez v0, :cond_0
+  
+      new-instance v1, Landroid/content/pm/PackageManager$NameNotFoundException;
+--- 2661,2668 ----
+      move-result-object v0
+  
+      .local v0, r:Landroid/content/res/Resources;
++     invoke-static {v0, p1}, Landroid/app/Injector$ApplicationPackageManagerHook;->setResourcesPackageName(Landroid/content/res/Resources;Landroid/content/pm/ApplicationInfo;)V
++ 
+      if-nez v0, :cond_0
+  
+      new-instance v1, Landroid/content/pm/PackageManager$NameNotFoundException;

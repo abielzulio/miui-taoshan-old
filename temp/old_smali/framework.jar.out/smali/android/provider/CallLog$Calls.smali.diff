@@ -1,0 +1,99 @@
+*** ./smali/android/provider/CallLog$Calls.smali	2014-08-20 05:48:04.604013395 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/provider/CallLog$Calls.smali	2014-08-20 05:50:49.436017670 +0700
+***************
+*** 88,99 ****
+--- 88,105 ----
+  
+  .field public static final VOICEMAIL_URI:Ljava/lang/String; = "voicemail_uri"
+  
++ .field static sExtraCallLogValues:Landroid/content/ContentValues;
++ 
+  
+  # direct methods
+  .method static constructor <clinit>()V
+      .locals 3
+  
+      .prologue
++     const/4 v0, 0x0
++ 
++     sput-object v0, Landroid/provider/CallLog$Calls;->sExtraCallLogValues:Landroid/content/ContentValues;
++ 
+      const-string v0, "content://call_log/calls"
+  
+      invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+***************
+*** 192,197 ****
+--- 198,207 ----
+  
+      invoke-direct {v13, v2}, Landroid/content/ContentValues;-><init>(I)V
+  
++     invoke-static {v13}, Landroid/provider/CallLog$Calls;->getExtraCallLogValues(Landroid/content/ContentValues;)Landroid/content/ContentValues;
++ 
++     move-result-object v13
++ 
+      .local v13, values:Landroid/content/ContentValues;
+      const-string v2, "number"
+  
+***************
+*** 428,435 ****
+      move-result-object v12
+  
+      .local v12, result:Landroid/net/Uri;
+-     invoke-static/range {p1 .. p1}, Landroid/provider/CallLog$Calls;->removeExpiredEntries(Landroid/content/Context;)V
+- 
+      return-object v12
+  
+      .end local v12           #result:Landroid/net/Uri;
+--- 438,443 ----
+***************
+*** 540,545 ****
+--- 548,580 ----
+      throw v2
+  .end method
+  
++ .method public static getExtraCallLogValues(Landroid/content/ContentValues;)Landroid/content/ContentValues;
++     .locals 2
++     .parameter "contentValues"
++ 
++     .prologue
++     sget-object v1, Landroid/provider/CallLog$Calls;->sExtraCallLogValues:Landroid/content/ContentValues;
++ 
++     if-nez v1, :cond_0
++ 
++     move-object v0, p0
++ 
++     .local v0, values:Landroid/content/ContentValues;
++     :goto_0
++     return-object v0
++ 
++     .end local v0           #values:Landroid/content/ContentValues;
++     :cond_0
++     sget-object v0, Landroid/provider/CallLog$Calls;->sExtraCallLogValues:Landroid/content/ContentValues;
++ 
++     .restart local v0       #values:Landroid/content/ContentValues;
++     const/4 v1, 0x0
++ 
++     sput-object v1, Landroid/provider/CallLog$Calls;->sExtraCallLogValues:Landroid/content/ContentValues;
++ 
++     goto :goto_0
++ .end method
++ 
+  .method public static getLastOutgoingCall(Landroid/content/Context;)Ljava/lang/String;
+      .locals 7
+      .parameter "context"
+***************
+*** 644,646 ****
+--- 679,691 ----
+  
+      return-void
+  .end method
++ 
++ .method public static setExtraCallLogValues(Landroid/content/ContentValues;)V
++     .locals 0
++     .parameter "extraCallLogValues"
++ 
++     .prologue
++     sput-object p0, Landroid/provider/CallLog$Calls;->sExtraCallLogValues:Landroid/content/ContentValues;
++ 
++     return-void
++ .end method

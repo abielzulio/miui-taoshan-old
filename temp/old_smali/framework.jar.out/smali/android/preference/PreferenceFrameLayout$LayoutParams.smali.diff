@@ -1,0 +1,19 @@
+*** ./smali/android/preference/PreferenceFrameLayout$LayoutParams.smali	2014-08-20 05:48:01.844013324 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/preference/PreferenceFrameLayout$LayoutParams.smali	2014-08-20 05:50:46.700017599 +0700
+***************
+*** 59,64 ****
+--- 59,72 ----
+  
+      iput-boolean v1, p0, Landroid/preference/PreferenceFrameLayout$LayoutParams;->removeBorders:Z
+  
++     iget-boolean v1, p0, Landroid/preference/PreferenceFrameLayout$LayoutParams;->removeBorders:Z
++ 
++     invoke-static {p1, v1}, Landroid/preference/Injector$PreferenceFrameLayoutHook;->isRemoveBorders(Landroid/content/Context;Z)Z
++ 
++     move-result v1
++ 
++     iput-boolean v1, p0, Landroid/preference/PreferenceFrameLayout$LayoutParams;->removeBorders:Z
++ 
+      invoke-virtual {v0}, Landroid/content/res/TypedArray;->recycle()V
+  
+      return-void

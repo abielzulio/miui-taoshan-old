@@ -1,0 +1,121 @@
+*** ./smali/com/android/server/power/ShutdownThread.smali	2014-08-20 05:49:38.384015827 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/power/ShutdownThread.smali	2014-08-20 05:52:23.684020114 +0700
+***************
+*** 181,187 ****
+  
+      invoke-virtual {v2, v3}, Landroid/view/Window;->setType(I)V
+  
+!     invoke-virtual {v1}, Landroid/app/ProgressDialog;->show()V
+  
+      sget-object v2, Lcom/android/server/power/ShutdownThread;->sInstance:Lcom/android/server/power/ShutdownThread;
+  
+--- 181,187 ----
+  
+      invoke-virtual {v2, v3}, Landroid/view/Window;->setType(I)V
+  
+!     invoke-static {p0}, Lcom/android/server/power/Injector$ShutdownThreadHook;->createShutDownDialog(Landroid/content/Context;)V
+  
+      sget-object v2, Lcom/android/server/power/ShutdownThread;->sInstance:Lcom/android/server/power/ShutdownThread;
+  
+***************
+*** 346,351 ****
+--- 346,378 ----
+      goto :goto_2
+  .end method
+  
++ .method static getIsStarted()Z
++     .locals 1
++ 
++     .prologue
++     sget-boolean v0, Lcom/android/server/power/ShutdownThread;->sIsStarted:Z
++ 
++     return v0
++ .end method
++ 
++ .method static getIsStartedGuard()Ljava/lang/Object;
++     .locals 1
++ 
++     .prologue
++     sget-object v0, Lcom/android/server/power/ShutdownThread;->sIsStartedGuard:Ljava/lang/Object;
++ 
++     return-object v0
++ .end method
++ 
++ .method static getReboot()Z
++     .locals 1
++ 
++     .prologue
++     sget-boolean v0, Lcom/android/server/power/ShutdownThread;->mReboot:Z
++ 
++     return v0
++ .end method
++ 
+  .method public static reboot(Landroid/content/Context;Ljava/lang/String;Z)V
+      .locals 1
+      .parameter "context"
+***************
+*** 468,473 ****
+--- 495,502 ----
+  
+      sput-boolean v0, Lcom/android/server/power/ShutdownThread;->mReboot:Z
+  
++     const/4 v0, 0x0
++ 
+      sput-boolean v0, Lcom/android/server/power/ShutdownThread;->mRebootSafeMode:Z
+  
+      const/4 v0, 0x0
+***************
+*** 479,484 ****
+--- 508,533 ----
+      return-void
+  .end method
+  
++ .method static setReboot(Z)V
++     .locals 0
++     .parameter "value"
++ 
++     .prologue
++     sput-boolean p0, Lcom/android/server/power/ShutdownThread;->mReboot:Z
++ 
++     return-void
++ .end method
++ 
++ .method static setRebootReason(Ljava/lang/String;)V
++     .locals 0
++     .parameter "value"
++ 
++     .prologue
++     sput-object p0, Lcom/android/server/power/ShutdownThread;->mRebootReason:Ljava/lang/String;
++ 
++     return-void
++ .end method
++ 
+  .method public static shutdown(Landroid/content/Context;Z)V
+      .locals 1
+      .parameter "context"
+***************
+*** 546,551 ****
+--- 595,604 ----
+  
+      .local v2, resourceId:I
+      :goto_1
++     invoke-static {v2}, Lcom/android/server/power/Injector$ShutdownThreadHook;->getResourceId(I)I
++ 
++     move-result v2
++ 
+      const-string v3, "ShutdownThread"
+  
+      new-instance v4, Ljava/lang/StringBuilder;
+***************
+*** 629,634 ****
+--- 682,691 ----
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+  
++     invoke-static {v3}, Lcom/android/server/power/Injector$ShutdownThreadHook;->setupShutdownConfirmDialog(Landroid/app/AlertDialog;)V
++ 
++     sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
++ 
+      iput-object v3, v0, Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;->dialog:Landroid/app/Dialog;
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;

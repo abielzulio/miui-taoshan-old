@@ -1,0 +1,99 @@
+*** ./smali/android/app/ContextImpl.smali	2014-08-20 05:48:11.160013565 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/ContextImpl.smali	2014-08-20 05:50:56.004017840 +0700
+***************
+*** 518,523 ****
+--- 518,525 ----
+  
+      invoke-static {v0, v1}, Landroid/app/ContextImpl;->registerService(Ljava/lang/String;Landroid/app/ContextImpl$ServiceFetcher;)V
+  
++     invoke-static {}, Landroid/app/ContextImpl;->registerMiuiServices()V
++ 
+      return-void
+  .end method
+  
+***************
+*** 1537,1542 ****
+--- 1539,1559 ----
+      throw v0
+  .end method
+  
++ .method static registerMiuiServices()V
++     .locals 2
++ 
++     .prologue
++     const-string v0, "security"
++ 
++     new-instance v1, Landroid/app/ContextImpl$SecurityServiceFetcher;
++ 
++     invoke-direct {v1}, Landroid/app/ContextImpl$SecurityServiceFetcher;-><init>()V
++ 
++     invoke-static {v0, v1}, Landroid/app/ContextImpl;->registerService(Ljava/lang/String;Landroid/app/ContextImpl$ServiceFetcher;)V
++ 
++     return-void
++ .end method
++ 
+  .method private registerReceiverInternal(Landroid/content/BroadcastReceiver;ILandroid/content/IntentFilter;Ljava/lang/String;Landroid/os/Handler;Landroid/content/Context;)Landroid/content/Intent;
+      .locals 9
+      .parameter "receiver"
+***************
+*** 1593,1598 ****
+--- 1610,1617 ----
+      .restart local v3       #rd:Landroid/content/IIntentReceiver;
+      :cond_1
+      :goto_0
++     invoke-static {p0, p3}, Landroid/app/Injector$ContextImplHook;->checkPriority(Landroid/app/ContextImpl;Landroid/content/IntentFilter;)V
++ 
+      :try_start_0
+      invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+  
+***************
+*** 2580,2585 ****
+--- 2599,2612 ----
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      return-object v6
+  .end method
+  
+***************
+*** 2644,2649 ****
+--- 2671,2684 ----
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      return-object v6
+  .end method
+  
+***************
+*** 4495,4500 ****
+--- 4530,4543 ----
+  
+      iput-object v0, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      :goto_2
+      iput-object p3, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+  

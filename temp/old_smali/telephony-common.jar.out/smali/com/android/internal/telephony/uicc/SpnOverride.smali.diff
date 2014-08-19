@@ -1,0 +1,32 @@
+*** ./smali/com/android/internal/telephony/uicc/SpnOverride.smali	2014-08-20 05:50:07.420016580 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/SpnOverride.smali	2014-08-20 05:52:52.728020867 +0700
+***************
+*** 99,104 ****
+--- 99,108 ----
+      .end local v4           #parser:Lorg/xmlpull/v1/XmlPullParser;
+      .end local v6           #spnReader:Ljava/io/FileReader;
+      :goto_1
++     invoke-static {v6}, Lcom/android/internal/telephony/uicc/SpnOverride$Injector;->closeSpnReader(Ljava/io/FileReader;)V
++ 
++     .end local v6           #spnReader:Ljava/io/FileReader;
++     :goto_miui
+      return-void
+  
+      :catch_0
+***************
+*** 143,149 ****
+  
+      invoke-static {v7, v8}, Landroid/telephony/Rlog;->w(Ljava/lang/String;Ljava/lang/String;)I
+  
+!     goto :goto_1
+  
+      .end local v1           #e:Ljava/io/FileNotFoundException;
+      .restart local v2       #name:Ljava/lang/String;
+--- 147,153 ----
+  
+      invoke-static {v7, v8}, Landroid/telephony/Rlog;->w(Ljava/lang/String;Ljava/lang/String;)I
+  
+!     goto :goto_miui
+  
+      .end local v1           #e:Ljava/io/FileNotFoundException;
+      .restart local v2       #name:Ljava/lang/String;

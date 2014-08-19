@@ -1,0 +1,15 @@
+*** ./smali/android/telephony/PhoneNumberUtils.smali	2014-08-20 05:48:58.304014788 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/telephony/PhoneNumberUtils.smali	2014-08-20 05:51:43.416019069 +0700
+***************
+*** 3165,3170 ****
+--- 3165,3174 ----
+      .parameter "defaultCountryIso"
+  
+      .prologue
++     invoke-static {p0}, Landroid/telephony/Injector$PhoneNumberUtilsHook;->before_formatNumber(Ljava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object p0
++ 
+      invoke-virtual {p0}, Ljava/lang/String;->length()I
+  
+      move-result v1

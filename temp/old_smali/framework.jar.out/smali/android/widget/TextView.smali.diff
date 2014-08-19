@@ -1,0 +1,206 @@
+*** ./smali/android/widget/TextView.smali	2014-08-20 05:48:31.732014099 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/TextView.smali	2014-08-20 05:51:16.768018378 +0700
+***************
+*** 7375,7381 ****
+  .end method
+  
+  .method private setText(Ljava/lang/CharSequence;Landroid/widget/TextView$BufferType;ZI)V
+!     .locals 22
+      .parameter "text"
+      .parameter "type"
+      .parameter "notifyBefore"
+--- 7375,7381 ----
+  .end method
+  
+  .method private setText(Ljava/lang/CharSequence;Landroid/widget/TextView$BufferType;ZI)V
+!     .locals 23
+      .parameter "text"
+      .parameter "type"
+      .parameter "notifyBefore"
+***************
+*** 7400,7405 ****
+--- 7400,7422 ----
+      :cond_1
+      move-object/from16 v0, p0
+  
++     iget-object v4, v0, Landroid/widget/TextView;->mText:Ljava/lang/CharSequence;
++ 
++     move-object/from16 v0, p1
++ 
++     invoke-virtual {v0, v4}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
++ 
++     move-result v4
++ 
++     const/16 v22, 0x0
++ 
++     if-nez v4, :cond_miui
++ 
++     const/16 v22, 0x1
++ 
++     :cond_miui
++     move-object/from16 v0, p0
++ 
+      iget-boolean v4, v0, Landroid/widget/TextView;->mUserSetTextScaleX:Z
+  
+      if-nez v4, :cond_2
+***************
+*** 7675,7681 ****
+  
+      move-object/from16 v0, v17
+  
+!     invoke-static {v0, v4}, Landroid/text/util/Linkify;->addLinks(Landroid/text/Spannable;I)Z
+  
+      move-result v4
+  
+--- 7692,7698 ----
+  
+      move-object/from16 v0, v17
+  
+!     invoke-static {v0, v4}, Lmiui/text/util/Linkify;->addLinks(Landroid/text/Spannable;I)Z
+  
+      move-result v4
+  
+***************
+*** 8024,8029 ****
+--- 8041,8048 ----
+      invoke-direct/range {p0 .. p0}, Landroid/widget/TextView;->checkForRelayout()V
+  
+      :cond_19
++     if-eqz v22, :cond_miui_0
++ 
+      const/4 v4, 0x0
+  
+      move-object/from16 v0, p0
+***************
+*** 8036,8041 ****
+--- 8055,8061 ----
+  
+      invoke-virtual {v0, v1, v4, v2, v3}, Landroid/widget/TextView;->sendOnTextChanged(Ljava/lang/CharSequence;III)V
+  
++     :cond_miui_0
+      const/4 v4, 0x0
+  
+      move-object/from16 v0, p0
+***************
+*** 8105,8110 ****
+--- 8125,8134 ----
+      packed-switch p2, :pswitch_data_0
+  
+      :goto_1
++     invoke-static {v0, p2, p3}, Landroid/graphics/MiuiTypeface;->getChangedTypeface(Landroid/graphics/Typeface;II)Landroid/graphics/Typeface;
++ 
++     move-result-object v0
++ 
+      invoke-virtual {p0, v0, p3}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;I)V
+  
+      goto :goto_0
+***************
+*** 22793,22798 ****
+--- 22817,22861 ----
+      return-void
+  .end method
+  
++ .method public setCursorDrawableRes(I)V
++     .locals 3
++     .parameter "cursorDrawableRes"
++ 
++     .prologue
++     iput p1, p0, Landroid/widget/TextView;->mCursorDrawableRes:I
++ 
++     const/4 v0, 0x0
++ 
++     .local v0, i:I
++     :goto_0
++     iget-object v1, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
++ 
++     iget v1, v1, Landroid/widget/Editor;->mCursorCount:I
++ 
++     if-ge v0, v1, :cond_0
++ 
++     iget-object v1, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
++ 
++     iget-object v1, v1, Landroid/widget/Editor;->mCursorDrawable:[Landroid/graphics/drawable/Drawable;
++ 
++     const/4 v2, 0x0
++ 
++     aput-object v2, v1, v0
++ 
++     add-int/lit8 v0, v0, 0x1
++ 
++     goto :goto_0
++ 
++     :cond_0
++     iget-object v1, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
++ 
++     const/4 v2, 0x0
++ 
++     iput v2, v1, Landroid/widget/Editor;->mCursorCount:I
++ 
++     return-void
++ .end method
++ 
+  .method protected setCursorPosition_internal(II)V
+      .locals 1
+      .parameter "start"
+***************
+*** 24590,24595 ****
+--- 24653,24668 ----
+      return-void
+  .end method
+  
++ .method public final setSoftInputShownOnFocus(Z)V
++     .locals 0
++     .parameter "show"
++ 
++     .prologue
++     invoke-virtual {p0, p1}, Landroid/widget/TextView;->setShowSoftInputOnFocus(Z)V
++ 
++     return-void
++ .end method
++ 
+  .method protected setSpan_internal(Ljava/lang/Object;III)V
+      .locals 1
+      .parameter "span"
+***************
+*** 25377,25382 ****
+--- 25450,25463 ----
+      .parameter "tf"
+  
+      .prologue
++     invoke-virtual {p0}, Landroid/widget/TextView;->getContext()Landroid/content/Context;
++ 
++     move-result-object v0
++ 
++     invoke-static {v0, p1}, Lmiui/util/UiUtils;->replaceTypeface(Landroid/content/Context;Landroid/graphics/Typeface;)Landroid/graphics/Typeface;
++ 
++     move-result-object p1
++ 
+      iget-object v0, p0, Landroid/widget/TextView;->mTextPaint:Landroid/text/TextPaint;
+  
+      invoke-virtual {v0}, Landroid/text/TextPaint;->getTypeface()Landroid/graphics/Typeface;
+***************
+*** 25424,25429 ****
+--- 25505,25514 ----
+      :goto_0
+      invoke-virtual {p0, p1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V
+  
++     invoke-virtual {p0}, Landroid/widget/TextView;->getTypeface()Landroid/graphics/Typeface;
++ 
++     move-result-object p1
++ 
+      if-eqz p1, :cond_2
+  
+      invoke-virtual {p1}, Landroid/graphics/Typeface;->getStyle()I
+***************
+*** 25494,25499 ****
+--- 25579,25588 ----
+  
+      invoke-virtual {v2, v3}, Landroid/text/TextPaint;->setTextSkewX(F)V
+  
++     invoke-static {p1}, Landroid/graphics/MiuiTypeface;->getDefaultTypeface(Landroid/graphics/Typeface;)Landroid/graphics/Typeface;
++ 
++     move-result-object p1
++ 
+      invoke-virtual {p0, p1}, Landroid/widget/TextView;->setTypeface(Landroid/graphics/Typeface;)V
+  
+      goto :goto_3

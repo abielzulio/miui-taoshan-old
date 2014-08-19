@@ -1,0 +1,32 @@
+*** AdnRecord.smali	2014-08-20 05:50:08.228016601 +0700
+--- AdnRecord.smali	2014-08-20 05:52:53.548020888 +0700
+***************
+*** 581,596 ****
+  
+      if-nez v5, :cond_1
+  
+!     iget-object v5, p0, Lcom/android/internal/telephony/uicc/AdnRecord;->mAlphaTag:Ljava/lang/String;
+! 
+!     invoke-static {v5}, Lcom/android/internal/telephony/GsmAlphabet;->stringToGsm8BitPacked(Ljava/lang/String;)[B
+  
+!     move-result-object v2
+! 
+!     .local v2, byteTag:[B
+!     array-length v5, v2
+  
+!     invoke-static {v2, v9, v0, v9, v5}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+  
+      goto :goto_1
+  .end method
+--- 581,591 ----
+  
+      if-nez v5, :cond_1
+  
+!     const-string v2, "AdnRecord"
+  
+!     iget-object v5, p0, Lcom/android/internal/telephony/uicc/AdnRecord;->mAlphaTag:Ljava/lang/String;
+  
+!     invoke-static {v2, v0, v5, v3}, Lcom/android/internal/telephony/uicc/Injector$AdnRecordHook;->encodeAlphaTag(Ljava/lang/String;[BLjava/lang/String;I)Z
+  
+      goto :goto_1
+  .end method

@@ -1,0 +1,84 @@
+*** ./smali/android/widget/TimePicker.smali	2014-08-20 05:48:21.012013821 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/TimePicker.smali	2014-08-20 05:51:05.944018098 +0700
+***************
+*** 246,251 ****
+--- 246,259 ----
+  
+      iget-object v8, p0, Landroid/widget/TimePicker;->mMinuteSpinner:Landroid/widget/NumberPicker;
+  
++     new-instance v9, Landroid/widget/TimePicker$OnMinuteChangeListener;
++ 
++     invoke-direct {v9, p0}, Landroid/widget/TimePicker$OnMinuteChangeListener;-><init>(Landroid/widget/TimePicker;)V
++ 
++     invoke-virtual {v8, v9}, Landroid/widget/NumberPicker;->setOnValueChangedListener(Landroid/widget/NumberPicker$OnValueChangeListener;)V
++ 
++     iget-object v8, p0, Landroid/widget/TimePicker;->mMinuteSpinner:Landroid/widget/NumberPicker;
++ 
+      const v9, 0x10202e9
+  
+      invoke-virtual {v8, v9}, Landroid/widget/NumberPicker;->findViewById(I)Landroid/view/View;
+***************
+*** 1299,1304 ****
+--- 1307,1330 ----
+  
+  
+  # virtual methods
++ .method callOnTimeChanged()V
++     .locals 0
++ 
++     .prologue
++     invoke-direct {p0}, Landroid/widget/TimePicker;->onTimeChanged()V
++ 
++     return-void
++ .end method
++ 
++ .method callUpdateInputState()V
++     .locals 0
++ 
++     .prologue
++     invoke-direct {p0}, Landroid/widget/TimePicker;->updateInputState()V
++ 
++     return-void
++ .end method
++ 
+  .method public dispatchPopulateAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)Z
+      .locals 1
+      .parameter "event"
+***************
+*** 1390,1395 ****
+--- 1416,1439 ----
+      return-object v0
+  .end method
+  
++ .method getIs24HourViewField()Z
++     .locals 1
++ 
++     .prologue
++     iget-boolean v0, p0, Landroid/widget/TimePicker;->mIs24HourView:Z
++ 
++     return v0
++ .end method
++ 
++ .method getMinuteSpinner()Landroid/widget/NumberPicker;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/TimePicker;->mMinuteSpinner:Landroid/widget/NumberPicker;
++ 
++     return-object v0
++ .end method
++ 
+  .method public is24HourView()Z
+      .locals 1
+  
+***************
+*** 1702,1707 ****
+--- 1746,1753 ----
+      .parameter "is24HourView"
+  
+      .prologue
++     invoke-static {p0, p1}, Landroid/widget/Injector$TimePickerHook;->before_setIs24HourView(Landroid/widget/TimePicker;Ljava/lang/Boolean;)V
++ 
+      iget-boolean v1, p0, Landroid/widget/TimePicker;->mIs24HourView:Z
+  
+      invoke-virtual {p1}, Ljava/lang/Boolean;->booleanValue()Z

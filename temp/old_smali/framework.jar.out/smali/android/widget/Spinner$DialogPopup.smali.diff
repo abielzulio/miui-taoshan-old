@@ -1,0 +1,21 @@
+*** ./smali/android/widget/Spinner$DialogPopup.smali	2014-08-20 05:48:26.740013969 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/Spinner$DialogPopup.smali	2014-08-20 05:51:11.756018248 +0700
+***************
+*** 283,291 ****
+      move-result-object v1
+  
+      .local v1, listView:Landroid/widget/ListView;
+!     invoke-virtual {v1, p1}, Landroid/widget/ListView;->setTextDirection(I)V
+! 
+!     invoke-virtual {v1, p2}, Landroid/widget/ListView;->setTextAlignment(I)V
+  
+      iget-object v2, p0, Landroid/widget/Spinner$DialogPopup;->mPopup:Landroid/app/AlertDialog;
+  
+--- 283,289 ----
+      move-result-object v1
+  
+      .local v1, listView:Landroid/widget/ListView;
+!     invoke-static {v1, p1, p2}, Landroid/widget/Injector$SpinnerHook;->setListViewRtl(Landroid/widget/ListView;II)V
+  
+      iget-object v2, p0, Landroid/widget/Spinner$DialogPopup;->mPopup:Landroid/app/AlertDialog;
+  

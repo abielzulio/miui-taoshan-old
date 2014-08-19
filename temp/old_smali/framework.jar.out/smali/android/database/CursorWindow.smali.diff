@@ -1,0 +1,35 @@
+*** ./smali/android/database/CursorWindow.smali	2014-08-20 05:49:15.860015243 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/database/CursorWindow.smali	2014-08-20 05:52:01.040019526 +0700
+***************
+*** 472,477 ****
+--- 472,479 ----
+      move-result v6
+  
+      .restart local v6       #pid:I
++     invoke-static {v0, v6}, Landroid/database/Injector$CursorWindowHook;->appendPackageName(Ljava/lang/StringBuilder;I)V
++ 
+      if-ne v6, v3, :cond_2
+  
+      const-string v12, "this proc="
+***************
+*** 614,619 ****
+--- 616,623 ----
+      .parameter "window"
+  
+      .prologue
++     invoke-static {p1}, Landroid/database/Injector$CursorWindowHook;->before_recordClosingOfWindow(I)V
++ 
+      sget-object v1, Landroid/database/CursorWindow;->sWindowToPidMap:Landroid/util/SparseIntArray;
+  
+      monitor-enter v1
+***************
+*** 657,662 ****
+--- 661,668 ----
+      .parameter "window"
+  
+      .prologue
++     invoke-static {p1, p2}, Landroid/database/Injector$CursorWindowHook;->before_recordNewWindow(II)V
++ 
+      sget-object v1, Landroid/database/CursorWindow;->sWindowToPidMap:Landroid/util/SparseIntArray;
+  
+      monitor-enter v1

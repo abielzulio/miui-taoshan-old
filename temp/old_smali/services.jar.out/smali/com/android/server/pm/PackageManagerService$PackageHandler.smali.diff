@@ -1,0 +1,26 @@
+*** ./smali/com/android/server/pm/PackageManagerService$PackageHandler.smali	2014-08-20 05:49:43.380015957 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/pm/PackageManagerService$PackageHandler.smali	2014-08-20 05:52:28.716020244 +0700
+***************
+*** 156,161 ****
+--- 156,176 ----
+      .parameter "msg"
+  
+      .prologue
++     move-object/from16 v0, p0
++ 
++     iget-object v3, v0, Lcom/android/server/pm/PackageManagerService$PackageHandler;->this$0:Lcom/android/server/pm/PackageManagerService;
++ 
++     move-object/from16 v0, p1
++ 
++     invoke-static {v3, v0}, Lcom/android/server/pm/Injector$PackageManagerServiceHook$PackageHandler;->before_doHandleMessage(Lcom/android/server/pm/PackageManagerService;Landroid/os/Message;)Z
++ 
++     move-result v3
++ 
++     if-eqz v3, :cond_miui
++ 
++     return-void
++ 
++     :cond_miui
+      move-object/from16 v0, p1
+  
+      iget v3, v0, Landroid/os/Message;->what:I

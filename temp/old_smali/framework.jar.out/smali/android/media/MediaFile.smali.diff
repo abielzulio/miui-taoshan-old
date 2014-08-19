@@ -1,0 +1,132 @@
+*** ./smali/android/media/MediaFile.smali	2014-08-20 05:47:35.880012651 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/media/MediaFile.smali	2014-08-20 05:50:20.640016923 +0700
+***************
+*** 12,17 ****
+--- 12,19 ----
+  
+  
+  # static fields
++ .field public static final FILE_TYPE_3G2B:I = 0xd0
++ 
+  .field public static final FILE_TYPE_3GPP:I = 0x17
+  
+  .field public static final FILE_TYPE_3GPP2:I = 0x18
+***************
+*** 20,25 ****
+--- 22,29 ----
+  
+  .field public static final FILE_TYPE_AMR:I = 0x4
+  
++ .field public static final FILE_TYPE_APE:I = 0x3e9
++ 
+  .field public static final FILE_TYPE_ASF:I = 0x1a
+  
+  .field public static final FILE_TYPE_AVI:I = 0x1d
+***************
+*** 28,37 ****
+--- 32,45 ----
+  
+  .field public static final FILE_TYPE_BMP:I = 0x22
+  
++ .field public static final FILE_TYPE_F4V:I = 0xcf
++ 
+  .field public static final FILE_TYPE_FL:I = 0x33
+  
+  .field public static final FILE_TYPE_FLAC:I = 0xa
+  
++ .field public static final FILE_TYPE_FLV:I = 0xcb
++ 
+  .field public static final FILE_TYPE_GIF:I = 0x20
+  
+  .field public static final FILE_TYPE_HTML:I = 0x65
+***************
+*** 54,59 ****
+--- 62,69 ----
+  
+  .field public static final FILE_TYPE_MKV:I = 0x1b
+  
++ .field public static final FILE_TYPE_MOV:I = 0xca
++ 
+  .field public static final FILE_TYPE_MP2PS:I = 0xc8
+  
+  .field public static final FILE_TYPE_MP2TS:I = 0x1c
+***************
+*** 76,85 ****
+--- 86,101 ----
+  
+  .field public static final FILE_TYPE_PNG:I = 0x21
+  
++ .field public static final FILE_TYPE_RM:I = 0xcc
++ 
++ .field public static final FILE_TYPE_RMVB:I = 0xcd
++ 
+  .field public static final FILE_TYPE_SMF:I = 0xc
+  
+  .field public static final FILE_TYPE_TEXT:I = 0x64
+  
++ .field public static final FILE_TYPE_VOB:I = 0xce
++ 
+  .field public static final FILE_TYPE_WAV:I = 0x3
+  
+  .field public static final FILE_TYPE_WBMP:I = 0x23
+***************
+*** 124,130 ****
+  
+  .field private static final LAST_VIDEO_FILE_TYPE:I = 0x1e
+  
+! .field private static final LAST_VIDEO_FILE_TYPE2:I = 0xc8
+  
+  .field private static final sFileTypeMap:Ljava/util/HashMap;
+      .annotation system Ldalvik/annotation/Signature;
+--- 140,146 ----
+  
+  .field private static final LAST_VIDEO_FILE_TYPE:I = 0x1e
+  
+! .field private static final LAST_VIDEO_FILE_TYPE2:I = 0xd0
+  
+  .field private static final sFileTypeMap:Ljava/util/HashMap;
+      .annotation system Ldalvik/annotation/Signature;
+***************
+*** 768,773 ****
+--- 784,791 ----
+  
+      invoke-static {v0, v1, v2}, Landroid/media/MediaFile;->addFileType(Ljava/lang/String;ILjava/lang/String;)V
+  
++     invoke-static {}, Landroid/media/Injector$MediaFileHook;->addFileTypes()V
++ 
+      return-void
+  .end method
+  
+***************
+*** 1084,1089 ****
+--- 1102,1116 ----
+      .parameter "fileType"
+  
+      .prologue
++     invoke-static {p0}, Landroid/media/Injector$MediaFileHook;->isAudioFileType(I)Z
++ 
++     move-result v1
++ 
++     if-eqz v1, :cond_miui_0
++ 
++     return v1
++ 
++     :cond_miui_0
+      const/4 v0, 0x1
+  
+      if-lt p0, v0, :cond_0
+***************
+*** 1243,1250 ****
+--- 1270,1281 ----
+      if-le p0, v0, :cond_1
+  
+      :cond_0
++     const/16 v1, 0xc8
++ 
+      if-lt p0, v1, :cond_2
+  
++     const/16 v1, 0xd0
++ 
+      if-gt p0, v1, :cond_2
+  
+      :cond_1

@@ -1,0 +1,23 @@
+*** QuickContactBadge$QueryHandler.smali	2014-08-20 05:48:27.336013985 +0700
+--- QuickContactBadge$QueryHandler.smali	2014-08-20 05:51:12.348018264 +0700
+***************
+*** 78,83 ****
+      #calls: Landroid/widget/QuickContactBadge;->onContactUriChanged()V
+      invoke-static {v8}, Landroid/widget/QuickContactBadge;->access$100(Landroid/widget/QuickContactBadge;)V
+  
+      if-eqz v7, :cond_5
+  
+      if-eqz v6, :cond_5
+--- 78,89 ----
+      #calls: Landroid/widget/QuickContactBadge;->onContactUriChanged()V
+      invoke-static {v8}, Landroid/widget/QuickContactBadge;->access$100(Landroid/widget/QuickContactBadge;)V
+  
++     iget-object v8, p0, Landroid/widget/QuickContactBadge$QueryHandler;->this$0:Landroid/widget/QuickContactBadge;
++ 
++     invoke-static {v8, v7, v6, v2}, Landroid/widget/Injector$QuickContactBadgeHook;->showQuickContactForStranger(Landroid/widget/QuickContactBadge;ZLandroid/net/Uri;Landroid/net/Uri;)Landroid/net/Uri;
++ 
++     move-result-object v2
++ 
+      if-eqz v7, :cond_5
+  
+      if-eqz v6, :cond_5

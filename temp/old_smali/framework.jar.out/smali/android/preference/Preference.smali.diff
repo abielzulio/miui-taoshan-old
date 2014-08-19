@@ -1,0 +1,43 @@
+*** ./smali/android/preference/Preference.smali	2014-08-20 05:48:01.892013325 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/preference/Preference.smali	2014-08-20 05:50:46.752017600 +0700
+***************
+*** 87,92 ****
+--- 87,94 ----
+  
+  .field private mPreferenceManager:Landroid/preference/PreferenceManager;
+  
++ .field mPreferenceParent:Landroid/preference/PreferenceGroup;
++ 
+  .field private mRequiresKey:Z
+  
+  .field private mSelectable:Z
+***************
+*** 1586,1591 ****
+--- 1588,1595 ----
+  
+      const/4 v5, 0x0
+  
++     invoke-static {p0, p1}, Landroid/preference/Injector$PreferenceHook;->before_onBindView(Landroid/preference/Preference;Landroid/view/View;)V
++ 
+      const v7, 0x1020016
+  
+      invoke-virtual {p1, v7}, Landroid/view/View;->findViewById(I)Landroid/view/View;
+***************
+*** 2587,2592 ****
+--- 2591,2606 ----
+      return-void
+  .end method
+  
++ .method public setParent(Landroid/preference/PreferenceGroup;)V
++     .locals 0
++     .parameter "parent"
++ 
++     .prologue
++     iput-object p1, p0, Landroid/preference/Preference;->mPreferenceParent:Landroid/preference/PreferenceGroup;
++ 
++     return-void
++ .end method
++ 
+  .method public setPersistent(Z)V
+      .locals 0
+      .parameter "persistent"

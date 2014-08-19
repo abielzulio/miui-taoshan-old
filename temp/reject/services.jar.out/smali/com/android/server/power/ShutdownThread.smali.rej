@@ -1,0 +1,40 @@
+*** ShutdownThread.smali	2014-08-20 05:49:38.384015827 +0700
+--- ShutdownThread.smali	2014-08-20 05:52:23.684020114 +0700
+***************
+*** 595,600 ****
+  
+      .local v2, resourceId:I
+      :goto_1
+      const-string v3, "ShutdownThread"
+  
+      new-instance v4, Ljava/lang/StringBuilder;
+--- 644,653 ----
+  
+      .local v2, resourceId:I
+      :goto_1
++     invoke-static {v2}, Lcom/android/server/power/Injector$ShutdownThreadHook;->getResourceId(I)I
++ 
++     move-result v2
++ 
+      const-string v3, "ShutdownThread"
+  
+      new-instance v4, Ljava/lang/StringBuilder;
+***************
+*** 678,683 ****
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+  
+      iput-object v3, v0, Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;->dialog:Landroid/app/Dialog;
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+--- 731,740 ----
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+  
++     invoke-static {v3}, Lcom/android/server/power/Injector$ShutdownThreadHook;->setupShutdownConfirmDialog(Landroid/app/AlertDialog;)V
++ 
++     sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
++ 
+      iput-object v3, v0, Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;->dialog:Landroid/app/Dialog;
+  
+      sget-object v3, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;

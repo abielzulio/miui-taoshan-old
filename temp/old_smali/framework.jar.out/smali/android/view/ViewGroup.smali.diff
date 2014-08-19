@@ -1,0 +1,192 @@
+*** ./smali/android/view/ViewGroup.smali	2014-08-20 05:47:56.700013191 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/view/ViewGroup.smali	2014-08-20 05:50:41.592017466 +0700
+***************
+*** 124,129 ****
+--- 124,131 ----
+      .end annotation
+  .end field
+  
++ .field mChildSequenceStateTaggingListener:Landroid/view/ViewGroup$ChildSequenceStateTaggingListener;
++ 
+  .field private mChildTransformation:Landroid/view/animation/Transformation;
+  
+  .field private mChildren:[Landroid/view/View;
+***************
+*** 230,235 ****
+--- 232,239 ----
+  
+  .field mSuppressLayout:Z
+  
++ .field mTagChildrenSequenceState:Z
++ 
+  .field private mTransition:Landroid/animation/LayoutTransition;
+  
+  .field private mTransitioningViews:Ljava/util/ArrayList;
+***************
+*** 535,540 ****
+--- 539,546 ----
+  
+      :cond_1
+      :goto_0
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->tagChildSequenceState(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  
+      :cond_2
+***************
+*** 2361,2366 ****
+--- 2367,2374 ----
+      :cond_1
+      invoke-virtual {v1}, Landroid/content/res/TypedArray;->recycle()V
+  
++     invoke-static {p0, p1, p2}, Landroid/view/Injector$ViewGroupHook;->after_initFromAttributes(Landroid/view/ViewGroup;Landroid/content/Context;Landroid/util/AttributeSet;)V
++ 
+      return-void
+  
+      :pswitch_data_0
+***************
+*** 2613,2618 ****
+--- 2621,2628 ----
+  
+      :cond_2
+      :goto_1
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->tagChildSequenceState(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  
+      :cond_3
+***************
+*** 2753,2758 ****
+--- 2763,2770 ----
+  
+      iput v4, p0, Landroid/view/ViewGroup;->mChildrenCount:I
+  
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->tagChildSequenceState(Landroid/view/ViewGroup;)V
++ 
+      goto :goto_0
+  .end method
+  
+***************
+*** 4266,4271 ****
+--- 4278,4284 ----
+      .local v1, count:I
+      if-gtz v1, :cond_1
+  
++     :goto_miui
+      :cond_0
+      return-void
+  
+***************
+*** 4281,4288 ****
+  
+      .local v2, i:I
+      :goto_0
+!     if-ltz v2, :cond_0
+! 
+      aget-object v3, v0, v2
+  
+      iput-object v4, v3, Landroid/view/View;->mParent:Landroid/view/ViewParent;
+--- 4294,4301 ----
+  
+      .local v2, i:I
+      :goto_0
+!     if-ltz v2, :cond_miui
+!  
+      aget-object v3, v0, v2
+  
+      iput-object v4, v3, Landroid/view/View;->mParent:Landroid/view/ViewParent;
+***************
+*** 4292,4297 ****
+--- 4305,4315 ----
+      add-int/lit8 v2, v2, -0x1
+  
+      goto :goto_0
++ 
++     :cond_miui
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->clearChildFocus(Landroid/view/ViewGroup;)V
++ 
++     goto :goto_miui
+  .end method
+  
+  .method protected detachViewFromParent(I)V
+***************
+*** 4301,4306 ****
+--- 4319,4326 ----
+      .prologue
+      invoke-direct {p0, p1}, Landroid/view/ViewGroup;->removeFromArray(I)V
+  
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->clearChildFocus(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 4315,4320 ****
+--- 4335,4342 ----
+  
+      invoke-direct {p0, v0}, Landroid/view/ViewGroup;->removeFromArray(I)V
+  
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->clearChildFocus(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 4326,4331 ****
+--- 4348,4355 ----
+      .prologue
+      invoke-direct {p0, p1, p2}, Landroid/view/ViewGroup;->removeFromArray(II)V
+  
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->clearChildFocus(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 9488,9493 ****
+--- 9512,9526 ----
+      return v0
+  .end method
+  
++ .method getFocused()Landroid/view/View;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/view/ViewGroup;->mFocused:Landroid/view/View;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getFocusedChild()Landroid/view/View;
+      .locals 1
+  
+***************
+*** 11989,11994 ****
+--- 12022,12029 ----
+      invoke-virtual {p0, p1}, Landroid/view/ViewGroup;->notifyChildOfDrag(Landroid/view/View;)Z
+  
+      :cond_1
++     invoke-static {p0}, Landroid/view/Injector$ViewGroupHook;->tagChildSequenceState(Landroid/view/ViewGroup;)V
++ 
+      return-void
+  
+      :cond_2
+***************
+*** 13824,13829 ****
+--- 13859,13874 ----
+  
+      return-void
+  .end method
++ 
++ .method public setChildSequenceStateTaggingListener(Landroid/view/ViewGroup$ChildSequenceStateTaggingListener;)V
++     .locals 0
++     .parameter "listener"
++ 
++     .prologue
++     iput-object p1, p0, Landroid/view/ViewGroup;->mChildSequenceStateTaggingListener:Landroid/view/ViewGroup$ChildSequenceStateTaggingListener;
++ 
++     return-void
++ .end method
+  
+  .method protected setChildrenDrawingCacheEnabled(Z)V
+      .locals 5

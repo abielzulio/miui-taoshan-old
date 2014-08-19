@@ -1,0 +1,83 @@
+*** ./smali/com/android/server/accounts/AccountManagerService.smali	2014-08-20 05:49:54.220016238 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/accounts/AccountManagerService.smali	2014-08-20 05:52:39.572020526 +0700
+***************
+*** 1650,1656 ****
+  
+      if-eqz v4, :cond_1
+  
+!     const-class v4, Landroid/accounts/GrantCredentialsPermissionActivity;
+  
+      invoke-virtual {v4}, Ljava/lang/Class;->getName()Ljava/lang/String;
+  
+--- 1650,1656 ----
+  
+      if-eqz v4, :cond_1
+  
+!     const-class v4, Lmiui/accounts/MiuiGrantCredentialsPermissionActivity;
+  
+      invoke-virtual {v4}, Ljava/lang/Class;->getName()Ljava/lang/String;
+  
+***************
+*** 3678,3684 ****
+  
+      iget v5, v2, Landroid/content/pm/RegisteredServicesCache$ServiceInfo;->uid:I
+  
+!     invoke-virtual {v3, v5, p2}, Landroid/content/pm/PackageManager;->checkSignatures(II)I
+  
+      move-result v3
+  
+--- 3678,3684 ----
+  
+      iget v5, v2, Landroid/content/pm/RegisteredServicesCache$ServiceInfo;->uid:I
+  
+!     invoke-static {v3, v5, p2, p1}, Lcom/android/server/accounts/Injector$AccountManagerServiceHook;->checkSignatures(Landroid/content/pm/PackageManager;IILjava/lang/String;)I
+  
+      move-result v3
+  
+***************
+*** 4297,4302 ****
+--- 4297,4304 ----
+  
+      invoke-virtual {v0, v1, p2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent;
+  
++     invoke-static {v0}, Lcom/android/server/accounts/Injector$AccountManagerServiceHook;->useMiuiGrantCredentialsPermissionActivity(Landroid/content/Intent;)V
++ 
+      return-object v0
+  .end method
+  
+***************
+*** 8033,8038 ****
+--- 8035,8049 ----
+      throw v0
+  .end method
+  
++ .method getAccountAuthenticatorCache()Lcom/android/server/accounts/IAccountAuthenticatorCache;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Lcom/android/server/accounts/AccountManagerService;->mAuthenticatorCache:Lcom/android/server/accounts/IAccountAuthenticatorCache;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getAccounts(I)[Landroid/accounts/Account;
+      .locals 7
+      .parameter "userId"
+***************
+*** 9397,9402 ****
+--- 9408,9422 ----
+      throw v8
+  .end method
+  
++ .method getPackageManager()Landroid/content/pm/PackageManager;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Lcom/android/server/accounts/AccountManagerService;->mPackageManager:Landroid/content/pm/PackageManager;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getPassword(Landroid/accounts/Account;)Ljava/lang/String;
+      .locals 6
+      .parameter "account"

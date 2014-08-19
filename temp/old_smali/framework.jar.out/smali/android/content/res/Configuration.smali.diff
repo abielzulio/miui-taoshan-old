@@ -1,0 +1,274 @@
+*** ./smali/android/content/res/Configuration.smali	2014-08-20 05:47:32.088012552 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/content/res/Configuration.smali	2014-08-20 05:50:16.800016823 +0700
+***************
+*** 186,191 ****
+--- 186,199 ----
+  
+  .field public static final UI_MODE_TYPE_NORMAL:I = 0x1
+  
++ .field public static final UI_MODE_TYPE_SCALE_HUGE:I = 0xf
++ 
++ .field public static final UI_MODE_TYPE_SCALE_LARGE:I = 0xe
++ 
++ .field public static final UI_MODE_TYPE_SCALE_MEDIUM:I = 0xd
++ 
++ .field public static final UI_MODE_TYPE_SCALE_SMALL:I = 0xc
++ 
+  .field public static final UI_MODE_TYPE_TELEVISION:I = 0x4
+  
+  .field public static final UI_MODE_TYPE_UNDEFINED:I
+***************
+*** 200,205 ****
+--- 208,215 ----
+  
+  .field public densityDpi:I
+  
++ .field public extraConfig:Lmiui/content/res/ExtraConfiguration;
++ 
+  .field public fontScale:F
+  
+  .field public hardKeyboardHidden:I
+***************
+*** 258,292 ****
+  .end method
+  
+  .method public constructor <init>()V
+!     .locals 0
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
+      invoke-virtual {p0}, Landroid/content/res/Configuration;->setToDefaults()V
+  
+      return-void
+  .end method
+  
+  .method public constructor <init>(Landroid/content/res/Configuration;)V
+!     .locals 0
+      .parameter "o"
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
+      invoke-virtual {p0, p1}, Landroid/content/res/Configuration;->setTo(Landroid/content/res/Configuration;)V
+  
+      return-void
+  .end method
+  
+  .method private constructor <init>(Landroid/os/Parcel;)V
+!     .locals 0
+      .parameter "source"
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
+      invoke-virtual {p0, p1}, Landroid/content/res/Configuration;->readFromParcel(Landroid/os/Parcel;)V
+  
+      return-void
+--- 268,320 ----
+  .end method
+  
+  .method public constructor <init>()V
+!     .locals 1
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Lmiui/content/res/ExtraConfiguration;
++ 
++     invoke-direct {v0}, Lmiui/content/res/ExtraConfiguration;-><init>()V
++ 
++     iput-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
++ 
+      invoke-virtual {p0}, Landroid/content/res/Configuration;->setToDefaults()V
+  
+      return-void
+  .end method
+  
+  .method public constructor <init>(Landroid/content/res/Configuration;)V
+!     .locals 1
+      .parameter "o"
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Lmiui/content/res/ExtraConfiguration;
++ 
++     invoke-direct {v0}, Lmiui/content/res/ExtraConfiguration;-><init>()V
++ 
++     iput-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
++ 
+      invoke-virtual {p0, p1}, Landroid/content/res/Configuration;->setTo(Landroid/content/res/Configuration;)V
+  
+      return-void
+  .end method
+  
+  .method private constructor <init>(Landroid/os/Parcel;)V
+!     .locals 1
+      .parameter "source"
+  
+      .prologue
+      invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+  
++     new-instance v0, Lmiui/content/res/ExtraConfiguration;
++ 
++     invoke-direct {v0}, Lmiui/content/res/ExtraConfiguration;-><init>()V
++ 
++     iput-object v0, p0, Landroid/content/res/Configuration;->extraConfig:Lmiui/content/res/ExtraConfiguration;
++ 
+      invoke-virtual {p0, p1}, Landroid/content/res/Configuration;->readFromParcel(Landroid/os/Parcel;)V
+  
+      return-void
+***************
+*** 325,332 ****
+--- 353,367 ----
+  
+      and-int/2addr v0, p0
+  
++     if-nez v0, :cond_miui
++ 
++     invoke-static {p0}, Lmiui/content/res/ExtraConfiguration;->needNewResources(I)Z
++ 
++     move-result v0
++ 
+      if-eqz v0, :cond_0
+  
++     :cond_miui
+      const/4 v0, 0x1
+  
+      :goto_0
+***************
+*** 712,717 ****
+--- 747,756 ----
+  
+      sub-int v2, v3, v4
+  
++     invoke-static {p0, v2, p1}, Landroid/content/res/Injector$ConfigurationHook;->compareTo(Landroid/content/res/Configuration;ILandroid/content/res/Configuration;)I
++ 
++     move-result v2
++ 
+      goto/16 :goto_0
+  .end method
+  
+***************
+*** 1015,1021 ****
+      or-int/lit16 v0, v0, 0x1000
+  
+      :cond_12
+!     return v0
+  .end method
+  
+  .method public equals(Landroid/content/res/Configuration;)Z
+--- 1054,1064 ----
+      or-int/lit16 v0, v0, 0x1000
+  
+      :cond_12
+!     invoke-static {p0, p1, v0}, Landroid/content/res/Injector$ConfigurationHook;->diff(Landroid/content/res/Configuration;Landroid/content/res/Configuration;I)I
+! 
+!     move-result v2
+! 
+!     return v2
+  .end method
+  
+  .method public equals(Landroid/content/res/Configuration;)Z
+***************
+*** 1218,1224 ****
+  
+      add-int v0, v1, v2
+  
+!     return v0
+  
+      :cond_0
+      const/4 v1, 0x0
+--- 1261,1273 ----
+  
+      add-int v0, v1, v2
+  
+!     invoke-static {p0}, Landroid/content/res/Injector$ConfigurationHook;->hashCode(Landroid/content/res/Configuration;)I
+! 
+!     move-result v1
+! 
+!     add-int/2addr v1, v0
+! 
+!     return v1
+  
+      :cond_0
+      const/4 v1, 0x0
+***************
+*** 1473,1478 ****
+--- 1522,1529 ----
+  
+      iput v0, p0, Landroid/content/res/Configuration;->seq:I
+  
++     invoke-static {p0, p1}, Landroid/content/res/Injector$ConfigurationHook;->readFromParcel(Landroid/content/res/Configuration;Landroid/os/Parcel;)V
++ 
+      return-void
+  
+      :cond_1
+***************
+*** 1628,1633 ****
+--- 1679,1686 ----
+  
+      iput v0, p0, Landroid/content/res/Configuration;->seq:I
+  
++     invoke-static {p0, p1}, Landroid/content/res/Injector$ConfigurationHook;->setTo(Landroid/content/res/Configuration;Landroid/content/res/Configuration;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 1685,1690 ****
+--- 1738,1745 ----
+  
+      iput v1, p0, Landroid/content/res/Configuration;->seq:I
+  
++     invoke-static {p0}, Landroid/content/res/Injector$ConfigurationHook;->setToDefaults(Landroid/content/res/Configuration;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 2017,2022 ****
+--- 2072,2081 ----
+  
+      move-result-object v2
+  
++     invoke-static {p0, v2}, Landroid/content/res/Injector$ConfigurationHook;->toString(Landroid/content/res/Configuration;Ljava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v2
++ 
+      return-object v2
+  
+      .end local v0           #layoutDir:I
+***************
+*** 2937,2943 ****
+      iput v2, p0, Landroid/content/res/Configuration;->seq:I
+  
+      :cond_19
+!     return v0
+  
+      .end local v1           #deltaScreenLayoutDir:I
+      :cond_1a
+--- 2996,3006 ----
+      iput v2, p0, Landroid/content/res/Configuration;->seq:I
+  
+      :cond_19
+!     invoke-static {p0, p1, v0}, Landroid/content/res/Injector$ConfigurationHook;->updateFrom(Landroid/content/res/Configuration;Landroid/content/res/Configuration;I)I
+! 
+!     move-result v2
+! 
+!     return v2
+  
+      .end local v1           #deltaScreenLayoutDir:I
+      :cond_1a
+***************
+*** 3058,3063 ****
+--- 3121,3128 ----
+  
+      invoke-virtual {p1, v0}, Landroid/os/Parcel;->writeInt(I)V
+  
++     invoke-static {p0, p1, p2}, Landroid/content/res/Injector$ConfigurationHook;->writeToParcel(Landroid/content/res/Configuration;Landroid/os/Parcel;I)V
++ 
+      return-void
+  
+      :cond_0

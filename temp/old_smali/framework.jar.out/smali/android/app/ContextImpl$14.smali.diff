@@ -1,0 +1,21 @@
+*** ./smali/android/app/ContextImpl$14.smali	2014-08-20 05:48:15.460013677 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/ContextImpl$14.smali	2014-08-20 05:51:00.376017953 +0700
+***************
+*** 41,47 ****
+  
+      move-result-object v2
+  
+!     invoke-direct {v0, v1, v2}, Landroid/app/DownloadManager;-><init>(Landroid/content/ContentResolver;Ljava/lang/String;)V
+  
+      return-object v0
+  .end method
+--- 41,49 ----
+  
+      move-result-object v2
+  
+!     invoke-static {v1, v2}, Landroid/app/Injector$ContextImplHook;->createDownloadManager(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/Object;
+! 
+!     move-result-object v0
+  
+      return-object v0
+  .end method

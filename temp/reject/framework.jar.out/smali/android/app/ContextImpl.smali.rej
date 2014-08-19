@@ -1,0 +1,71 @@
+*** ContextImpl.smali	2014-08-20 05:48:11.160013565 +0700
+--- ContextImpl.smali	2014-08-20 05:50:56.004017840 +0700
+***************
+*** 2599,2604 ****
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
+      return-object v6
+  .end method
+  
+--- 2618,2631 ----
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      return-object v6
+  .end method
+  
+***************
+*** 2663,2668 ****
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
+      return-object v6
+  .end method
+  
+--- 2690,2703 ----
+  
+      iput-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, v6, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      return-object v6
+  .end method
+  
+***************
+*** 4514,4519 ****
+  
+      iput-object v0, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
+      :goto_2
+      iput-object p3, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+  
+--- 4549,4562 ----
+  
+      iput-object v0, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
+  
++     iget-object v0, p0, Landroid/app/ContextImpl;->mResources:Landroid/content/res/Resources;
++ 
++     iget-object v1, p0, Landroid/app/ContextImpl;->mPackageInfo:Landroid/app/LoadedApk;
++ 
++     iget-object v1, v1, Landroid/app/LoadedApk;->mPackageName:Ljava/lang/String;
++ 
++     invoke-static {v0, v1}, Landroid/app/Injector$ActivityThreadHook;->setResourcesPackageName(Landroid/content/res/Resources;Ljava/lang/String;)V
++ 
+      :goto_2
+      iput-object p3, p0, Landroid/app/ContextImpl;->mMainThread:Landroid/app/ActivityThread;
+  

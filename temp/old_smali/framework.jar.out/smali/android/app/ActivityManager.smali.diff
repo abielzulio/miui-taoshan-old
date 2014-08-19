@@ -1,0 +1,70 @@
+*** ./smali/android/app/ActivityManager.smali	2014-08-20 05:48:07.512013471 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/ActivityManager.smali	2014-08-20 05:50:52.400017747 +0700
+***************
+*** 101,106 ****
+--- 101,108 ----
+  
+  .field public static final START_FORWARD_AND_REQUEST_CONFLICT:I = -0x3
+  
++ .field public static final START_INCOMPATIBLE:I = 0x5
++ 
+  .field public static final START_INTENT_NOT_RESOLVED:I = -0x1
+  
+  .field public static final START_NOT_ACTIVITY:I = -0x5
+***************
+*** 640,645 ****
+--- 642,659 ----
+      goto :goto_0
+  .end method
+  
++ .method public static isHighEndGfx(Landroid/view/Display;)Z
++     .locals 1
++     .parameter "display"
++ 
++     .prologue
++     invoke-static {}, Landroid/app/ActivityManager;->isHighEndGfx()Z
++ 
++     move-result v0
++ 
++     return v0
++ .end method
++ 
+  .method public static isLowRamDeviceStatic()Z
+      .locals 3
+  
+***************
+*** 854,859 ****
+--- 868,882 ----
+      .parameter "packageName"
+  
+      .prologue
++     invoke-static {p0, p1}, Landroid/app/Injector$ActivityManagerHook;->before_forceStopPackage(Landroid/app/ActivityManager;Ljava/lang/String;)Z
++ 
++     move-result v0
++ 
++     if-eqz v0, :cond_0
++ 
++     goto :goto_0
++ 
++     :cond_0
+      :try_start_0
+      invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
+  
+***************
+*** 1037,1042 ****
+--- 1060,1074 ----
+      goto :goto_0
+  .end method
+  
++ .method getContext()Landroid/content/Context;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/app/ActivityManager;->mContext:Landroid/content/Context;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getDeviceConfigurationInfo()Landroid/content/pm/ConfigurationInfo;
+      .locals 1
+  

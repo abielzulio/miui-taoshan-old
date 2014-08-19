@@ -1,0 +1,31 @@
+*** ActionBarView.smali	2014-08-20 05:49:25.860015503 +0700
+--- ActionBarView.smali	2014-08-20 05:52:11.020019785 +0700
+***************
+*** 979,991 ****
+  
+      check-cast v1, Landroid/widget/LinearLayout;
+  
+!     iput-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+  
+!     iget-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/widget/LinearLayout;
+  
+      const v2, 0x1020265
+  
+!     invoke-virtual {v1, v2}, Landroid/widget/LinearLayout;->findViewById(I)Landroid/view/View;
+  
+      move-result-object v1
+  
+--- 1008,1020 ----
+  
+      check-cast v1, Landroid/widget/LinearLayout;
+  
+!     iput-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/view/ViewGroup;
+  
+!     iget-object v1, p0, Lcom/android/internal/widget/ActionBarView;->mTitleLayout:Landroid/view/ViewGroup;
+  
+      const v2, 0x1020265
+  
+!     invoke-virtual {v1, v2}, Landroid/view/ViewGroup;->findViewById(I)Landroid/view/View;
+  
+      move-result-object v1
+  

@@ -1,0 +1,74 @@
+*** CDMAPhone.smali	2014-08-20 05:50:09.828016643 +0700
+--- CDMAPhone.smali	2014-08-20 05:52:55.096020928 +0700
+***************
+*** 101,107 ****
+  
+  .field mPostDialHandler:Landroid/os/Registrant;
+  
+! .field mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/cdma/RuimPhoneBookInterfaceManager;
+  
+  .field mSST:Lcom/android/internal/telephony/cdma/CdmaServiceStateTracker;
+  
+--- 101,107 ----
+  
+  .field mPostDialHandler:Landroid/os/Registrant;
+  
+! .field mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/IccPhoneBookInterfaceManager;
+  
+  .field mSST:Lcom/android/internal/telephony/cdma/CdmaServiceStateTracker;
+  
+***************
+*** 4051,4059 ****
+  
+      invoke-virtual {p0}, Lcom/android/internal/telephony/cdma/CDMAPhone;->unregisterForRuimRecordEvents()V
+  
+!     iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/cdma/RuimPhoneBookInterfaceManager;
+  
+!     invoke-virtual {v2, v4}, Lcom/android/internal/telephony/cdma/RuimPhoneBookInterfaceManager;->updateIccRecords(Lcom/android/internal/telephony/uicc/IccRecords;)V
+  
+      :cond_3
+      iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mIccRecords:Ljava/util/concurrent/atomic/AtomicReference;
+--- 4051,4059 ----
+  
+      invoke-virtual {p0}, Lcom/android/internal/telephony/cdma/CDMAPhone;->unregisterForRuimRecordEvents()V
+  
+!     iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/IccPhoneBookInterfaceManager;
+  
+!     invoke-virtual {v2, v4}, Lcom/android/internal/telephony/IccPhoneBookInterfaceManager;->updateIccRecords(Lcom/android/internal/telephony/uicc/IccRecords;)V
+  
+      :cond_3
+      iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mIccRecords:Ljava/util/concurrent/atomic/AtomicReference;
+***************
+*** 4085,4091 ****
+  
+      invoke-virtual {p0}, Lcom/android/internal/telephony/cdma/CDMAPhone;->registerForRuimRecordEvents()V
+  
+!     iget-object v3, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/cdma/RuimPhoneBookInterfaceManager;
+  
+      iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mIccRecords:Ljava/util/concurrent/atomic/AtomicReference;
+  
+--- 4085,4091 ----
+  
+      invoke-virtual {p0}, Lcom/android/internal/telephony/cdma/CDMAPhone;->registerForRuimRecordEvents()V
+  
+!     iget-object v3, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mRuimPhoneBookInterfaceManager:Lcom/android/internal/telephony/IccPhoneBookInterfaceManager;
+  
+      iget-object v2, p0, Lcom/android/internal/telephony/cdma/CDMAPhone;->mIccRecords:Ljava/util/concurrent/atomic/AtomicReference;
+  
+***************
+*** 4095,4101 ****
+  
+      check-cast v2, Lcom/android/internal/telephony/uicc/IccRecords;
+  
+!     invoke-virtual {v3, v2}, Lcom/android/internal/telephony/cdma/RuimPhoneBookInterfaceManager;->updateIccRecords(Lcom/android/internal/telephony/uicc/IccRecords;)V
+  
+      goto :goto_0
+  .end method
+--- 4095,4101 ----
+  
+      check-cast v2, Lcom/android/internal/telephony/uicc/IccRecords;
+  
+!     invoke-virtual {v3, v2}, Lcom/android/internal/telephony/IccPhoneBookInterfaceManager;->updateIccRecords(Lcom/android/internal/telephony/uicc/IccRecords;)V
+  
+      goto :goto_0
+  .end method

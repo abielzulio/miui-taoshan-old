@@ -1,0 +1,29 @@
+*** ./smali/com/android/internal/widget/ScrollingTabContainerView.smali	2014-08-20 05:49:27.528015546 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework2.jar.out/./smali/com/android/internal/widget/ScrollingTabContainerView.smali	2014-08-20 05:52:12.708019829 +0700
+***************
+*** 667,672 ****
+--- 667,690 ----
+      goto :goto_0
+  .end method
+  
++ .method protected getSelectedTabIndex()I
++     .locals 1
++ 
++     .prologue
++     iget v0, p0, Lcom/android/internal/widget/ScrollingTabContainerView;->mSelectedTabIndex:I
++ 
++     return v0
++ .end method
++ 
++ .method protected getTabLayout()Landroid/widget/LinearLayout;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Lcom/android/internal/widget/ScrollingTabContainerView;->mTabLayout:Landroid/widget/LinearLayout;
++ 
++     return-object v0
++ .end method
++ 
+  .method public onAttachedToWindow()V
+      .locals 1
+  

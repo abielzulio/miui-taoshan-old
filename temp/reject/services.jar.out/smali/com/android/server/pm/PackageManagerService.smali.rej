@@ -1,0 +1,99 @@
+*** PackageManagerService.smali	2014-08-20 05:49:42.468015933 +0700
+--- PackageManagerService.smali	2014-08-20 05:52:27.792020220 +0700
+***************
+*** 917,922 ****
+  
+      invoke-virtual {v2, v3, v4, v5}, Lcom/android/server/pm/Settings;->addSharedUserLPw(Ljava/lang/String;II)Lcom/android/server/pm/SharedUserSetting;
+  
+      const-string v2, "debug.separate_processes"
+  
+      invoke-static {v2}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+--- 917,924 ----
+  
+      invoke-virtual {v2, v3, v4, v5}, Lcom/android/server/pm/Settings;->addSharedUserLPw(Ljava/lang/String;II)Lcom/android/server/pm/SharedUserSetting;
+  
++     invoke-static/range {p0 .. p0}, Lcom/android/server/pm/Injector$PackageManagerServiceHook;->addMiuiSharedUids(Lcom/android/server/pm/PackageManagerService;)V
++ 
+      const-string v2, "debug.separate_processes"
+  
+      invoke-static {v2}, Landroid/os/SystemProperties;->get(Ljava/lang/String;)Ljava/lang/String;
+***************
+*** 2357,2362 ****
+  
+      iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+  
+      invoke-virtual {v2}, Lcom/android/server/pm/Settings;->pruneSharedUsersLPw()V
+  
+      move-object/from16 v0, p0
+--- 2363,2374 ----
+  
+      iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
+  
++     invoke-static {v0, v2}, Lcom/android/server/pm/Injector$PackageManagerServiceHook;->performPreinstallApp(Lcom/android/server/pm/PackageManagerService;Lcom/android/server/pm/Settings;)V
++ 
++     move-object/from16 v0, p0
++ 
++     iget-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mSettings:Lcom/android/server/pm/Settings;
++ 
+      invoke-virtual {v2}, Lcom/android/server/pm/Settings;->pruneSharedUsersLPw()V
+  
+      move-object/from16 v0, p0
+***************
+*** 2811,2816 ****
+  
+      iput-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mRequiredVerifierPackage:Ljava/lang/String;
+  
+      monitor-exit v47
+      :try_end_8
+      .catchall {:try_start_8 .. :try_end_8} :catchall_0
+--- 2823,2830 ----
+  
+      iput-object v2, v0, Lcom/android/server/pm/PackageManagerService;->mRequiredVerifierPackage:Ljava/lang/String;
+  
++     invoke-static {}, Lcom/android/server/pm/Injector$PackageManagerServiceHook;->postScanPackages()V
++ 
+      monitor-exit v47
+      :try_end_8
+      .catchall {:try_start_8 .. :try_end_8} :catchall_0
+***************
+*** 16758,16763 ****
+      .end local v30           #i:I
+      .end local v55           #renamed:Ljava/lang/String;
+      :cond_12
+      move-object/from16 v0, v51
+  
+      iget-object v3, v0, Lcom/android/server/pm/PackageSetting;->origPackage:Lcom/android/server/pm/PackageSettingBase;
+--- 16794,16805 ----
+      .end local v30           #i:I
+      .end local v55           #renamed:Ljava/lang/String;
+      :cond_12
++     move-object/from16 v0, p1
++ 
++     move-object/from16 v1, v51
++ 
++     invoke-static {v0, v1}, Lcom/android/server/pm/Injector$PackageManagerServiceHook;->addMiuiExtendFlags(Landroid/content/pm/PackageParser$Package;Lcom/android/server/pm/PackageSetting;)V
++ 
+      move-object/from16 v0, v51
+  
+      iget-object v3, v0, Lcom/android/server/pm/PackageSetting;->origPackage:Lcom/android/server/pm/PackageSettingBase;
+***************
+*** 34535,34540 ****
+  
+      .local v5, filteredFlags:I
+      :goto_2
+      move-object/from16 v0, p5
+  
+      invoke-virtual {v0, v11}, Landroid/content/pm/VerificationParams;->setInstallerUid(I)V
+--- 34591,34602 ----
+  
+      .local v5, filteredFlags:I
+      :goto_2
++     move-object/from16 v0, p4
++ 
++     invoke-static {p0, v0}, Lcom/android/server/pm/Injector$PackageManagerServiceHook;->getPackageInstaller(Lcom/android/server/pm/PackageManagerService;Ljava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object p4
++ 
+      move-object/from16 v0, p5
+  
+      invoke-virtual {v0, v11}, Landroid/content/pm/VerificationParams;->setInstallerUid(I)V

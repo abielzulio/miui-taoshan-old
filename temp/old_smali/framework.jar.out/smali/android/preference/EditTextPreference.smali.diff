@@ -1,0 +1,13 @@
+*** ./smali/android/preference/EditTextPreference.smali	2014-08-20 05:48:01.076013304 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/preference/EditTextPreference.smali	2014-08-20 05:50:45.932017579 +0700
+***************
+*** 163,168 ****
+--- 163,170 ----
+      invoke-virtual {p0, p1, v0}, Landroid/preference/EditTextPreference;->onAddEditTextToDialogView(Landroid/view/View;Landroid/widget/EditText;)V
+  
+      :cond_1
++     invoke-static {p0, p1}, Landroid/preference/Injector$EditTextPreferenceHook;->after_onBindDialogView(Landroid/preference/EditTextPreference;Landroid/view/View;)V
++ 
+      return-void
+  .end method
+  

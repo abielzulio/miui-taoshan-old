@@ -1,0 +1,25 @@
+*** ./smali/com/android/internal/telephony/uicc/IccCardProxy.smali	2014-08-20 05:50:08.256016602 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/IccCardProxy.smali	2014-08-20 05:52:53.584020889 +0700
+***************
+*** 767,773 ****
+      if-ne v0, v1, :cond_2
+  
+      :cond_0
+!     iget-boolean v0, p0, Lcom/android/internal/telephony/uicc/IccCardProxy;->mRadioOn:Z
+  
+      if-eqz v0, :cond_1
+  
+--- 767,779 ----
+      if-ne v0, v1, :cond_2
+  
+      :cond_0
+!     iget-object v0, p0, Lcom/android/internal/telephony/uicc/IccCardProxy;->mUiccCard:Lcom/android/internal/telephony/uicc/UiccCard;
+! 
+!     iget-boolean v1, p0, Lcom/android/internal/telephony/uicc/IccCardProxy;->mRadioOn:Z
+! 
+!     invoke-static {v0, v1}, Lcom/android/internal/telephony/uicc/Injector$IccCardProxyHook;->isUiccCardReady(Lcom/android/internal/telephony/uicc/UiccCard;Z)Z
+! 
+!     move-result v0
+  
+      if-eqz v0, :cond_1
+  

@@ -1,0 +1,40 @@
+*** ./smali/android/media/AudioManager.smali	2014-08-20 05:47:42.816012831 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/media/AudioManager.smali	2014-08-20 05:50:27.640017104 +0700
+***************
+*** 1055,1060 ****
+--- 1055,1069 ----
+      goto :goto_0
+  .end method
+  
++ .method getContext()Landroid/content/Context;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/media/AudioManager;->mContext:Landroid/content/Context;
++ 
++     return-object v0
++ .end method
++ 
+  .method public getDevicesForStream(I)I
+      .locals 1
+      .parameter "streamType"
+***************
+*** 1507,1512 ****
+--- 1516,1532 ----
+      .parameter "streamType"
+  
+      .prologue
++     const/4 v2, 0x0
++ 
++     invoke-static {p0, p1}, Landroid/media/Injector$AudioManagerHook;->before_getStreamVolume(Landroid/media/AudioManager;I)Z
++ 
++     move-result v3
++ 
++     if-eqz v3, :cond_miui
++ 
++     return v2
++ 
++     :cond_miui
+      invoke-static {}, Landroid/media/AudioManager;->getService()Landroid/media/IAudioService;
+  
+      move-result-object v1

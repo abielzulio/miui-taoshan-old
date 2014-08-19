@@ -1,0 +1,23 @@
+*** ./smali/android/widget/Toast.smali	2014-08-20 05:48:22.432013858 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/Toast.smali	2014-08-20 05:51:07.372018135 +0700
+***************
+*** 405,410 ****
+--- 405,422 ----
+      return-void
+  .end method
+  
++ .method public setType(I)V
++     .locals 1
++     .parameter "type"
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/Toast;->mTN:Landroid/widget/Toast$TN;
++ 
++     invoke-virtual {v0, p1}, Landroid/widget/Toast$TN;->setType(I)V
++ 
++     return-void
++ .end method
++ 
+  .method public setView(Landroid/view/View;)V
+      .locals 0
+      .parameter "view"

@@ -1,0 +1,50 @@
+*** ./smali/com/android/internal/app/LocalePicker.smali	2014-08-20 05:49:23.880015451 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework2.jar.out/./smali/com/android/internal/app/LocalePicker.smali	2014-08-20 05:52:09.096019735 +0700
+***************
+*** 118,124 ****
+  
+      move-result-object v2
+  
+!     invoke-virtual {v2}, Landroid/content/res/AssetManager;->getLocales()[Ljava/lang/String;
+  
+      move-result-object v2
+  
+--- 118,124 ----
+  
+      move-result-object v2
+  
+!     invoke-static/range {v22 .. v22}, Lcom/android/internal/app/LocalePicker;->getMiuiSupportLocale(Landroid/content/res/Resources;)[Ljava/lang/String;
+  
+      move-result-object v2
+  
+***************
+*** 466,471 ****
+--- 466,473 ----
+      :cond_6
+      invoke-static {v6}, Ljava/util/Arrays;->sort([Ljava/lang/Object;)V
+  
++     invoke-static {v6}, Lcom/android/internal/app/Injector$LocalePickerHook;->adjustLocaleOrder([Lcom/android/internal/app/LocalePicker$LocaleInfo;)V
++ 
+      const-string v2, "layout_inflater"
+  
+      move-object/from16 v0, p0
+***************
+*** 762,764 ****
+--- 764,780 ----
+  
+      return-void
+  .end method
++ 
++ .method private static getMiuiSupportLocale(Landroid/content/res/Resources;)[Ljava/lang/String;
++     .locals 1
++     .parameter "resources"
++ 
++     .prologue
++     sget v0, Lcom/miui/internal/R$array;->supported_locale:I
++ 
++     invoke-virtual {p0, v0}, Landroid/content/res/Resources;->getStringArray(I)[Ljava/lang/String;
++ 
++     move-result-object v0
++ 
++     return-object v0
++ .end method

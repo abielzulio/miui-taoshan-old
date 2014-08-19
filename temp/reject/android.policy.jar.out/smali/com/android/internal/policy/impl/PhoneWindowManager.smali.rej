@@ -1,0 +1,142 @@
+*** PhoneWindowManager.smali	2014-08-20 05:50:00.112016391 +0700
+--- PhoneWindowManager.smali	2014-08-20 05:52:45.424020677 +0700
+***************
+*** 3371,3379 ****
+      xor-int v0, v3, v6
+  
+      .local v0, diff:I
+!     iget-object v6, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mTopFullscreenOpaqueWindowState:Landroid/view/WindowManagerPolicy$WindowState;
+  
+!     invoke-interface {v4, v6}, Landroid/view/WindowManagerPolicy$WindowState;->getNeedsMenuLw(Landroid/view/WindowManagerPolicy$WindowState;)Z
+  
+      move-result v1
+  
+--- 3381,3391 ----
+      xor-int v0, v3, v6
+  
+      .local v0, diff:I
+!     iget-object v6, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mFocusedWindow:Landroid/view/WindowManagerPolicy$WindowState;
+! 
+!     iget-object v7, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mTopFullscreenOpaqueWindowState:Landroid/view/WindowManagerPolicy$WindowState;
+  
+!     invoke-static {v6, v7}, Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;->getNeedsMenuLw(Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/WindowManagerPolicy$WindowState;)Z
+  
+      move-result v1
+  
+***************
+*** 4406,4411 ****
+  
+      .end local v0           #applyWindow:Z
+      :cond_a
+      return-void
+  
+      :cond_b
+--- 4418,4425 ----
+  
+      .end local v0           #applyWindow:Z
+      :cond_a
++     invoke-static {p0, p1, p2}, Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;->setAboveStatusBarFullScreenWindow(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/WindowManagerPolicy$WindowState;Landroid/view/WindowManager$LayoutParams;)V
++ 
+      return-void
+  
+      :cond_b
+***************
+*** 5406,5425 ****
+  
+      if-nez v2, :cond_7
+  
+-     move-object/from16 v0, p0
+- 
+-     iget v2, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mUnrestrictedScreenTop:I
+- 
+-     move-object/from16 v0, p0
+- 
+-     iget v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mStatusBarHeight:I
+- 
+-     add-int/2addr v2, v3
+- 
+-     move-object/from16 v0, p0
+- 
+-     iput v2, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mSystemTop:I
+- 
+      :cond_7
+      move-object/from16 v0, p0
+  
+--- 5420,5425 ----
+  
+      if-nez v2, :cond_7
+  
+      :cond_7
+      move-object/from16 v0, p0
+  
+***************
+*** 10037,10042 ****
+  
+      if-eqz v3, :cond_6
+  
+      const-string v3, "WindowManager"
+  
+      const-string v5, "Ignoring HOME; there\'s a ringing incoming call."
+--- 10094,10109 ----
+  
+      if-eqz v3, :cond_6
+  
++     move-object/from16 v0, p0
++ 
++     iget-object v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
++ 
++     invoke-static {v3}, Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;->isInCallScreenShowing(Landroid/content/Context;)Z
++ 
++     move-result v3
++ 
++     if-eqz v3, :cond_6
++ 
+      const-string v3, "WindowManager"
+  
+      const-string v5, "Ignoring HOME; there\'s a ringing incoming call."
+***************
+*** 11323,11329 ****
+  
+      .local v6, isWakeKey:Z
+      :goto_4
+!     if-eqz v2, :cond_3
+  
+      move/from16 v0, p2
+  
+--- 11390,11396 ----
+  
+      .local v6, isWakeKey:Z
+      :goto_4
+!     invoke-static/range {p0 .. p2}, Lcom/android/internal/policy/impl/PhoneWindowManager$Injector;->performReleaseHapticFeedback(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;I)V
+  
+      move/from16 v0, p2
+  
+***************
+*** 17041,17053 ****
+      move-result v0
+  
+      .local v0, keyguardShowing:Z
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/GlobalActions;
+  
+      invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isDeviceProvisioned()Z
+  
+      move-result v2
+  
+!     invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/GlobalActions;->showDialog(ZZ)V
+  
+      if-eqz v0, :cond_1
+  
+--- 17215,17227 ----
+      move-result v0
+  
+      .local v0, keyguardShowing:Z
+!     iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mGlobalActions:Lcom/android/internal/policy/impl/MiuiGlobalActions;
+  
+      invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isDeviceProvisioned()Z
+  
+      move-result v2
+  
+!     invoke-virtual {v1, v0, v2}, Lcom/android/internal/policy/impl/MiuiGlobalActions;->showDialog(ZZ)V
+  
+      if-eqz v0, :cond_1
+  

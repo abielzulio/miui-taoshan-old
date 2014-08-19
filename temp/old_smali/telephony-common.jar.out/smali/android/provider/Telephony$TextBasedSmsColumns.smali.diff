@@ -1,0 +1,13 @@
+*** ./smali/android/provider/Telephony$TextBasedSmsColumns.smali	2014-08-20 05:50:11.420016684 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/android/provider/Telephony$TextBasedSmsColumns.smali	2014-08-20 05:52:56.692020970 +0700
+***************
+*** 53,58 ****
+--- 53,60 ----
+  
+  .field public static final SERVICE_CENTER:Ljava/lang/String; = "service_center"
+  
++ .field public static final SIM_ID:Ljava/lang/String; = "sim_id"
++ 
+  .field public static final STATUS:Ljava/lang/String; = "status"
+  
+  .field public static final STATUS_COMPLETE:I = 0x0

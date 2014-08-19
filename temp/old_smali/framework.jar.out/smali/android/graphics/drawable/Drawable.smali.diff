@@ -1,0 +1,63 @@
+*** ./smali/android/graphics/drawable/Drawable.smali	2014-08-20 05:49:00.652014849 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/graphics/drawable/Drawable.smali	2014-08-20 05:51:45.780019131 +0700
+***************
+*** 32,37 ****
+--- 32,39 ----
+  
+  .field private mChangingConfigurations:I
+  
++ .field mId:I
++ 
+  .field private mLayoutDirection:I
+  
+  .field private mLevel:I
+***************
+*** 83,88 ****
+--- 85,94 ----
+  
+      iput-boolean v0, p0, Landroid/graphics/drawable/Drawable;->mVisible:Z
+  
++     const/4 v0, -0x1
++ 
++     iput v0, p0, Landroid/graphics/drawable/Drawable;->mId:I
++ 
+      return-void
+  .end method
+  
+***************
+*** 975,980 ****
+--- 981,995 ----
+      return-object p0
+  .end method
+  
++ .method public getId()I
++     .locals 1
++ 
++     .prologue
++     iget v0, p0, Landroid/graphics/drawable/Drawable;->mId:I
++ 
++     return v0
++ .end method
++ 
+  .method public getIntrinsicHeight()I
+      .locals 1
+  
+***************
+*** 1405,1410 ****
+--- 1420,1435 ----
+      return-void
+  .end method
+  
++ .method public setId(I)V
++     .locals 0
++     .parameter "id"
++ 
++     .prologue
++     iput p1, p0, Landroid/graphics/drawable/Drawable;->mId:I
++ 
++     return-void
++ .end method
++ 
+  .method public setLayoutDirection(I)V
+      .locals 1
+      .parameter "layoutDirection"

@@ -1,0 +1,29 @@
+*** ./smali/com/android/server/usb/UsbDeviceManager.smali	2014-08-20 05:49:48.180016081 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/usb/UsbDeviceManager.smali	2014-08-20 05:52:33.576020370 +0700
+***************
+*** 218,224 ****
+  
+      invoke-direct {v3, p1}, Lcom/android/server/usb/UsbDebuggingManager;-><init>(Landroid/content/Context;)V
+  
+!     iput-object v3, p0, Lcom/android/server/usb/UsbDeviceManager;->mDebuggingManager:Lcom/android/server/usb/UsbDebuggingManager;
+  
+      :cond_1
+      return-void
+--- 218,224 ----
+  
+      invoke-direct {v3, p1}, Lcom/android/server/usb/UsbDebuggingManager;-><init>(Landroid/content/Context;)V
+  
+!     #iput-object v3, p0, Lcom/android/server/usb/UsbDeviceManager;->mDebuggingManager:Lcom/android/server/usb/UsbDebuggingManager;
+  
+      :cond_1
+      return-void
+***************
+*** 1288,1293 ****
+--- 1288,1294 ----
+      .locals 2
+  
+      .prologue
++     return-void
+      iget-object v0, p0, Lcom/android/server/usb/UsbDeviceManager;->mDebuggingManager:Lcom/android/server/usb/UsbDebuggingManager;
+  
+      if-eqz v0, :cond_0

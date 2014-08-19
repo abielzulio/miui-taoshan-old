@@ -1,0 +1,36 @@
+*** ./smali/android/widget/CompoundButton.smali	2014-08-20 05:48:29.300014036 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/CompoundButton.smali	2014-08-20 05:51:14.300018314 +0700
+***************
+*** 307,313 ****
+      and-int/lit8 v7, v8, 0x70
+  
+      .local v7, verticalGravity:I
+!     invoke-virtual {v1}, Landroid/graphics/drawable/Drawable;->getIntrinsicHeight()I
+  
+      move-result v2
+  
+--- 307,313 ----
+      and-int/lit8 v7, v8, 0x70
+  
+      .local v7, verticalGravity:I
+!     invoke-static {v1, p0}, Landroid/widget/Injector$CompoundButtonHook;->getDrawableHeight(Landroid/graphics/drawable/Drawable;Landroid/widget/CompoundButton;)I
+  
+      move-result v2
+  
+***************
+*** 352,357 ****
+--- 352,365 ----
+  
+      .local v5, right:I
+      :goto_2
++     invoke-static {p0, v4}, Landroid/widget/Injector$CompoundButtonHook;->adjustDrawablePosition(Landroid/widget/CompoundButton;I)I
++ 
++     move-result v4
++ 
++     invoke-static {p0, v5}, Landroid/widget/Injector$CompoundButtonHook;->adjustDrawablePosition(Landroid/widget/CompoundButton;I)I
++ 
++     move-result v5
++ 
+      invoke-virtual {v1, v4, v6, v5, v0}, Landroid/graphics/drawable/Drawable;->setBounds(IIII)V
+  
+      invoke-virtual {v1, p1}, Landroid/graphics/drawable/Drawable;->draw(Landroid/graphics/Canvas;)V

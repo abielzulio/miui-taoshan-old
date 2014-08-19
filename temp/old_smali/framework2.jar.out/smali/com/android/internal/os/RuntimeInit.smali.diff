@@ -1,0 +1,43 @@
+*** ./smali/com/android/internal/os/RuntimeInit.smali	2014-08-20 05:49:30.428015621 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework2.jar.out/./smali/com/android/internal/os/RuntimeInit.smali	2014-08-20 05:52:15.608019904 +0700
+***************
+*** 137,142 ****
+--- 137,153 ----
+      goto :goto_0
+  .end method
+  
++ .method public static callGetDefaultUserAgent()Ljava/lang/String;
++     .locals 1
++ 
++     .prologue
++     invoke-static {}, Lcom/android/internal/os/RuntimeInit;->getDefaultUserAgent()Ljava/lang/String;
++ 
++     move-result-object v0
++ 
++     return-object v0
++ .end method
++ 
+  .method private static final commonInit()V
+      .locals 4
+  
+***************
+*** 285,291 ****
+  
+      .end local v1           #model:Ljava/lang/String;
+      :cond_0
+!     sget-object v0, Landroid/os/Build;->ID:Ljava/lang/String;
+  
+      .local v0, id:Ljava/lang/String;
+      invoke-virtual {v0}, Ljava/lang/String;->length()I
+--- 296,306 ----
+  
+      .end local v1           #model:Ljava/lang/String;
+      :cond_0
+!     sget-object v4, Landroid/os/Build;->ID:Ljava/lang/String;
+! 
+!     invoke-static {v2, v4}, Lcom/android/internal/os/Injector$RuntimeInitHook;->appendBuildVersion(Ljava/lang/StringBuilder;Ljava/lang/String;)Ljava/lang/String;
+! 
+!     move-result-object v0
+  
+      .local v0, id:Ljava/lang/String;
+      invoke-virtual {v0}, Ljava/lang/String;->length()I

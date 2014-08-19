@@ -1,0 +1,157 @@
+*** ./smali/android/content/pm/PackageParser.smali	2014-08-20 05:47:29.840012494 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/content/pm/PackageParser.smali	2014-08-20 05:50:14.684016769 +0700
+***************
+*** 94,99 ****
+--- 94,101 ----
+  
+  .field private mParseError:I
+  
++ .field private mParseFlags:I
++ 
+  .field private mParseInstrumentationArgs:Landroid/content/pm/PackageParser$ParsePackageItemArgs;
+  
+  .field private mParseProviderArgs:Landroid/content/pm/PackageParser$ParseComponentArgs;
+***************
+*** 234,239 ****
+--- 236,245 ----
+  
+      iput v0, p0, Landroid/content/pm/PackageParser;->mParseError:I
+  
++     const/4 v0, 0x0
++ 
++     iput v0, p0, Landroid/content/pm/PackageParser;->mParseFlags:I
++ 
+      iput-object p1, p0, Landroid/content/pm/PackageParser;->mArchiveSourcePath:Ljava/lang/String;
+  
+      return-void
+***************
+*** 6721,6726 ****
+--- 6727,6740 ----
+      move-result v7
+  
+      .local v7, priority:I
++     move-object/from16 v0, p0
++ 
++     iget v13, v0, Landroid/content/pm/PackageParser;->mParseFlags:I
++ 
++     invoke-static {v13, v7}, Landroid/content/pm/Injector$PackageParserHook;->checkPriority(II)I
++ 
++     move-result v7
++ 
+      move-object/from16 v0, p5
+  
+      invoke-virtual {v0, v7}, Landroid/content/pm/PackageParser$IntentInfo;->setPriority(I)V
+***************
+*** 11705,11717 ****
+      .local v15, providerExportedDefault:Z
+      move-object/from16 v0, p1
+  
+!     iget-object v2, v0, Landroid/content/pm/PackageParser$Package;->applicationInfo:Landroid/content/pm/ApplicationInfo;
+  
+!     iget v2, v2, Landroid/content/pm/ApplicationInfo;->targetSdkVersion:I
+  
+!     const/16 v3, 0x11
+  
+!     if-ge v2, v3, :cond_3
+  
+      const/4 v15, 0x1
+  
+--- 11719,11731 ----
+      .local v15, providerExportedDefault:Z
+      move-object/from16 v0, p1
+  
+!     move/from16 v1, p5
+  
+!     invoke-static {v0, v1}, Landroid/content/pm/Injector$PackageParserHook;->providerShouldExport(Landroid/content/pm/PackageParser$Package;I)Z
+  
+!     move-result v2
+  
+!     if-eqz v2, :cond_3
+  
+      const/4 v15, 0x1
+  
+***************
+*** 14072,14077 ****
+--- 14086,14102 ----
+      .parameter "requiresSeparator"
+  
+      .prologue
++     const/4 v5, 0x0
++ 
++     invoke-static {p0}, Landroid/content/pm/Injector$PackageParserHook;->before_validateName(Ljava/lang/String;)Z
++ 
++     move-result v6
++ 
++     if-eqz v6, :cond_miui
++ 
++     return-object v5
++ 
++     :cond_miui
+      invoke-virtual {p0}, Ljava/lang/String;->length()I
+  
+      move-result v0
+***************
+*** 14436,14441 ****
+--- 14461,14476 ----
+      .local v11, localCerts:[Ljava/security/cert/Certificate;
+      if-nez v11, :cond_5
+  
++     move-object/from16 v0, p1
++ 
++     iget-object v15, v0, Landroid/content/pm/PackageParser$Package;->packageName:Ljava/lang/String;
++ 
++     invoke-static {v10, v15}, Landroid/content/pm/Injector$PackageParserHook;->acceptNoCertificatesPackage(Ljava/util/jar/JarEntry;Ljava/lang/String;)Z
++ 
++     move-result v15
++ 
++     if-nez v15, :cond_3
++ 
+      const-string v15, "PackageParser"
+  
+      new-instance v16, Ljava/lang/StringBuilder;
+***************
+*** 15041,15046 ****
+--- 15076,15087 ----
+  
+      iput v6, v0, Landroid/content/pm/PackageParser;->mParseError:I
+  
++     move/from16 v0, p4
++ 
++     move-object/from16 v1, p0
++ 
++     iput v0, v1, Landroid/content/pm/PackageParser;->mParseFlags:I
++ 
+      invoke-virtual/range {p1 .. p1}, Ljava/io/File;->getPath()Ljava/lang/String;
+  
+      move-result-object v6
+***************
+*** 15182,15196 ****
+      .local v25, cookie:I
+      if-eqz v25, :cond_4
+  
+-     new-instance v32, Landroid/content/res/Resources;
+- 
+      const/4 v6, 0x0
+  
+!     move-object/from16 v0, v32
+  
+!     move-object/from16 v1, p3
+  
+!     invoke-direct {v0, v5, v1, v6}, Landroid/content/res/Resources;-><init>(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)V
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+  
+--- 15223,15235 ----
+      .local v25, cookie:I
+      if-eqz v25, :cond_4
+  
+      const/4 v6, 0x0
+  
+!     move-object/from16 v0, p3
+  
+!     invoke-static {v5, v0, v6}, Landroid/content/pm/Injector$PackageParserHook;->createResources(Landroid/content/res/AssetManager;Landroid/util/DisplayMetrics;Landroid/content/res/Configuration;)Landroid/content/res/Resources;
+  
+!     move-result-object v32
+      :try_end_1
+      .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
+  

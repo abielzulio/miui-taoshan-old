@@ -1,0 +1,31 @@
+*** ./smali/com/android/internal/telephony/CallManager.smali	2014-08-20 05:50:03.652016482 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/CallManager.smali	2014-08-20 05:52:48.956020769 +0700
+***************
+*** 1293,1298 ****
+--- 1293,1302 ----
+      move-result-object v1
+  
+      :cond_1
++     if-eqz v0, :cond_miui
++ 
++     if-eqz v1, :cond_miui
++ 
+      invoke-virtual {v1}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  
+      move-result-object v2
+***************
+*** 1305,1311 ****
+--- 1309,1321 ----
+  
+      move-result v2
+  
++     :goto_miui
+      return v2
++ 
++     :cond_miui
++     const/4 v2, 0x0
++ 
++     goto :goto_miui
+  .end method
+  
+  .method public canTransfer(Lcom/android/internal/telephony/Call;)Z

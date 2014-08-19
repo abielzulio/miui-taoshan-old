@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/NotificationManagerService$5.smali	2014-08-20 05:49:48.648016093 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/NotificationManagerService$5.smali	2014-08-20 05:52:34.040020382 +0700
+***************
+*** 275,281 ****
+  
+      move-result-object v1
+  
+!     invoke-virtual {v1, v2}, Landroid/content/pm/PackageManager;->getApplicationEnabledSetting(Ljava/lang/String;)I
+      :try_end_0
+      .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0
+  
+--- 275,281 ----
+  
+      move-result-object v1
+  
+!     invoke-static {v1, v2}, Lcom/android/server/Injector$NotificationManagerServiceHook;->getApplicationEnabledSetting(Landroid/content/pm/PackageManager;Ljava/lang/String;)I
+      :try_end_0
+      .catch Ljava/lang/IllegalArgumentException; {:try_start_0 .. :try_end_0} :catch_0
+  

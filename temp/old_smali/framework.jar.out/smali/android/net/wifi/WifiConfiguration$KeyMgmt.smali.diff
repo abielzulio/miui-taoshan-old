@@ -1,0 +1,53 @@
+*** ./smali/android/net/wifi/WifiConfiguration$KeyMgmt.smali	2014-08-20 05:48:40.300014321 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/wifi/WifiConfiguration$KeyMgmt.smali	2014-08-20 05:51:25.388018602 +0700
+***************
+*** 19,24 ****
+--- 19,28 ----
+  
+  .field public static final NONE:I = 0x0
+  
++ .field public static final WAPI_CERT:I = 0x6
++ 
++ .field public static final WAPI_PSK:I = 0x5
++ 
+  .field public static final WPA2_PSK:I = 0x4
+  
+  .field public static final WPA_EAP:I = 0x2
+***************
+*** 35,41 ****
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x5
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+--- 39,45 ----
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x7
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+***************
+*** 69,74 ****
+--- 73,90 ----
+  
+      aput-object v2, v0, v1
+  
++     const/4 v1, 0x5
++ 
++     const-string v2, "WAPI_PSK"
++ 
++     aput-object v2, v0, v1
++ 
++     const/4 v1, 0x6
++ 
++     const-string v2, "WAPI_CERT"
++ 
++     aput-object v2, v0, v1
++ 
+      sput-object v0, Landroid/net/wifi/WifiConfiguration$KeyMgmt;->strings:[Ljava/lang/String;
+  
+      return-void

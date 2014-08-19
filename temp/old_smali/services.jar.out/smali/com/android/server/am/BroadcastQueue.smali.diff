@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/am/BroadcastQueue.smali	2014-08-20 05:49:41.944015920 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/am/BroadcastQueue.smali	2014-08-20 05:52:27.276020207 +0700
+***************
+*** 5088,5093 ****
+--- 5088,5101 ----
+      :cond_22
+      move-object/from16 v0, v32
+  
++     iget-object v3, v0, Lcom/android/server/am/BroadcastRecord;->curApp:Lcom/android/server/am/ProcessRecord;
++ 
++     const/4 v5, 0x1
++ 
++     iput-boolean v5, v3, Lcom/android/server/am/ProcessRecord;->startedViaBroadcast:Z
++ 
++     move-object/from16 v0, v32
++ 
+      move-object/from16 v1, p0
+  
+      iput-object v0, v1, Lcom/android/server/am/BroadcastQueue;->mPendingBroadcast:Lcom/android/server/am/BroadcastRecord;

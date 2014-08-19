@@ -1,0 +1,73 @@
+*** ./smali/com/android/server/InputMethodManagerService.smali	2014-08-20 05:49:58.172016340 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/InputMethodManagerService.smali	2014-08-20 05:52:43.504020628 +0700
+***************
+*** 3186,3191 ****
+--- 3186,3193 ----
+  
+      invoke-virtual {v11, v0}, Landroid/widget/Switch;->setOnCheckedChangeListener(Landroid/widget/CompoundButton$OnCheckedChangeListener;)V
+  
++     invoke-virtual/range {p0 .. p0}, Lcom/android/server/InputMethodManagerService;->removeCustomTitle()V
++ 
+      new-instance v6, Lcom/android/server/InputMethodManagerService$ImeSubtypeListAdapter;
+  
+      const v22, 0x10900a0
+***************
+*** 5450,5456 ****
+  
+      sparse-switch v7, :sswitch_data_0
+  
+!     move v9, v8
+  
+      :goto_0
+      return v9
+--- 5452,5462 ----
+  
+      sparse-switch v7, :sswitch_data_0
+  
+!     iget-object v7, p0, Lcom/android/server/InputMethodManagerService;->mCurIntent:Landroid/content/Intent;
+! 
+!     invoke-static {v7, p1}, Lcom/android/server/Injector$InputMethodManagerServiceHook;->after_handleMessage(Landroid/content/Intent;Landroid/os/Message;)Z
+! 
+!     move-result v9
+  
+      :goto_0
+      return v9
+***************
+*** 7003,7008 ****
+--- 7009,7044 ----
+      throw v1
+  .end method
+  
++ .method removeCustomTitle()V
++     .locals 3
++ 
++     .prologue
++     const/4 v2, 0x0
++ 
++     iget-object v0, p0, Lcom/android/server/InputMethodManagerService;->mContext:Landroid/content/Context;
++ 
++     invoke-static {v0}, Lmiui/util/UiUtils;->isV5Ui(Landroid/content/Context;)Z
++ 
++     move-result v0
++ 
++     if-eqz v0, :cond_0
++ 
++     iget-object v0, p0, Lcom/android/server/InputMethodManagerService;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
++ 
++     invoke-virtual {v0, v2}, Landroid/app/AlertDialog$Builder;->setCustomTitle(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
++ 
++     iget-object v0, p0, Lcom/android/server/InputMethodManagerService;->mDialogBuilder:Landroid/app/AlertDialog$Builder;
++ 
++     const v1, 0x104047c
++ 
++     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setTitle(I)Landroid/app/AlertDialog$Builder;
++ 
++     iput-object v2, p0, Lcom/android/server/InputMethodManagerService;->mSwitchingDialogTitleView:Landroid/view/View;
++ 
++     :cond_0
++     return-void
++ .end method
++ 
+  .method requestClientSessionLocked(Lcom/android/server/InputMethodManagerService$ClientState;)V
+      .locals 9
+      .parameter "cs"

@@ -1512,29 +1512,30 @@
 
     check-cast v7, Landroid/app/NotificationManager;
 
-    .line 513
     .local v7, notificationManager:Landroid/app/NotificationManager;
     if-nez v7, :cond_1
 
-    .line 549
     :cond_0
     :goto_0
     return-void
 
-    .line 517
     :cond_1
+    invoke-static {}, Lcom/android/server/connectivity/Injector$TetheringHook;->isUsbShareNet()Z
+
+    move-result v0
+
+    if-nez v0, :cond_0
+
     iget-object v0, p0, Lcom/android/server/connectivity/Tethering;->mTetheredNotification:Landroid/app/Notification;
 
     if-eqz v0, :cond_2
 
-    .line 518
     iget-object v0, p0, Lcom/android/server/connectivity/Tethering;->mTetheredNotification:Landroid/app/Notification;
 
     iget v0, v0, Landroid/app/Notification;->icon:I
 
     if-eq v0, p1, :cond_0
 
-    .line 521
     iget-object v0, p0, Lcom/android/server/connectivity/Tethering;->mTetheredNotification:Landroid/app/Notification;
 
     iget v0, v0, Landroid/app/Notification;->icon:I
@@ -1557,12 +1558,6 @@
 
     invoke-virtual {v2, v0, v3}, Landroid/content/Intent;->setClassName(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
 
-    .line 527
-    const/high16 v0, 0x4000
-
-    invoke-virtual {v2, v0}, Landroid/content/Intent;->setFlags(I)Landroid/content/Intent;
-
-    .line 529
     iget-object v0, p0, Lcom/android/server/connectivity/Tethering;->mContext:Landroid/content/Context;
 
     sget-object v5, Landroid/os/UserHandle;->CURRENT:Landroid/os/UserHandle;

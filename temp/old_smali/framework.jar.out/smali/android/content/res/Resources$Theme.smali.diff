@@ -1,0 +1,71 @@
+*** ./smali/android/content/res/Resources$Theme.smali	2014-08-20 05:47:32.128012553 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/content/res/Resources$Theme.smali	2014-08-20 05:50:16.844016825 +0700
+***************
+*** 136,142 ****
+  
+      invoke-static/range {v0 .. v6}, Landroid/content/res/AssetManager;->applyStyle(IIII[I[I[I)Z
+  
+!     return-object v7
+  .end method
+  
+  .method public obtainStyledAttributes(Landroid/util/AttributeSet;[III)Landroid/content/res/TypedArray;
+--- 136,148 ----
+  
+      invoke-static/range {v0 .. v6}, Landroid/content/res/AssetManager;->applyStyle(IIII[I[I[I)Z
+  
+!     iget-object v0, p0, Landroid/content/res/Resources$Theme;->this$0:Landroid/content/res/Resources;
+! 
+!     invoke-virtual {v0, v7}, Landroid/content/res/Resources;->loadOverlayTypedArray(Landroid/content/res/TypedArray;)Landroid/content/res/TypedArray;
+! 
+!     move-result-object v0
+! 
+!     return-object v0
+  .end method
+  
+  .method public obtainStyledAttributes(Landroid/util/AttributeSet;[III)Landroid/content/res/TypedArray;
+***************
+*** 186,192 ****
+  
+      iput-object v9, v7, Landroid/content/res/TypedArray;->mXml:Landroid/content/res/XmlBlock$Parser;
+  
+!     return-object v7
+  
+      :cond_0
+      const/4 v3, 0x0
+--- 192,204 ----
+  
+      iput-object v9, v7, Landroid/content/res/TypedArray;->mXml:Landroid/content/res/XmlBlock$Parser;
+  
+!     iget-object v0, p0, Landroid/content/res/Resources$Theme;->this$0:Landroid/content/res/Resources;
+! 
+!     invoke-virtual {v0, v7}, Landroid/content/res/Resources;->loadOverlayTypedArray(Landroid/content/res/TypedArray;)Landroid/content/res/TypedArray;
+! 
+!     move-result-object v0
+! 
+!     return-object v0
+  
+      :cond_0
+      const/4 v3, 0x0
+***************
+*** 228,234 ****
+  
+      invoke-static/range {v0 .. v6}, Landroid/content/res/AssetManager;->applyStyle(IIII[I[I[I)Z
+  
+!     return-object v7
+  .end method
+  
+  .method public resolveAttribute(ILandroid/util/TypedValue;Z)Z
+--- 240,252 ----
+  
+      invoke-static/range {v0 .. v6}, Landroid/content/res/AssetManager;->applyStyle(IIII[I[I[I)Z
+  
+!     iget-object v0, p0, Landroid/content/res/Resources$Theme;->this$0:Landroid/content/res/Resources;
+! 
+!     invoke-virtual {v0, v7}, Landroid/content/res/Resources;->loadOverlayTypedArray(Landroid/content/res/TypedArray;)Landroid/content/res/TypedArray;
+! 
+!     move-result-object v0
+! 
+!     return-object v0
+  .end method
+  
+  .method public resolveAttribute(ILandroid/util/TypedValue;Z)Z

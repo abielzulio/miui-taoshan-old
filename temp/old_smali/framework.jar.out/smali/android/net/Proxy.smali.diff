@@ -1,0 +1,17 @@
+*** ./smali/android/net/Proxy.smali	2014-08-20 05:48:37.680014253 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/Proxy.smali	2014-08-20 05:51:22.764018534 +0700
+***************
+*** 267,272 ****
+--- 267,278 ----
+      .parameter "url"
+  
+      .prologue
++     invoke-static {p0, p1}, Landroid/net/Injector$ProxyHook;->getPreferredHttpHost(Landroid/content/Context;Ljava/lang/String;)Lorg/apache/http/HttpHost;
++ 
++     move-result-object v0
++ 
++     return-object v0
++ 
+      invoke-static {p0, p1}, Landroid/net/Proxy;->getProxy(Landroid/content/Context;Ljava/lang/String;)Ljava/net/Proxy;
+  
+      move-result-object v0

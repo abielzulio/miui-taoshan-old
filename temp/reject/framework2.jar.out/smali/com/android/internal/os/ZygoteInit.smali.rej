@@ -1,0 +1,19 @@
+*** ZygoteInit.smali	2014-08-20 05:49:29.960015609 +0700
+--- ZygoteInit.smali	2014-08-20 05:52:15.140019892 +0700
+***************
+*** 1470,1475 ****
+  
+      invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+  
+      invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+  
+      move-result-wide v4
+--- 1548,1555 ----
+  
+      invoke-static {v6, v7}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
+  
++     invoke-static {}, Lcom/android/internal/os/ZygoteInit;->preloadMiuiResources()V
++ 
+      invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+  
+      move-result-wide v4

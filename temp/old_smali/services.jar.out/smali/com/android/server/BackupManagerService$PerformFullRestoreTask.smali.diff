@@ -1,0 +1,19 @@
+*** ./smali/com/android/server/BackupManagerService$PerformFullRestoreTask.smali	2014-08-20 05:49:33.128015691 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/BackupManagerService$PerformFullRestoreTask.smali	2014-08-20 05:52:18.408019977 +0700
+***************
+*** 1470,1476 ****
+      move-result v7
+  
+      .local v7, didRead:I
+!     if-ltz v7, :cond_0
+  
+      move-object/from16 v0, p0
+  
+--- 1470,1476 ----
+      move-result v7
+  
+      .local v7, didRead:I
+!     if-ltz v7, :cond_2
+  
+      move-object/from16 v0, p0
+  

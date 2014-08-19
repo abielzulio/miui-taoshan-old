@@ -1,0 +1,66 @@
+*** ./smali/com/android/internal/telephony/uicc/AdnRecord.smali	2014-08-20 05:50:08.228016601 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/uicc/AdnRecord.smali	2014-08-20 05:52:53.548020888 +0700
+***************
+*** 42,48 ****
+  
+  .field static final MAX_EXT_CALLED_PARTY_LENGTH:I = 0xa
+  
+! .field static final MAX_NUMBER_SIZE_BYTES:I = 0xb
+  
+  
+  # instance fields
+--- 42,48 ----
+  
+  .field static final MAX_EXT_CALLED_PARTY_LENGTH:I = 0xa
+  
+! .field static final MAX_NUMBER_SIZE_BYTES:I = 0xff
+  
+  
+  # instance fields
+***************
+*** 247,253 ****
+      and-int/lit16 v2, v3, 0xff
+  
+      .local v2, numberLength:I
+!     const/16 v3, 0xb
+  
+      if-le v2, v3, :cond_0
+  
+--- 247,253 ----
+      and-int/lit16 v2, v3, 0xff
+  
+      .local v2, numberLength:I
+!     const/16 v3, 0xff
+  
+      if-le v2, v3, :cond_0
+  
+***************
+*** 581,596 ****
+  
+      if-nez v5, :cond_1
+  
+!     iget-object v5, p0, Lcom/android/internal/telephony/uicc/AdnRecord;->mAlphaTag:Ljava/lang/String;
+! 
+!     invoke-static {v5}, Lcom/android/internal/telephony/GsmAlphabet;->stringToGsm8BitPacked(Ljava/lang/String;)[B
+  
+!     move-result-object v2
+! 
+!     .local v2, byteTag:[B
+!     array-length v5, v2
+  
+!     invoke-static {v2, v9, v0, v9, v5}, Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V
+  
+      goto :goto_1
+  .end method
+--- 581,591 ----
+  
+      if-nez v5, :cond_1
+  
+!     const-string v2, "AdnRecord"
+  
+!     iget-object v5, p0, Lcom/android/internal/telephony/uicc/AdnRecord;->mAlphaTag:Ljava/lang/String;
+  
+!     invoke-static {v2, v0, v5, v3}, Lcom/android/internal/telephony/uicc/Injector$AdnRecordHook;->encodeAlphaTag(Ljava/lang/String;[BLjava/lang/String;I)Z
+  
+      goto :goto_1
+  .end method

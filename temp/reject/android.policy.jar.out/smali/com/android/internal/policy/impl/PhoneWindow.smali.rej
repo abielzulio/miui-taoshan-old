@@ -1,0 +1,44 @@
+*** PhoneWindow.smali	2014-08-20 05:50:01.620016430 +0700
+--- PhoneWindow.smali	2014-08-20 05:52:46.920020716 +0700
+***************
+*** 1268,1273 ****
+      invoke-virtual {v7}, Lcom/android/internal/widget/ActionBarView;->initIndeterminateProgress()V
+  
+      :cond_7
+      const v7, 0x1020313
+  
+      invoke-virtual {p0, v7}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
+--- 1268,1277 ----
+      invoke-virtual {v7}, Lcom/android/internal/widget/ActionBarView;->initIndeterminateProgress()V
+  
+      :cond_7
++     iget-object v7, p0, Lcom/android/internal/policy/impl/PhoneWindow;->mActionBar:Lcom/android/internal/widget/ActionBarView;
++ 
++     invoke-static {p0, v7}, Lcom/android/internal/policy/impl/Injector$PhoneWindowHook;->handleStartingWindow(Lcom/android/internal/policy/impl/PhoneWindow;Lcom/android/internal/widget/ActionBarView;)V
++ 
+      const v7, 0x1020313
+  
+      invoke-virtual {p0, v7}, Lcom/android/internal/policy/impl/PhoneWindow;->findViewById(I)Landroid/view/View;
+***************
+*** 4630,4636 ****
+  
+      if-eqz v19, :cond_29
+  
+!     const v10, 0x109008d
+  
+      .restart local v10       #layoutResource:I
+      goto/16 :goto_8
+--- 4660,4672 ----
+  
+      if-eqz v19, :cond_29
+  
+!     sget v19, Lcom/android/internal/R$layout;->screen_action_bar:I
+! 
+!     move/from16 v0, v19
+! 
+!     invoke-static {v5, v0}, Lcom/android/internal/policy/impl/Injector$PhoneWindowHook;->getActionBarResourceId(Landroid/content/Context;I)I
+! 
+!     move-result v10
+  
+      .restart local v10       #layoutResource:I
+      goto/16 :goto_8

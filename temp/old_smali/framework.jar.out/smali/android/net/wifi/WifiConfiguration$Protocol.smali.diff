@@ -1,0 +1,45 @@
+*** ./smali/android/net/wifi/WifiConfiguration$Protocol.smali	2014-08-20 05:48:42.212014371 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/wifi/WifiConfiguration$Protocol.smali	2014-08-20 05:51:27.280018651 +0700
+***************
+*** 17,22 ****
+--- 17,24 ----
+  # static fields
+  .field public static final RSN:I = 0x1
+  
++ .field public static final WAPI:I = 0x2
++ 
+  .field public static final WPA:I = 0x0
+  
+  .field public static final strings:[Ljava/lang/String; = null
+***************
+*** 29,35 ****
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x2
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+--- 31,37 ----
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x3
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+***************
+*** 45,50 ****
+--- 47,58 ----
+  
+      aput-object v2, v0, v1
+  
++     const/4 v1, 0x2
++ 
++     const-string v2, "WAPI"
++ 
++     aput-object v2, v0, v1
++ 
+      sput-object v0, Landroid/net/wifi/WifiConfiguration$Protocol;->strings:[Ljava/lang/String;
+  
+      return-void

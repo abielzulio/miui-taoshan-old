@@ -1,0 +1,36 @@
+*** ./smali/android/net/wifi/SupplicantStateTracker$HandshakeState.smali	2014-08-20 05:48:41.000014339 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/wifi/SupplicantStateTracker$HandshakeState.smali	2014-08-20 05:51:26.076018620 +0700
+***************
+*** 15,21 ****
+  
+  
+  # static fields
+! .field private static final MAX_SUPPLICANT_LOOP_ITERATIONS:I = 0x4
+  
+  
+  # instance fields
+--- 15,21 ----
+  
+  
+  # static fields
+! .field private static final MAX_SUPPLICANT_LOOP_ITERATIONS:I = 0xa
+  
+  
+  # instance fields
+***************
+*** 101,107 ****
+      :cond_1
+      iget v2, p0, Landroid/net/wifi/SupplicantStateTracker$HandshakeState;->mLoopDetectCount:I
+  
+!     const/4 v3, 0x4
+  
+      if-le v2, v3, :cond_2
+  
+--- 101,107 ----
+      :cond_1
+      iget v2, p0, Landroid/net/wifi/SupplicantStateTracker$HandshakeState;->mLoopDetectCount:I
+  
+!     const/16 v3, 0xa
+  
+      if-le v2, v3, :cond_2
+  

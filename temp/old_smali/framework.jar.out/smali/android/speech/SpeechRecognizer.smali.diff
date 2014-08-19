@@ -1,0 +1,19 @@
+*** ./smali/android/speech/SpeechRecognizer.smali	2014-08-20 05:47:48.184012970 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/speech/SpeechRecognizer.smali	2014-08-20 05:50:33.056017245 +0700
+***************
+*** 565,571 ****
+  
+      move-result-object v0
+  
+!     invoke-direct {p0, v0}, Landroid/speech/SpeechRecognizer;->putMessage(Landroid/os/Message;)V
+  
+      return-void
+  .end method
+--- 565,571 ----
+  
+      move-result-object v0
+  
+!     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
+  
+      return-void
+  .end method

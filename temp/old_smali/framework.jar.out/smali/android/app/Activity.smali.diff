@@ -1,0 +1,121 @@
+*** ./smali/android/app/Activity.smali	2014-08-20 05:48:09.312013518 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/Activity.smali	2014-08-20 05:50:54.172017792 +0700
+***************
+*** 372,380 ****
+      return-void
+  
+      :cond_1
+!     new-instance v1, Lcom/android/internal/app/ActionBarImpl;
+  
+!     invoke-direct {v1, p0}, Lcom/android/internal/app/ActionBarImpl;-><init>(Landroid/app/Activity;)V
+  
+      iput-object v1, p0, Landroid/app/Activity;->mActionBar:Lcom/android/internal/app/ActionBarImpl;
+  
+--- 372,380 ----
+      return-void
+  
+      :cond_1
+!     invoke-static {p0}, Landroid/app/Injector$ActivityHook;->createActionBarImpl(Landroid/app/Activity;)Lcom/android/internal/app/ActionBarImpl;
+  
+!     move-result-object v1
+  
+      iput-object v1, p0, Landroid/app/Activity;->mActionBar:Lcom/android/internal/app/ActionBarImpl;
+  
+***************
+*** 2476,2481 ****
+--- 2476,2507 ----
+      goto :goto_0
+  .end method
+  
++ .method public getMiuiActionBar()Lmiui/v5/app/MiuiActionBar;
++     .locals 2
++ 
++     .prologue
++     invoke-virtual {p0}, Landroid/app/Activity;->getActionBar()Landroid/app/ActionBar;
++ 
++     move-result-object v0
++ 
++     .local v0, bar:Landroid/app/ActionBar;
++     instance-of v1, v0, Lmiui/v5/app/MiuiActionBar;
++ 
++     if-eqz v1, :cond_0
++ 
++     check-cast v0, Lmiui/v5/app/MiuiActionBar;
++ 
++     .end local v0           #bar:Landroid/app/ActionBar;
++     :goto_0
++     return-object v0
++ 
++     .restart local v0       #bar:Landroid/app/ActionBar;
++     :cond_0
++     const/4 v0, 0x0
++ 
++     goto :goto_0
++ .end method
++ 
+  .method public final getParent()Landroid/app/Activity;
+      .locals 1
+  
+***************
+*** 3520,3525 ****
+--- 3546,3553 ----
+  
+      iput-boolean v3, p0, Landroid/app/Activity;->mCalled:Z
+  
++     invoke-static {p0}, Landroid/app/Injector$ActivityHook;->after_onCreate(Landroid/app/Activity;)V
++ 
+      return-void
+  
+      :cond_3
+***************
+*** 4843,4849 ****
+      return v0
+  
+      :cond_0
+!     const/4 v0, 0x0
+  
+      goto :goto_0
+  .end method
+--- 4871,4879 ----
+      return v0
+  
+      :cond_0
+!     invoke-static {p0, p1}, Landroid/app/Injector$ActivityHook;->after_onOptionsItemSelected(Landroid/app/Activity;Landroid/view/MenuItem;)Z
+! 
+!     move-result v0
+  
+      goto :goto_0
+  .end method
+***************
+*** 5142,5147 ****
+--- 5172,5179 ----
+  
+      iput-boolean v0, p0, Landroid/app/Activity;->mCalled:Z
+  
++     invoke-static {p0}, Landroid/app/Injector$ActivityHook;->after_onResume(Landroid/app/Activity;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 5634,5639 ****
+--- 5666,5673 ----
+      .prologue
+      const/4 v2, 0x0
+  
++     invoke-static {p0}, Landroid/app/Injector$ActivityHook;->before_performPause(Landroid/app/Activity;)V
++ 
+      iput-boolean v2, p0, Landroid/app/Activity;->mDoReportFullyDrawn:Z
+  
+      iget-object v0, p0, Landroid/app/Activity;->mFragments:Landroid/app/FragmentManagerImpl;
+***************
+*** 6048,6053 ****
+--- 6082,6089 ----
+      throw v0
+  
+      :cond_1
++     invoke-static {p0}, Landroid/app/Injector$ActivityHook;->after_performResume(Landroid/app/Activity;)V
++ 
+      return-void
+  .end method
+  

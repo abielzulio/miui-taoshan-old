@@ -1,0 +1,236 @@
+*** ./smali/android/view/View.smali	2014-08-20 05:47:55.636013163 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/view/View.smali	2014-08-20 05:50:40.604017441 +0700
+***************
+*** 719,724 ****
+--- 719,726 ----
+  
+  .field mAccessibilityViewId:I
+  
++ .field mAdditionalState:I
++ 
+  .field private mAnimator:Landroid/view/ViewPropertyAnimator;
+  
+  .field mAttachInfo:Landroid/view/View$AttachInfo;
+***************
+*** 760,765 ****
+--- 762,769 ----
+  
+  .field private mFloatingTreeObserver:Landroid/view/ViewTreeObserver;
+  
++ .field mHapticEnabledExplicitly:Z
++ 
+  .field private mHardwareLayer:Landroid/view/HardwareLayer;
+  
+  .field private mHasPerformedLongPress:Z
+***************
+*** 1809,1814 ****
+--- 1813,1820 ----
+      :goto_0
+      iput-object v0, p0, Landroid/view/View;->mInputEventConsistencyVerifier:Landroid/view/InputEventConsistencyVerifier;
+  
++     iput v2, p0, Landroid/view/View;->mAdditionalState:I
++ 
+      iput-object v1, p0, Landroid/view/View;->mResources:Landroid/content/res/Resources;
+  
+      return-void
+***************
+*** 1899,1904 ****
+--- 1905,1912 ----
+      :goto_0
+      iput-object v1, p0, Landroid/view/View;->mInputEventConsistencyVerifier:Landroid/view/InputEventConsistencyVerifier;
+  
++     iput v4, p0, Landroid/view/View;->mAdditionalState:I
++ 
+      iput-object p1, p0, Landroid/view/View;->mContext:Landroid/content/Context;
+  
+      if-eqz p1, :cond_0
+***************
+*** 2822,2827 ****
+--- 2830,2849 ----
+      goto/16 :goto_1
+  
+      :pswitch_24
++     const/16 v48, 0x0
++ 
++     move/from16 v0, v48
++ 
++     invoke-virtual {v6, v7, v0}, Landroid/content/res/TypedArray;->getBoolean(IZ)Z
++ 
++     move-result v48
++ 
++     move/from16 v0, v48
++ 
++     move-object/from16 v1, p0
++ 
++     iput-boolean v0, v1, Landroid/view/View;->mHapticEnabledExplicitly:Z
++ 
+      const/16 v48, 0x1
+  
+      move/from16 v0, v48
+***************
+*** 3592,3597 ****
+--- 3614,3627 ----
+      :cond_11
+      invoke-virtual/range {p0 .. p0}, Landroid/view/View;->computeOpaqueFlags()V
+  
++     move-object/from16 v0, p0
++ 
++     move-object/from16 v1, p2
++ 
++     move/from16 v2, p3
++ 
++     invoke-static {v0, v1, v2}, Landroid/view/Injector$ViewHook;->initializeChildrenSequenceStates(Landroid/view/View;Landroid/util/AttributeSet;I)V
++ 
+      return-void
+  
+      .restart local v9       #bottomPadding:I
+***************
+*** 14725,14730 ****
+--- 14755,14762 ----
+      invoke-virtual {v0, v1}, Landroid/graphics/drawable/Drawable;->setState([I)Z
+  
+      :cond_0
++     invoke-static {p0}, Landroid/view/Injector$ViewHook;->after_drawableStateChanged(Landroid/view/View;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 14778,14783 ****
+--- 14810,14837 ----
+      goto :goto_0
+  .end method
+  
++ .method fillAdditionalState([I)[I
++     .locals 2
++     .parameter "states"
++ 
++     .prologue
++     move-object v0, p1
++ 
++     .local v0, newStates:[I
++     iget v1, p0, Landroid/view/View;->mAdditionalState:I
++ 
++     if-eqz v1, :cond_0
++ 
++     iget v1, p0, Landroid/view/View;->mAdditionalState:I
++ 
++     invoke-static {v0, v1}, Lmiui/util/UiUtils;->getViewStates([II)[I
++ 
++     move-result-object v0
++ 
++     :cond_0
++     return-object v0
++ .end method
++ 
+  .method public findFocus()Landroid/view/View;
+      .locals 1
+  
+***************
+*** 23306,23311 ****
+--- 23360,23369 ----
+      aget-object v0, v5, v4
+  
+      .local v0, drawableState:[I
++     invoke-virtual {p0, v0}, Landroid/view/View;->fillAdditionalState([I)[I
++ 
++     move-result-object v0
++ 
+      if-eqz p1, :cond_0
+  
+      if-eqz v0, :cond_c
+***************
+*** 25379,25384 ****
+--- 25437,25444 ----
+      iput-object v6, p0, Landroid/view/View;->mPerformClick:Landroid/view/View$PerformClick;
+  
+      :cond_a
++     invoke-static {p0}, Landroid/view/Injector$ViewHook;->performHapticFeedbackOnRelease(Landroid/view/View;)V
++ 
+      iget-object v6, p0, Landroid/view/View;->mPerformClick:Landroid/view/View$PerformClick;
+  
+      invoke-virtual {p0, v6}, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
+***************
+*** 25497,25502 ****
+--- 25557,25564 ----
+  
+      invoke-direct {p0, v6}, Landroid/view/View;->checkForLongClick(I)V
+  
++     invoke-static {p0}, Landroid/view/Injector$ViewHook;->performHapticFeedbackOnDown(Landroid/view/View;)V
++ 
+      goto/16 :goto_1
+  
+      .end local v1           #isInScrollingContainer:Z
+***************
+*** 26500,26506 ****
+      .prologue
+      const/4 v0, 0x0
+  
+!     iget-object v1, p0, Landroid/view/View;->mAttachInfo:Landroid/view/View$AttachInfo;
+  
+      if-nez v1, :cond_1
+  
+--- 26562,26570 ----
+      .prologue
+      const/4 v0, 0x0
+  
+!     invoke-static {p0, p1, p2}, Landroid/view/Injector$ViewHook;->before_performHapticFeedback(Landroid/view/View;II)Z
+! 
+!     move-result v1
+  
+      if-nez v1, :cond_1
+  
+***************
+*** 26509,26514 ****
+--- 26573,26582 ----
+      return v0
+  
+      :cond_1
++     iget-object v1, p0, Landroid/view/View;->mAttachInfo:Landroid/view/View$AttachInfo;
++ 
++     if-eqz v1, :cond_0
++ 
+      and-int/lit8 v1, p2, 0x1
+  
+      if-nez v1, :cond_2
+***************
+*** 29237,29242 ****
+--- 29305,29331 ----
+      goto :goto_1
+  .end method
+  
++ .method public setAdditionalState(I)V
++     .locals 1
++     .parameter "state"
++ 
++     .prologue
++     iget v0, p0, Landroid/view/View;->mAdditionalState:I
++ 
++     if-eq p1, v0, :cond_0
++ 
++     iput p1, p0, Landroid/view/View;->mAdditionalState:I
++ 
++     const/4 v0, 0x1
++ 
++     invoke-virtual {p0, v0}, Landroid/view/View;->invalidate(Z)V
++ 
++     invoke-virtual {p0}, Landroid/view/View;->refreshDrawableState()V
++ 
++     :cond_0
++     return-void
++ .end method
++ 
+  .method public setAlpha(F)V
+      .locals 3
+      .parameter "alpha"
+***************
+*** 31425,31430 ****
+--- 31514,31521 ----
+      :goto_0
+      invoke-virtual {p0, v0, v1}, Landroid/view/View;->setFlags(II)V
+  
++     iput-boolean p1, p0, Landroid/view/View;->mHapticEnabledExplicitly:Z
++ 
+      return-void
+  
+      :cond_0

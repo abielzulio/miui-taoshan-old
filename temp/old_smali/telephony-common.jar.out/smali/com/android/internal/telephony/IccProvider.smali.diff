@@ -1,0 +1,20 @@
+*** ./smali/com/android/internal/telephony/IccProvider.smali	2014-08-20 05:50:10.156016651 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/IccProvider.smali	2014-08-20 05:52:55.412020936 +0700
+***************
+*** 228,233 ****
+--- 228,242 ----
+      goto :goto_0
+  .end method
+  
++ .method static getURL_MATCHER()Landroid/content/UriMatcher;
++     .locals 1
++ 
++     .prologue
++     sget-object v0, Lcom/android/internal/telephony/IccProvider;->URL_MATCHER:Landroid/content/UriMatcher;
++ 
++     return-object v0
++ .end method
++ 
+  .method private loadFromEf(I)Landroid/database/MatrixCursor;
+      .locals 7
+      .parameter "efType"

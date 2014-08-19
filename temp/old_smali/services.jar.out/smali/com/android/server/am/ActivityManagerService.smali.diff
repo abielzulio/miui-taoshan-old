@@ -1,0 +1,304 @@
+*** ./smali/com/android/server/am/ActivityManagerService.smali	2014-08-20 05:49:39.248015850 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/am/ActivityManagerService.smali	2014-08-20 05:52:24.580020137 +0700
+***************
+*** 1501,1506 ****
+--- 1501,1508 ----
+  
+      iput-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mBgHandler:Landroid/os/Handler;
+  
++     invoke-static {}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->before_ActivityManagerService()V
++ 
+      const-string v0, "ActivityManager"
+  
+      new-instance v1, Ljava/lang/StringBuilder;
+***************
+*** 5897,5902 ****
+--- 5899,5912 ----
+      move-result-object v9
+  
+      .restart local v9       #queue:Lcom/android/server/am/BroadcastQueue;
++     move-object/from16 v0, p0
++ 
++     move-object/from16 v1, v29
++ 
++     move-object/from16 v2, v50
++ 
++     invoke-static {v0, v1, v2}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->adjustMediaButtonReceivers(Lcom/android/server/am/ActivityManagerService;Ljava/util/List;Landroid/content/Intent;)V
++ 
+      new-instance v8, Lcom/android/server/am/BroadcastRecord;
+  
+      const/16 v36, 0x0
+***************
+*** 8207,8217 ****
+      const/16 v25, 0x0
+  
+      .local v25, interesting:Z
+!     move-object/from16 v0, p1
+  
+!     move-object/from16 v1, p3
+  
+!     if-ne v0, v1, :cond_8
+  
+      const/4 v12, 0x0
+  
+--- 8217,8233 ----
+      const/16 v25, 0x0
+  
+      .local v25, interesting:Z
+!     move-object/from16 v0, p0
+  
+!     move-object/from16 v1, p1
+  
+!     move-object/from16 v2, p3
+! 
+!     invoke-static {v0, v1, v2}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->isForegroudApp(Lcom/android/server/am/ActivityManagerService;Lcom/android/server/am/ProcessRecord;Lcom/android/server/am/ProcessRecord;)Z
+! 
+!     move-result v2
+! 
+!     if-eqz v2, :cond_8
+  
+      const/4 v12, 0x0
+  
+***************
+*** 10880,10885 ****
+--- 10896,10907 ----
+  
+      invoke-virtual {v12, v3, v0}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+  
++     const-string v3, "crash"
++ 
++     move-object/from16 v0, p2
++ 
++     invoke-virtual {v12, v3, v0}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
++ 
+      iput-object v12, v15, Landroid/os/Message;->obj:Ljava/lang/Object;
+  
+      move-object/from16 v0, p0
+***************
+*** 14295,14300 ****
+--- 14317,14333 ----
+      .parameter "reason"
+  
+      .prologue
++     invoke-static/range {p0 .. p1}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->before_forceStopPackageLocked(Lcom/android/server/am/ActivityManagerService;Ljava/lang/String;)Z
++ 
++     move-result v4
++ 
++     if-nez v4, :cond_miui
++ 
++     const/16 v17, 0x0
++ 
++     return v17
++ 
++     :cond_miui
+      const/4 v4, -0x1
+  
+      move/from16 v0, p7
+***************
+*** 14591,14596 ****
+--- 14624,14651 ----
+      .end local v20           #ip:I
+      .end local v23           #pmap:Landroid/util/ArrayMap;,"Landroid/util/ArrayMap<Ljava/lang/String;Landroid/util/SparseArray<Ljava/lang/Long;>;>;"
+      :cond_9
++     :try_start_miui
++     invoke-static {}, Landroid/app/AppGlobals;->getPackageManager()Landroid/content/pm/IPackageManager;
++ 
++     move-result-object v4
++ 
++     const/4 v5, 0x0
++ 
++     move-object/from16 v0, p1
++ 
++     invoke-interface {v4, v0, v5}, Landroid/content/pm/IPackageManager;->getPackageUid(Ljava/lang/String;I)I
++ 
++     move-result v4
++ 
++     move-object/from16 v0, p0
++ 
++     move-object/from16 v1, p1
++ 
++     invoke-direct {v0, v4, v1}, Lcom/android/server/am/ActivityManagerService;->killNativePackageProcesses(ILjava/lang/String;)V
++     :try_end_miui
++     .catch Landroid/os/RemoteException; {:try_start_miui .. :try_end_miui} :catch_miui
++ 
++     :goto_miui
+      const/16 v8, -0x64
+  
+      const/4 v10, 0x1
+***************
+*** 15024,15029 ****
+--- 15079,15088 ----
+      move-exception v4
+  
+      goto/16 :goto_0
++     :catch_miui
++     move-exception v4
++ 
++     goto/16 :goto_miui
+  .end method
+  
+  .method private forceStopUserLocked(ILjava/lang/String;)V
+***************
+*** 18134,18139 ****
+--- 18193,18225 ----
+      goto :goto_0
+  .end method
+  
++ .method private final killNativePackageProcesses(ILjava/lang/String;)V
++     .locals 3
++     .parameter "uid"
++     .parameter "packageName"
++ 
++     .prologue
++     iget-object v1, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
++ 
++     const-string v2, "security"
++ 
++     invoke-virtual {v1, v2}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
++ 
++     move-result-object v0
++ 
++     check-cast v0, Lmiui/security/SecurityManager;
++ 
++     .local v0, sm:Lmiui/security/SecurityManager;
++     if-eqz v0, :cond_0
++ 
++     if-eqz p2, :cond_0
++ 
++     invoke-virtual {v0, p1, p2}, Lmiui/security/SecurityManager;->killNativePackageProcesses(ILjava/lang/String;)V
++ 
++     :cond_0
++     return-void
++ .end method
++ 
+  .method private final killPackageProcessesLocked(Ljava/lang/String;IIIZZZZLjava/lang/String;)Z
+      .locals 15
+      .parameter "packageName"
+***************
+*** 19235,19240 ****
+--- 19321,19328 ----
+  
+      invoke-virtual {v2, v6, v6, v6, v6}, Lcom/android/server/am/ActivityManagerService;->startRunning(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+  
++     invoke-static {v1}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->useMiuiTheme(Landroid/content/Context;)V
++ 
+      return-object v1
+  
+      .end local v0           #at:Landroid/app/ActivityThread;
+***************
+*** 27265,27270 ****
+--- 27353,27375 ----
+      throw v0
+  
+      :cond_0
++     iget-boolean v0, p0, Lcom/android/server/am/ActivityManagerService;->mSystemReady:Z
++ 
++     if-eqz v0, :cond_miui
++ 
++     iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
++ 
++     invoke-static {v0, p3, p4, p7}, Lcom/android/server/am/ExtraActivityManagerService;->checkRunningCompatibility(Landroid/content/Context;Landroid/content/Intent;Ljava/lang/String;I)Z
++ 
++     move-result v0
++ 
++     if-nez v0, :cond_miui
++ 
++     const/4 v0, -0x1
++ 
++     return v0
++ 
++     :cond_miui
+      monitor-enter p0
+  
+      :try_start_0
+***************
+*** 41927,41933 ****
+  
+      monitor-enter p0
+  
+!     :try_start_0
+      move-object/from16 v0, p0
+  
+      iget-object v2, v0, Lcom/android/server/am/ActivityManagerService;->mProcessesOnHold:Ljava/util/ArrayList;
+--- 42032,42038 ----
+  
+      monitor-enter p0
+  
+!     :try_start_miui
+      move-object/from16 v0, p0
+  
+      iget-object v2, v0, Lcom/android/server/am/ActivityManagerService;->mProcessesOnHold:Ljava/util/ArrayList;
+***************
+*** 42143,42148 ****
+--- 42248,42257 ----
+      .end local v24           #uss:Lcom/android/server/am/UserStartedState;
+      :cond_2
+      monitor-exit p0
++     :try_end_miui
++     .catchall {:try_start_miui .. :try_end_miui} :catchall_0
++ 
++     invoke-static/range {p0 .. p0}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->after_finishBooting(Lcom/android/server/am/ActivityManagerService;)V
+  
+      return-void
+  
+***************
+*** 42150,42155 ****
+--- 42259,42265 ----
+      :catchall_0
+      move-exception v2
+  
++     :try_start_0
+      monitor-exit p0
+      :try_end_0
+      .catchall {:try_start_0 .. :try_end_0} :catchall_0
+***************
+*** 61456,61461 ****
+--- 61566,61596 ----
+      throw v0
+  
+      :cond_0
++     iget-boolean v0, p0, Lcom/android/server/am/ActivityManagerService;->mSystemReady:Z
++ 
++     if-eqz v0, :cond_miui
++ 
++     iget-object v0, p0, Lcom/android/server/am/ActivityManagerService;->mContext:Landroid/content/Context;
++ 
++     invoke-static {}, Landroid/os/Binder;->getCallingUid()I
++ 
++     move-result v1
++ 
++     invoke-static {v1}, Landroid/os/UserId;->getUserId(I)I
++ 
++     move-result v1
++ 
++     invoke-static {v0, p2, p3, v1}, Lcom/android/server/am/ExtraActivityManagerService;->checkRunningCompatibility(Landroid/content/Context;Landroid/content/Intent;Ljava/lang/String;I)Z
++ 
++     move-result v0
++ 
++     if-nez v0, :cond_miui
++ 
++     const/4 v9, 0x0
++ 
++     return-object v9
++ 
++     :cond_miui
+      monitor-enter p0
+  
+      :try_start_0
+***************
+*** 65895,65900 ****
+--- 66030,66043 ----
+  
+      invoke-direct/range {v3 .. v18}, Lcom/android/server/am/ActivityManagerService;->broadcastIntentLocked(Lcom/android/server/am/ProcessRecord;Ljava/lang/String;Landroid/content/Intent;Ljava/lang/String;Landroid/content/IIntentReceiver;ILjava/lang/String;Landroid/os/Bundle;Ljava/lang/String;IZZIII)I
+  
++     move-object/from16 v0, p0
++ 
++     move/from16 v1, v21
++ 
++     move-object/from16 v2, v27
++ 
++     invoke-static {v0, v1, v2}, Lcom/android/server/am/Injector$ActivityManagerServiceHook;->handleConfigurationChanges(Lcom/android/server/am/ActivityManagerService;ILandroid/content/res/Configuration;)V
++ 
+      and-int/lit8 v3, v21, 0x4
+  
+      if-eqz v3, :cond_9

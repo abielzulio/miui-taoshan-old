@@ -1,0 +1,26 @@
+*** ./smali/android/view/WindowManagerPolicy$WindowManagerFuncs.smali	2014-08-20 05:47:50.864013039 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/view/WindowManagerPolicy$WindowManagerFuncs.smali	2014-08-20 05:50:35.744017315 +0700
+***************
+*** 32,37 ****
+--- 32,40 ----
+  .method public abstract getWindowManagerLock()Ljava/lang/Object;
+  .end method
+  
++ .method public abstract rebootSafeMode()V
++ .end method
++ 
+  .method public abstract rebootSafeMode(Z)V
+  .end method
+  
+***************
+*** 41,46 ****
+--- 44,52 ----
+  .method public abstract registerPointerEventListener(Landroid/view/WindowManagerPolicy$PointerEventListener;)V
+  .end method
+  
++ .method public abstract shutdown()V
++ .end method
++ 
+  .method public abstract shutdown(Z)V
+  .end method
+  

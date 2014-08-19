@@ -1,0 +1,65 @@
+*** ./smali/com/android/internal/policy/impl/Policy.smali	2014-08-20 05:50:00.852016410 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/android.policy.jar.out/./smali/com/android/internal/policy/impl/Policy.smali	2014-08-20 05:52:46.140020696 +0700
+***************
+*** 140,148 ****
+      .parameter "context"
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/PhoneFallbackEventHandler;
+  
+!     invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/PhoneFallbackEventHandler;-><init>(Landroid/content/Context;)V
+  
+      return-object v0
+  .end method
+--- 140,148 ----
+      .parameter "context"
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneFallbackEventHandler;
+  
+!     invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/MiuiPhoneFallbackEventHandler;-><init>(Landroid/content/Context;)V
+  
+      return-object v0
+  .end method
+***************
+*** 152,160 ****
+      .parameter "context"
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/PhoneLayoutInflater;
+  
+!     invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/PhoneLayoutInflater;-><init>(Landroid/content/Context;)V
+  
+      return-object v0
+  .end method
+--- 152,160 ----
+      .parameter "context"
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneLayoutInflater;
+  
+!     invoke-direct {v0, p1}, Lcom/android/internal/policy/impl/MiuiPhoneLayoutInflater;-><init>(Landroid/content/Context;)V
+  
+      return-object v0
+  .end method
+***************
+*** 175,183 ****
+      .locals 1
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager;
+  
+!     invoke-direct {v0}, Lcom/android/internal/policy/impl/PhoneWindowManager;-><init>()V
+  
+      return-object v0
+  .end method
+--- 175,183 ----
+      .locals 1
+  
+      .prologue
+!     new-instance v0, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;
+  
+!     invoke-direct {v0}, Lcom/android/internal/policy/impl/MiuiPhoneWindowManager;-><init>()V
+  
+      return-object v0
+  .end method

@@ -1,0 +1,631 @@
+*** ./smali/android/net/wifi/WifiConfigStore.smali	2014-08-20 05:48:41.676014357 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/wifi/WifiConfigStore.smali	2014-08-20 05:51:26.760018638 +0700
+***************
+*** 159,164 ****
+--- 159,166 ----
+  
+      iput-object v1, p0, Landroid/net/wifi/WifiConfigStore;->mFileObserver:Landroid/net/wifi/WifiConfigStore$WpaConfigFileObserver;
+  
++     invoke-static {p0, p1}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->after_WifiConfigStore(Landroid/net/wifi/WifiConfigStore;Landroid/content/Context;)V
++ 
+      return-void
+  .end method
+  
+***************
+*** 933,938 ****
+--- 935,1316 ----
+      goto/16 :goto_0
+  
+      :cond_a
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     if-eqz v24, :cond_miui_0
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "*"
++ 
++     invoke-virtual/range {v24 .. v25}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_0
++ 
++     move-object/from16 v0, p0
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "as_cert_file"
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     move-object/from16 v0, v24
++ 
++     move/from16 v1, v18
++ 
++     move-object/from16 v2, v25
++ 
++     move-object/from16 v3, v26
++ 
++     invoke-virtual {v0, v1, v2, v3}, Landroid/net/wifi/WifiNative;->setNetworkVariable(ILjava/lang/String;Ljava/lang/String;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_0
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "failed to set as cert: "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "- config.wapiASCert = "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     goto/16 :goto_0
++ 
++     :cond_miui_0
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     if-eqz v24, :cond_miui_1
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "*"
++ 
++     invoke-virtual/range {v24 .. v25}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_1
++ 
++     move-object/from16 v0, p0
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "user_cert_file"
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     move-object/from16 v0, v24
++ 
++     move/from16 v1, v18
++ 
++     move-object/from16 v2, v25
++ 
++     move-object/from16 v3, v26
++ 
++     invoke-virtual {v0, v1, v2, v3}, Landroid/net/wifi/WifiNative;->setNetworkVariable(ILjava/lang/String;Ljava/lang/String;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_1
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "failed to set user cert: "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "- config.wapiUserCert =  "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     goto/16 :goto_0
++ 
++     :cond_miui_1
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->allowedKeyManagement:Ljava/util/BitSet;
++ 
++     move-object/from16 v24, v0
++ 
++     const/16 v25, 0x5
++ 
++     invoke-virtual/range {v24 .. v25}, Ljava/util/BitSet;->get(I)Z
++ 
++     move-result v24
++ 
++     if-eqz v24, :cond_miui_3
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     if-eqz v24, :cond_miui_2
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "*"
++ 
++     invoke-virtual/range {v24 .. v25}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_2
++ 
++     move-object/from16 v0, p0
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "wapi_psk"
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     move-object/from16 v0, v24
++ 
++     move/from16 v1, v18
++ 
++     move-object/from16 v2, v25
++ 
++     move-object/from16 v3, v26
++ 
++     invoke-virtual {v0, v1, v2, v3}, Landroid/net/wifi/WifiNative;->setNetworkVariable(ILjava/lang/String;Ljava/lang/String;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_2
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "failed to set wapi psk: "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     move-object/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     goto/16 :goto_0
++ 
++     :cond_miui_2
++     move-object/from16 v0, p0
++ 
++     iget-object v0, v0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     move-object/from16 v24, v0
++ 
++     const-string v25, "wapi_key_type"
++ 
++     move-object/from16 v0, p1
++ 
++     iget v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPskType:I
++ 
++     move/from16 v26, v0
++ 
++     invoke-static/range {v26 .. v26}, Ljava/lang/Integer;->toString(I)Ljava/lang/String;
++ 
++     move-result-object v26
++ 
++     move-object/from16 v0, v24
++ 
++     move/from16 v1, v18
++ 
++     move-object/from16 v2, v25
++ 
++     move-object/from16 v3, v26
++ 
++     invoke-virtual {v0, v1, v2, v3}, Landroid/net/wifi/WifiNative;->setNetworkVariable(ILjava/lang/String;Ljava/lang/String;)Z
++ 
++     move-result v24
++ 
++     if-nez v24, :cond_miui_3
++ 
++     const-string v24, "WifiConfigStore"
++ 
++     new-instance v25, Ljava/lang/StringBuilder;
++ 
++     invoke-direct/range {v25 .. v25}, Ljava/lang/StringBuilder;-><init>()V
++ 
++     const-string v26, "failed to set wapi key type: "
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     move-object/from16 v0, p1
++ 
++     iget v0, v0, Landroid/net/wifi/WifiConfiguration;->wapiPskType:I
++ 
++     move/from16 v26, v0
++ 
++     invoke-virtual/range {v25 .. v26}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
++ 
++     move-result-object v25
++ 
++     invoke-virtual/range {v25 .. v25}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++ 
++     move-result-object v25
++ 
++     invoke-static/range {v24 .. v25}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
++ 
++     goto/16 :goto_0
++ 
++     :cond_miui_3
+      const/4 v13, 0x0
+  
+      .local v13, hasSetKey:Z
+***************
+*** 3635,3640 ****
+--- 4013,4094 ----
+      :cond_9
+      iget-object v11, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
+  
++     const-string v12, "as_cert_file"
++ 
++     invoke-virtual {v11, v7, v12}, Landroid/net/wifi/WifiNative;->getNetworkVariable(ILjava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v10
++ 
++     invoke-static {v10}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
++ 
++     move-result v11
++ 
++     if-nez v11, :cond_miui_0
++ 
++     iput-object v10, p1, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     :goto_miui_0
++     iget-object v11, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     const-string v12, "user_cert_file"
++ 
++     invoke-virtual {v11, v7, v12}, Landroid/net/wifi/WifiNative;->getNetworkVariable(ILjava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v10
++ 
++     invoke-static {v10}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
++ 
++     move-result v11
++ 
++     if-nez v11, :cond_miui_1
++ 
++     iput-object v10, p1, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     :goto_miui_1
++     iget-object v11, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     const-string v12, "wapi_key_type"
++ 
++     invoke-virtual {v11, v7, v12}, Landroid/net/wifi/WifiNative;->getNetworkVariable(ILjava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v10
++ 
++     invoke-static {v10}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
++ 
++     move-result v11
++ 
++     if-nez v11, :cond_miui_3
++ 
++     :try_start_miui
++     invoke-static {v10}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
++ 
++     move-result v11
++ 
++     iput v11, p1, Landroid/net/wifi/WifiConfiguration;->wapiPskType:I
++     :try_end_miui
++     .catch Ljava/lang/NumberFormatException; {:try_start_miui .. :try_end_miui} :catch_miui
++ 
++     :cond_miui_3
++     :goto_miui_3
++     iget-object v11, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
++     const-string v12, "wapi_psk"
++ 
++     invoke-virtual {v11, v7, v12}, Landroid/net/wifi/WifiNative;->getNetworkVariable(ILjava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object v10
++ 
++     invoke-static {v10}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
++ 
++     move-result v11
++ 
++     if-nez v11, :cond_miui_2
++ 
++     iput-object v10, p1, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     :goto_miui_2
++     iget-object v11, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
++ 
+      const-string v12, "psk"
+  
+      invoke-virtual {v11, v7, v12}, Landroid/net/wifi/WifiNative;->getNetworkVariable(ILjava/lang/String;)Ljava/lang/String;
+***************
+*** 3712,3717 ****
+--- 4166,4192 ----
+      .end local v6           #len$:I
+      .end local v8           #val:Ljava/lang/String;
+      .end local v9           #vals:[Ljava/lang/String;
++     :cond_miui_0
++     const/4 v11, 0x0
++ 
++     iput-object v11, p1, Landroid/net/wifi/WifiConfiguration;->wapiASCert:Ljava/lang/String;
++ 
++     goto :goto_miui_0
++ 
++     :cond_miui_1
++     const/4 v11, 0x0
++ 
++     iput-object v11, p1, Landroid/net/wifi/WifiConfiguration;->wapiUserCert:Ljava/lang/String;
++ 
++     goto :goto_miui_1
++ 
++     :cond_miui_2
++     const/4 v11, 0x0
++ 
++     iput-object v11, p1, Landroid/net/wifi/WifiConfiguration;->wapiPsk:Ljava/lang/String;
++ 
++     goto :goto_miui_2
++ 
+      :cond_b
+      const/4 v11, 0x0
+  
+***************
+*** 4071,4076 ****
+--- 4546,4556 ----
+      .end local v2           #i:I
+      .end local v3           #i$:I
+      .end local v6           #len$:I
++     :catch_miui
++     move-exception v11
++ 
++     goto/16 :goto_miui_3
++ 
+      :catch_0
+      move-exception v11
+  
+***************
+*** 5269,5274 ****
+--- 5749,5765 ----
+      .locals 6
+  
+      .prologue
++     iget-object v3, p0, Landroid/net/wifi/WifiConfigStore;->mContext:Landroid/content/Context;
++ 
++     invoke-static {v3}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->shouldEnableAllNetworks(Landroid/content/Context;)Z
++ 
++     move-result v3
++ 
++     if-nez v3, :cond_miui_1
++ 
++     return-void
++ 
++     :cond_miui_1
+      const/4 v2, 0x0
+  
+      .local v2, networkEnabledStateChanged:Z
+***************
+*** 5298,5310 ****
+      check-cast v0, Landroid/net/wifi/WifiConfiguration;
+  
+      .local v0, config:Landroid/net/wifi/WifiConfiguration;
+!     if-eqz v0, :cond_0
+  
+      iget v3, v0, Landroid/net/wifi/WifiConfiguration;->status:I
+  
+      const/4 v4, 0x1
+  
+!     if-ne v3, v4, :cond_0
+  
+      iget-object v3, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
+  
+--- 5789,5809 ----
+      check-cast v0, Landroid/net/wifi/WifiConfiguration;
+  
+      .local v0, config:Landroid/net/wifi/WifiConfiguration;
+!     if-eqz v0, :cond_miui_0
+  
+      iget v3, v0, Landroid/net/wifi/WifiConfiguration;->status:I
+  
+      const/4 v4, 0x1
+  
+!     if-ne v3, v4, :cond_miui_0
+! 
+!     iget-object v3, v0, Landroid/net/wifi/WifiConfiguration;->SSID:Ljava/lang/String;
+! 
+!     invoke-static {v3}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->isDisableByUser(Ljava/lang/String;)Z
+! 
+!     move-result v3
+! 
+!     if-nez v3, :cond_miui_0
+  
+      iget-object v3, p0, Landroid/net/wifi/WifiConfigStore;->mWifiNative:Landroid/net/wifi/WifiNative;
+  
+***************
+*** 5351,5356 ****
+--- 5850,5860 ----
+  
+      goto :goto_0
+  
++     :cond_miui_0
++     invoke-static {v0}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->disableNetwork(Landroid/net/wifi/WifiConfiguration;)V
++ 
++     goto :goto_0
++ 
+      .end local v0           #config:Landroid/net/wifi/WifiConfiguration;
+      :cond_2
+      if-eqz v2, :cond_3
+***************
+*** 5693,5698 ****
+--- 6197,6204 ----
+      .locals 1
+  
+      .prologue
++     invoke-static {}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->before_loadAndEnableAllNetworks()V
++ 
+      const-string v0, "Loading config and enabling all networks"
+  
+      invoke-direct {p0, v0}, Landroid/net/wifi/WifiConfigStore;->log(Ljava/lang/String;)V
+***************
+*** 6324,6329 ****
+--- 6830,6837 ----
+  
+      const/4 v6, -0x1
+  
++     invoke-static {p1}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->before_selectNetwork(I)V
++ 
+      if-ne p1, v6, :cond_0
+  
+      :goto_0
+***************
+*** 6644,6649 ****
+--- 7152,7159 ----
+  
+      iput v1, v0, Landroid/net/wifi/WifiConfiguration;->status:I
+  
++     invoke-static {v0}, Landroid/net/wifi/Injector$WifiConfigStoreHook;->disConnect(Landroid/net/wifi/WifiConfiguration;)V
++ 
+      goto :goto_0
+  
+      :pswitch_data_0

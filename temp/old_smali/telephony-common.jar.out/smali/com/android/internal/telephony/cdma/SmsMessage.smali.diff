@@ -1,0 +1,55 @@
+*** ./smali/com/android/internal/telephony/cdma/SmsMessage.smali	2014-08-20 05:50:09.384016631 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/telephony-common.jar.out/./smali/com/android/internal/telephony/cdma/SmsMessage.smali	2014-08-20 05:52:54.660020917 +0700
+***************
+*** 266,272 ****
+  
+      const/4 v5, 0x1
+  
+!     aget-byte v3, p1, v5
+  
+      .local v3, size:I
+      new-array v2, v3, [B
+--- 266,274 ----
+  
+      const/4 v5, 0x1
+  
+!     aget-byte v5, p1, v5
+! 
+!     and-int/lit16 v3, v5, 0xff
+  
+      .local v3, size:I
+      new-array v2, v3, [B
+***************
+*** 1312,1318 ****
+      .local v14, parameterId:I
+      invoke-virtual {v8}, Ljava/io/DataInputStream;->readUnsignedByte()I
+  
+!     move-result v15
+  
+      .local v15, parameterLen:I
+      new-array v13, v15, [B
+--- 1314,1324 ----
+      .local v14, parameterId:I
+      invoke-virtual {v8}, Ljava/io/DataInputStream;->readUnsignedByte()I
+  
+!     move-result v21
+! 
+!     move/from16 v0, v21
+! 
+!     and-int/lit16 v15, v0, 0xff
+  
+      .local v15, parameterLen:I
+      new-array v13, v15, [B
+***************
+*** 2025,2030 ****
+--- 2031,2040 ----
+      .parameter "userData"
+  
+      .prologue
++     invoke-static {p0}, Lmiui/telephony/PhoneNumberUtils$PhoneNumber;->replaceCdmaInternationalAccessCode(Ljava/lang/String;)Ljava/lang/String;
++ 
++     move-result-object p0
++ 
+      invoke-static {p0}, Landroid/telephony/PhoneNumberUtils;->cdmaCheckAndProcessPlusCodeForSms(Ljava/lang/String;)Ljava/lang/String;
+  
+      move-result-object v9

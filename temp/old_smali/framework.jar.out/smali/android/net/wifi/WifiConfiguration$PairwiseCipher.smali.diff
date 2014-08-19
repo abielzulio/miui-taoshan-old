@@ -1,0 +1,34 @@
+*** ./smali/android/net/wifi/WifiConfiguration$PairwiseCipher.smali	2014-08-20 05:48:41.064014341 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/net/wifi/WifiConfiguration$PairwiseCipher.smali	2014-08-20 05:51:26.144018622 +0700
+***************
+*** 31,37 ****
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x3
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+--- 31,37 ----
+      .locals 3
+  
+      .prologue
+!     const/4 v0, 0x4
+  
+      new-array v0, v0, [Ljava/lang/String;
+  
+***************
+*** 53,58 ****
+--- 53,64 ----
+  
+      aput-object v2, v0, v1
+  
++     const/4 v1, 0x3
++ 
++     const-string v2, "SMS4"
++ 
++     aput-object v2, v0, v1
++ 
+      sput-object v0, Landroid/net/wifi/WifiConfiguration$PairwiseCipher;->strings:[Ljava/lang/String;
+  
+      return-void

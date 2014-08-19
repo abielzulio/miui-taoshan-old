@@ -1,0 +1,15 @@
+*** ./smali/com/android/server/am/AppNotRespondingDialog$1.smali	2014-08-20 05:49:38.956015842 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/am/AppNotRespondingDialog$1.smali	2014-08-20 05:52:24.292020129 +0700
+***************
+*** 38,43 ****
+--- 38,47 ----
+      .parameter "msg"
+  
+      .prologue
++     iget-object v3, p0, Lcom/android/server/am/AppNotRespondingDialog$1;->this$0:Lcom/android/server/am/AppNotRespondingDialog;
++ 
++     invoke-static {v3}, Lcom/android/server/am/Injector$AppNotRespondingDialogHook;->sendAnrErrorReport(Lcom/android/server/am/AppNotRespondingDialog;)V
++ 
+      const/4 v1, 0x0
+  
+      .local v1, appErrorIntent:Landroid/content/Intent;

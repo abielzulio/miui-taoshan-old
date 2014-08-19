@@ -1,0 +1,58 @@
+*** ./smali/android/widget/MediaController.smali	2014-08-20 05:48:24.044013900 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/widget/MediaController.smali	2014-08-20 05:51:09.044018178 +0700
+***************
+*** 1239,1244 ****
+--- 1239,1247 ----
+  
+      invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setImageResource(I)V
+  
++     :goto_1
++     invoke-static {p0}, Landroid/widget/Injector$MediaControllerHook;->after_updatePausePlay(Landroid/widget/MediaController;)V
++ 
+      goto :goto_0
+  
+      :cond_2
+***************
+*** 1248,1254 ****
+  
+      invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setImageResource(I)V
+  
+!     goto :goto_0
+  .end method
+  
+  
+--- 1251,1257 ----
+  
+      invoke-virtual {v0, v1}, Landroid/widget/ImageButton;->setImageResource(I)V
+  
+!     goto :goto_1
+  .end method
+  
+  
+***************
+*** 1426,1431 ****
+--- 1429,1452 ----
+      goto :goto_1
+  .end method
+  
++ .method getPauseButton()Landroid/widget/ImageButton;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/MediaController;->mPauseButton:Landroid/widget/ImageButton;
++ 
++     return-object v0
++ .end method
++ 
++ .method getPlayer()Landroid/widget/MediaController$MediaPlayerControl;
++     .locals 1
++ 
++     .prologue
++     iget-object v0, p0, Landroid/widget/MediaController;->mPlayer:Landroid/widget/MediaController$MediaPlayerControl;
++ 
++     return-object v0
++ .end method
++ 
+  .method public hide()V
+      .locals 3
+  

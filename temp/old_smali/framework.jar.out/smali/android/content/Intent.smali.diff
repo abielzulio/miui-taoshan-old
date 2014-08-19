@@ -1,0 +1,19 @@
+*** ./smali/android/content/Intent.smali	2014-08-20 05:47:32.464012562 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/content/Intent.smali	2014-08-20 05:50:17.132016832 +0700
+***************
+*** 5085,5091 ****
+      .prologue
+      iget v0, p0, Landroid/content/Intent;->mFlags:I
+  
+!     and-int/lit8 v0, v0, 0x30
+  
+      const/16 v1, 0x10
+  
+--- 5085,5091 ----
+      .prologue
+      iget v0, p0, Landroid/content/Intent;->mFlags:I
+  
+!     and-int/lit8 v0, v0, 0x10
+  
+      const/16 v1, 0x10
+  

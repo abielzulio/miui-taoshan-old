@@ -1,0 +1,54 @@
+*** ./smali/com/android/server/LockSettingsService.smali	2014-08-20 05:49:55.984016284 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/services.jar.out/./smali/com/android/server/LockSettingsService.smali	2014-08-20 05:52:41.352020572 +0700
+***************
+*** 1259,1265 ****
+      move-result-object v2
+  
+      .local v2, hash:[B
+!     invoke-static {v6, v2}, Ljava/util/Arrays;->equals([B[B)Z
+  
+      move-result v4
+  
+--- 1259,1269 ----
+      move-result-object v2
+  
+      .local v2, hash:[B
+!     invoke-static {v6, v2}, Lcom/android/server/LockSettingsService$Injector;->passwordToHash([B[B)[B
+! 
+!     move-result-object v8
+! 
+!     invoke-static {v6, v8}, Ljava/util/Arrays;->equals([B[B)Z
+  
+      move-result v4
+  
+***************
+*** 1916,1921 ****
+--- 1920,1947 ----
+  
+      return-void
+  .end method
++ 
++ .method public setRawLockPassword([BI)V
++     .locals 1
++     .parameter "hash"
++     .parameter "userId"
++     .annotation system Ldalvik/annotation/Throws;
++         value = {
++             Landroid/os/RemoteException;
++         }
++     .end annotation
++ 
++     .prologue
++     invoke-direct {p0, p2}, Lcom/android/server/LockSettingsService;->checkWritePermission(I)V
++ 
++     invoke-direct {p0, p2}, Lcom/android/server/LockSettingsService;->getLockPasswordFilename(I)Ljava/lang/String;
++ 
++     move-result-object v0
++ 
++     invoke-direct {p0, v0, p1}, Lcom/android/server/LockSettingsService;->writeFile(Ljava/lang/String;[B)V
++ 
++     return-void
++ .end method
+  
+  .method public setString(Ljava/lang/String;Ljava/lang/String;I)V
+      .locals 0

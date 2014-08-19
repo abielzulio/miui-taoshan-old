@@ -1,0 +1,53 @@
+*** ./smali/android/app/Application.smali	2014-08-20 05:48:15.012013665 +0700
+--- /home/fantastical/workspace/patchrom/taoshan/temp/new_smali/framework.jar.out/./smali/android/app/Application.smali	2014-08-20 05:50:59.920017942 +0700
+***************
+*** 526,535 ****
+  .end method
+  
+  .method public onCreate()V
+!     .locals 0
+  
+      .prologue
+      return-void
+  .end method
+  
+  .method public onLowMemory()V
+--- 526,563 ----
+  .end method
+  
+  .method public onCreate()V
+!     .locals 3
+  
+      .prologue
++     :try_start_0
++     invoke-virtual {p0}, Landroid/app/Application;->getResources()Landroid/content/res/Resources;
++ 
++     move-result-object v1
++ 
++     check-cast v1, Landroid/content/res/MiuiResources;
++ 
++     invoke-static {}, Landroid/app/ActivityManagerNative;->getDefault()Landroid/app/IActivityManager;
++ 
++     move-result-object v2
++ 
++     invoke-interface {v2}, Landroid/app/IActivityManager;->getConfiguration()Landroid/content/res/Configuration;
++ 
++     move-result-object v2
++ 
++     invoke-virtual {v1, v2}, Landroid/content/res/MiuiResources;->initMiuiFontScale(Landroid/content/res/Configuration;)V
++     :try_end_0
++     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
++ 
++     :goto_0
+      return-void
++ 
++     :catch_0
++     move-exception v0
++ 
++     .local v0, e:Ljava/lang/Exception;
++     invoke-virtual {v0}, Ljava/lang/Exception;->printStackTrace()V
++ 
++     goto :goto_0
+  .end method
+  
+  .method public onLowMemory()V

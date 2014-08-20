@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:sharedUserId="android.uid.system" android:versionCode="19" android:versionName="4.4.2-eng.mkey.20140817.114549" package="miui"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:allowClearUserData="false" android:hasCode="false" android:persistent="true" android:process="system" android:backupAgent="com.android.server.SystemBackupAgent" android:killAfterRestore="false">
+        <activity android:theme="@style/V5.Theme.Light.Settings" android:name="com.miui.internal.app.MiuiLicenseActivity" android:process=":ui" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MIUI_LICENSE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/V5.Theme.Light.Translucent.NoTitle" android:name="com.miui.internal.app.DisclaimerActivity" android:process=":ui" android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MIUI_DISCLAIMER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/V5.Theme.Light.Settings" android:label="@string/android_choose_account_label" android:name="miui.accounts.MiuiChooseAccountTypeActivity" android:process=":ui" android:excludeFromRecents="true" />
+        <activity android:theme="@style/V5.Theme.Light.Translucent.NoTitle" android:name="miui.accounts.MiuiGrantCredentialsPermissionActivity" android:exported="true" android:process=":ui" android:excludeFromRecents="true" android:screenOrientation="portrait" />
+    </application>
+    <permission android:name="miui.permission.USE_INTERNAL_GENERAL_API" android:protectionLevel="signatureOrSystem" />
+    <permission android:name="miui.permission.SHELL" android:protectionLevel="signatureOrSystem" />
+    <permission android:label="@string/perm_tigger_toggle_lab" android:name="com.android.SystemUI.permission.TIGGER_TOGGLE" android:protectionLevel="signatureOrSystem" android:description="@string/perm_tigger_toggle_dspt" />
+    <permission android:name="com.xiaomi.permission.CLOUD_MANAGER" android:protectionLevel="signatureOrSystem" />
+    <permission android:label="@string/perm_payment_lab" android:name="com.xiaomi.xmsf.permission.PAYMENT" android:protectionLevel="dangerous" android:description="@string/perm_payment_dspt" />
+    <permission android:name="com.xiaomi.permission.ACTIVATE_SIM" android:protectionLevel="signature" />
+    <permission android:label="@string/perm_use_find_device" android:name="com.miui.cloudservice.permission.FIND_DEVICE" android:protectionLevel="signature" android:description="@string/perm_use_find_device" />
+    <permission android:label="@string/perm_auto_backup" android:name="com.miui.backup.permission.AUTO_BACKUP" android:protectionLevel="signature" android:description="@string/perm_auto_backup" />
+    <permission android:label="@string/permlab_accessNote" android:name="com.miui.notes.permission.ACCESS_NOTE" android:protectionLevel="signatureOrSystem" android:description="@string/permdesc_accessNote" />
+    <permission android:label="@string/perm_send_push_lab" android:name="com.xiaomi.permission.SEND_PUSH" android:protectionLevel="signature" android:description="@string/perm_send_push_dspt" />
+    <permission android:label="@string/perm_data_update_lab" android:name="com.xiaomi.permission.DATA_UPDATE" android:protectionLevel="signatureOrSystem" android:description="@string/perm_data_update_dspt" />
+    <permission android:name="com.xiaomi.permission.RECEIVE_BROADCAST_REPORT" android:protectionLevel="signatureOrSystem" />
+    <permission android:name="com.xiaomi.permission.WIFI_SHARE" android:protectionLevel="signature" />
+    <permission android:name="com.xiaomi.permission.ACCESS_WIFI" android:protectionLevel="signature" />
+    <permission android:name="com.xiaomi.permission.QUERY_MX_STAUTS" android:protectionLevel="signatureOrSystem" />
+    <permission android:name="com.miui.permission.MANAGE_SMS_INTERCEPT" android:protectionLevel="signatureOrSystem" />
+</manifest>

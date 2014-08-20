@@ -1,0 +1,132 @@
+===================================
+Since Wed Aug 13 19:16:47 UTC 2014
+===================================
+
+   * android
+ae3706a Add CMBugreport to manifest
+
+   * bootable/recovery-cm
+a6b1553 sr: Force format /data when wipe_media option is given
+
+   * build
+2169837 build: Handle boot images with custom makefile properly
+e451f86 build: Store no_separate_recovery flag in misc_info
+
+   * frameworks/base
+2f44766 Fix ressource leak in getFileCrC
+bbc8147 Fix camera usage tracking.
+5fb70d5 Themes: setUserRequired(false) when updating audibles
+750c44f Themes: Allow clearing the wallpaper and ls wallpaper
+
+   * packages/apps/InCallUI
+d7ff41e Fix display of 'Dialing (waiting...)' state.
+
+   * packages/apps/ThemeChooser
+f6b0cee Use getThemedResourcesForApplication for icons
+
+   * packages/services/Telephony
+51452d0 Merge "Handle CALL_IS_WAITING MO notification." into cm-11.0
+f60831e Pass creation time in Call interface so that we can uniquely identify calls in call log
+
+   * vendor/cm
+5d52191 vendor/cm: add CMBugReport
+
+===================================
+Since Tue Aug 12 19:22:41 UTC 2014
+===================================
+
+   * bootable/recovery
+36810d2 Tell vold to use the fstype defined in fstab when formatting
+9678ca2 fix unnecessarily slow writing of EMMC partitions
+06511b3 Touch: slot and tracking updates
+
+   * bootable/recovery-cm
+e8f5898 sr: Only use overlay for MDP 5.x and cleanup a bit
+
+   * frameworks/av
+bdc2366 Merge "audioflinger: exchange AUDIO_SOURCE_HOTWORD with AUDIO_SOURCE_VOICE_RECOGNITION for pre-kitkat blobs." into cm-11.0
+
+   * frameworks/base
+eee4e97 SettingsProvider: add default overlay entry for SEND_ACTION_APP_ERROR
+7128a0a Themes: Pass resource IDs instead of bitmaps [1/2]
+7bb802a Themes: Build icon cache when applying icons
+b23bebc MSimNetworkController: Quiet logspam
+73be017 MSimNetworkController: disable CHATTY logs
+
+   * packages/apps/CMBugReport
+2d274e3 CMBugReport: clean up AnroidManifest.xml
+25c2e8e CMBugReport: update app name case
+24b6fd4 CMBugReport: scrub device serial number and IMEI
+a3e1d9e CMBugReport: update LOCAL_PACKAGE_NAME case
+22fd252 CMBugReport: add system bug crash reporter
+
+   * packages/apps/Dialer
+df7f323 Call recording service implementation, show recordings and allow playback in call history
+
+   * packages/apps/InCallUI
+7a156e0 Add an option in the InCall UI to perform call recording
+
+===================================
+Since Mon Aug 11 19:04:08 UTC 2014
+===================================
+
+   * external/koush/Superuser
+188b032 Superuser: Remove unused translations
+
+   * external/cardslib
+9ebd6b1 Merge "Revert "CardsLib : Set layer type to software when doing operations"" into cm-11.0
+0b4ac6a Revert "CardsLib : Set layer type to software when doing operations"
+
+   * frameworks/base
+42d3883 Telephony: fix tdsdma asu invalid value
+
+   * packages/apps/CMBugReport
+a46d233 CMBugReport: add data scrubbing
+
+   * packages/services/Telephony
+bb7f74a Clean up MSimMobileNetworkSubSettings
+d609e4d Port enabled network mode selection menu to MSIM classes
+
+===================================
+Since Sun Aug 10 20:17:17 UTC 2014
+===================================
+
+   * external/koush/Superuser
+2cc9531 Rename allow and deny strings.
+
+   * frameworks/av
+405c666 stagefright: Improve 24-bit support
+
+   * packages/apps/ThemeChooser
+14ae3ea Themes: Pass resource IDs instead of bitmaps [2/2]
+
+===================================
+Since Sat Aug  9 18:24:17 UTC 2014
+===================================
+
+   * external/busybox
+39046ba dmesg: rework color feature, compat. with more
+a20778a Android: typo in busybox folder
+c9b3fd2 Android: clean only objects, not the folders
+
+   * frameworks/base
+734243d Automatic translation import
+
+   * hardware/ti/omap3
+d609a9c Merge changes Idfe0d8c8,I0e66f2cc,I1e266848,I6ae4d897 into cm-11.0
+
+   * packages/apps/CMBugReport
+2043a57 Automatic translation import
+
+   * packages/apps/CMHome
+7ca9f07 Automatic translation import
+
+   * packages/apps/Settings
+00c84ea Automatic translation import
+
+   * packages/services/Telephony
+0b966bd Handle CALL_IS_WAITING MO notification.
+
+   * packages/wallpapers/PhotoPhase
+79a4739 Automatic translation import
+

@@ -624,8 +624,7 @@
     .end packed-switch
 .end method
 
-.method private modifyNat(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-    .locals 11
+    .locals 10
     .parameter "action"
     .parameter "internalInterface"
     .parameter "externalInterface"
@@ -636,76 +635,58 @@
     .end annotation
 
     .prologue
-    .line 1045
     new-instance v1, Lcom/android/server/NativeDaemonConnector$Command;
 
-    const-string v8, "nat"
+    const-string v7, "nat"
 
-    const/4 v9, 0x3
+    const/4 v8, 0x3
 
-    new-array v9, v9, [Ljava/lang/Object;
+    new-array v8, v8, [Ljava/lang/Object;
 
-    const/4 v10, 0x0
+    const/4 v9, 0x0
 
-    aput-object p1, v9, v10
+    aput-object p1, v8, v9
 
-    const/4 v10, 0x1
+    const/4 v9, 0x1
 
-    aput-object p2, v9, v10
+    aput-object p2, v8, v9
 
-    const/4 v10, 0x2
+    const/4 v9, 0x2
 
-    aput-object p3, v9, v10
+    aput-object p3, v8, v9
 
-    invoke-direct {v1, v8, v9}, Lcom/android/server/NativeDaemonConnector$Command;-><init>(Ljava/lang/String;[Ljava/lang/Object;)V
+    invoke-direct {v1, v7, v8}, Lcom/android/server/NativeDaemonConnector$Command;-><init>(Ljava/lang/String;[Ljava/lang/Object;)V
 
-    .line 1046
     .local v1, cmd:Lcom/android/server/NativeDaemonConnector$Command;
-    const-string v8, "enable"
+    const/4 v6, 0x0
 
-    invoke-virtual {p1, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v3
-
-    .line 1047
-    .local v3, enabled:Z
-    const/4 v7, 0x0
-
-    .line 1048
-    .local v7, internalNetworkInterface:Ljava/net/NetworkInterface;
-    if-eqz v3, :cond_1
-
-    .line 1049
-    invoke-static {p2}, Ljava/net/NetworkInterface;->getByName(Ljava/lang/String;)Ljava/net/NetworkInterface;
-
-    move-result-object v7
-
-    .line 1050
-    iget-object v8, p0, Lcom/android/server/NetworkManagementService;->mCachedAddressForNat:Ljava/util/HashMap;
-
-    invoke-virtual {v8, p2, v7}, Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
-
-    .line 1056
-    :goto_0
-    if-nez v7, :cond_2
-
-    .line 1057
-    const-string v8, "0"
-
-    invoke-virtual {v1, v8}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
-
-    .line 1072
-    :cond_0
+    .local v6, internalNetworkInterface:Ljava/net/NetworkInterface;
     :try_start_0
-    iget-object v8, p0, Lcom/android/server/NetworkManagementService;->mConnector:Lcom/android/server/NativeDaemonConnector;
-
-    invoke-virtual {v8, v1}, Lcom/android/server/NativeDaemonConnector;->execute(Lcom/android/server/NativeDaemonConnector$Command;)Lcom/android/server/NativeDaemonEvent;
+    invoke-static {p2}, Ljava/net/NetworkInterface;->getByName(Ljava/lang/String;)Ljava/net/NetworkInterface;
     :try_end_0
-    .catch Lcom/android/server/NativeDaemonConnectorException; {:try_start_0 .. :try_end_0} :catch_0
+    .catch Ljava/net/SocketException; {:try_start_0 .. :try_end_0} :catch_0
+
+    move-result-object v6
+
+    .local v6, internalNetworkInterface:Ljava/net/NetworkInterface;
+    :goto_0
+    if-nez v6, :cond_1
+
+    const-string v7, "0"
+
+    invoke-virtual {v1, v7}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
+
+    :cond_0
+    :try_start_1
+    iget-object v7, p0, Lcom/android/server/NetworkManagementService;->mConnector:Lcom/android/server/NativeDaemonConnector;
+
+    invoke-virtual {v7, v1}, Lcom/android/server/NativeDaemonConnector;->execute(Lcom/android/server/NativeDaemonConnector$Command;)Lcom/android/server/NativeDaemonEvent;
+    :try_end_1
+    .catch Lcom/android/server/NativeDaemonConnectorException; {:try_start_1 .. :try_end_1} :catch_1
 
     return-void
 
-    :catch_miui
+    :catch_0
     move-exception v2
 
     .local v2, e:Ljava/net/SocketException;
@@ -735,133 +716,108 @@
 
     invoke-static {v7, v8}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    goto :goto_miui
+    goto :goto_0
 
     .end local v2           #e:Ljava/net/SocketException;
     :cond_1
-    iget-object v8, p0, Lcom/android/server/NetworkManagementService;->mCachedAddressForNat:Ljava/util/HashMap;
-
-    invoke-virtual {v8, p2}, Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+    invoke-virtual {v6}, Ljava/net/NetworkInterface;->getInterfaceAddresses()Ljava/util/List;
 
     move-result-object v7
 
-    .end local v7           #internalNetworkInterface:Ljava/net/NetworkInterface;
-    check-cast v7, Ljava/net/NetworkInterface;
-
-    .line 1053
-    .restart local v7       #internalNetworkInterface:Ljava/net/NetworkInterface;
-    iget-object v8, p0, Lcom/android/server/NetworkManagementService;->mCachedAddressForNat:Ljava/util/HashMap;
-
-    invoke-virtual {v8, p2}, Ljava/util/HashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;
-
-    goto :goto_0
-
-    .line 1061
-    :cond_2
-    invoke-virtual {v7}, Ljava/net/NetworkInterface;->getInterfaceAddresses()Ljava/util/List;
-
-    move-result-object v8
-
-    invoke-direct {p0, v8}, Lcom/android/server/NetworkManagementService;->excludeLinkLocal(Ljava/util/List;)Ljava/util/List;
-
-    move-result-object v6
-
-    .line 1063
-    .local v6, interfaceAddresses:Ljava/util/List;,"Ljava/util/List<Ljava/net/InterfaceAddress;>;"
-    invoke-interface {v6}, Ljava/util/List;->size()I
-
-    move-result v8
-
-    invoke-static {v8}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-
-    move-result-object v8
-
-    invoke-virtual {v1, v8}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
-
-    .line 1064
-    invoke-interface {v6}, Ljava/util/List;->iterator()Ljava/util/Iterator;
-
-    move-result-object v4
-
-    .local v4, i$:Ljava/util/Iterator;
-    :goto_1
-    invoke-interface {v4}, Ljava/util/Iterator;->hasNext()Z
-
-    move-result v8
-
-    if-eqz v8, :cond_0
-
-    invoke-interface {v4}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+    invoke-direct {p0, v7}, Lcom/android/server/NetworkManagementService;->excludeLinkLocal(Ljava/util/List;)Ljava/util/List;
 
     move-result-object v5
 
-    check-cast v5, Ljava/net/InterfaceAddress;
+    .local v5, interfaceAddresses:Ljava/util/List;,"Ljava/util/List<Ljava/net/InterfaceAddress;>;"
+    invoke-interface {v5}, Ljava/util/List;->size()I
 
-    .line 1065
-    .local v5, ia:Ljava/net/InterfaceAddress;
-    invoke-virtual {v5}, Ljava/net/InterfaceAddress;->getAddress()Ljava/net/InetAddress;
+    move-result v7
 
-    move-result-object v8
+    invoke-static {v7}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
 
-    invoke-virtual {v5}, Ljava/net/InterfaceAddress;->getNetworkPrefixLength()S
+    move-result-object v7
 
-    move-result v9
+    invoke-virtual {v1, v7}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
 
-    invoke-static {v8, v9}, Landroid/net/NetworkUtils;->getNetworkPart(Ljava/net/InetAddress;I)Ljava/net/InetAddress;
+    invoke-interface {v5}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v3
+
+    .local v3, i$:Ljava/util/Iterator;
+    :goto_1
+    invoke-interface {v3}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v7
+
+    if-eqz v7, :cond_0
+
+    invoke-interface {v3}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Ljava/net/InterfaceAddress;
+
+    .local v4, ia:Ljava/net/InterfaceAddress;
+    invoke-virtual {v4}, Ljava/net/InterfaceAddress;->getAddress()Ljava/net/InetAddress;
+
+    move-result-object v7
+
+    invoke-virtual {v4}, Ljava/net/InterfaceAddress;->getNetworkPrefixLength()S
+
+    move-result v8
+
+    invoke-static {v7, v8}, Landroid/net/NetworkUtils;->getNetworkPart(Ljava/net/InetAddress;I)Ljava/net/InetAddress;
 
     move-result-object v0
 
-    .line 1067
     .local v0, addr:Ljava/net/InetAddress;
-    new-instance v8, Ljava/lang/StringBuilder;
+    new-instance v7, Ljava/lang/StringBuilder;
 
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
+    invoke-direct {v7}, Ljava/lang/StringBuilder;-><init>()V
 
     invoke-virtual {v0}, Ljava/net/InetAddress;->getHostAddress()Ljava/lang/String;
 
-    move-result-object v9
-
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
     move-result-object v8
 
-    const-string v9, "/"
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v7
 
-    move-result-object v8
+    const-string v8, "/"
 
-    invoke-virtual {v5}, Ljava/net/InterfaceAddress;->getNetworkPrefixLength()S
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    move-result v9
+    move-result-object v7
 
-    invoke-virtual {v8, v9}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {v4}, Ljava/net/InterfaceAddress;->getNetworkPrefixLength()S
 
-    move-result-object v8
+    move-result v8
 
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+    invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    move-result-object v8
+    move-result-object v7
 
-    invoke-virtual {v1, v8}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
+    invoke-virtual {v7}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v7
+
+    invoke-virtual {v1, v7}, Lcom/android/server/NativeDaemonConnector$Command;->appendArg(Ljava/lang/Object;)Lcom/android/server/NativeDaemonConnector$Command;
 
     goto :goto_1
 
-    .line 1073
     .end local v0           #addr:Ljava/net/InetAddress;
-    .end local v4           #i$:Ljava/util/Iterator;
-    .end local v5           #ia:Ljava/net/InterfaceAddress;
-    .end local v6           #interfaceAddresses:Ljava/util/List;,"Ljava/util/List<Ljava/net/InterfaceAddress;>;"
-    :catch_0
+    .end local v3           #i$:Ljava/util/Iterator;
+    .end local v4           #ia:Ljava/net/InterfaceAddress;
+    .end local v5           #interfaceAddresses:Ljava/util/List;,"Ljava/util/List<Ljava/net/InterfaceAddress;>;"
+    :catch_1
     move-exception v2
 
-    .line 1074
     .local v2, e:Lcom/android/server/NativeDaemonConnectorException;
     invoke-virtual {v2}, Lcom/android/server/NativeDaemonConnectorException;->rethrowAsParcelableException()Ljava/lang/IllegalArgumentException;
 
-    move-result-object v8
+    move-result-object v7
 
-    throw v8
+    throw v7
 .end method
 
 .method private modifyRoute(Ljava/lang/String;Ljava/lang/String;Landroid/net/RouteInfo;Ljava/lang/String;)V

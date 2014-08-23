@@ -624,6 +624,7 @@
     .end packed-switch
 .end method
 
+.method private modifyNat(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
     .locals 10
     .parameter "action"
     .parameter "internalInterface"

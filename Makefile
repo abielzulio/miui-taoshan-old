@@ -22,6 +22,8 @@ local-miui-removed-priv-apps :=
 
 local-miui-modified-apps :=
 
+PORT_PRODUCT := taoshan
+
 # Config density for co-developers to use the aaps with HDPI or XHDPI resource,
 # Default configrations are HDPI for ics branch and XHDPI for jellybean branch
 local-density := HDPI

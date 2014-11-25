@@ -18,7 +18,7 @@ local-modified-jars :=
 # All apks from MIUI
 local-miui-removed-apps := 
 
-local-miui-removed-priv-apps :=
+local-miui-removed-priv-apps := MediaProvider
 
 local-miui-modified-apps :=
 
